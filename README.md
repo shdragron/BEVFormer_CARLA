@@ -1,99 +1,286 @@
-<div align="center">   
-  
-# BEVFormer: a Cutting-edge Baseline for Camera-based Detection
-</div>
+# BEVFormer-CARLA — viewpoint-robustness & cross-platform-transfer 3D detection (a CARLA fork of BEVFormer)
 
+## Attribution
 
-https://user-images.githubusercontent.com/27915819/161392594-fc0082f7-5c37-4919-830a-2dd423c1d025.mp4
+This repository is a **fork / modification** of
+[**BEVFormer**](https://github.com/fundamentalvision/BEVFormer)
+(fundamentalvision / OpenDriveLab), which is licensed under the
+**Apache License 2.0**. We are **not** the original authors of BEVFormer; all
+credit for the model and the upstream training code belongs to them. The
+upstream `LICENSE` file is kept **unmodified** in this repo.
 
-> **BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers**, ECCV 2022
-> - [Paper in arXiv](http://arxiv.org/abs/2203.17270) | [Paper in Chinese](https://drive.google.com/file/d/1dKnD6gUHhBXZ8gT733cIU_A7dHEEzNTP/view?usp=sharing) |  [OpenDriveLab](https://opendrivelab.com/)
-> - [Slides in English](https://docs.google.com/presentation/d/1fTjuSKpj_-KRjUACr8o5TbKetAXlWrmpaorVvfCTZUA/edit?usp=sharing) | [Occupancy and BEV Perception Talk Slides](https://docs.google.com/presentation/d/1U7wVi2_zJxM-EMqLVqC4zJ12ItUgS7ZcsXp7zQ1fkvc/edit?usp=sharing)
-> -  [Blog in Chinese](https://www.zhihu.com/question/521842610/answer/2431585901) | [Video Talk](https://www.bilibili.com/video/BV12t4y1t7Lq?share_source=copy_web) and [Slides](https://docs.google.com/presentation/d/1NNeikhDPkgT14G1D_Ih7K3wbSN0DkvhO9wlAMx3CIcM/edit?usp=sharing) (in Chinese) 
-> - [BEV Perception Survey](https://arxiv.org/abs/2209.05324) (Accepted by PAMI) | [Github repo](https://github.com/OpenDriveLab/BEVPerception-Survey-Recipe)
+Per Apache-2.0 §4(b), the following is a list of the files we **added or
+changed** for the CARLA viewpoint / cross-platform study. Everything else is
+upstream BEVFormer, unchanged.
 
+**Added (new files):**
 
+- `projects/mmdet3d_plugin/datasets/carla_nuscenes_dataset.py` — `CarlaNuScenesDataset`.
+- `tools/create_carla_data.py` — builds the per-vehicle info pkls.
+- `tools/check_carla_projection.py` — cam-projection sanity check.
+- `tools/train_carla_tiny_chain.sh` — sequential sedan→suv→bus training driver.
+- `projects/configs/bevformer/bevformer_tiny_carla.py` (sedan) and
+  `bevformer_tiny_carla_{suv,bus}.py`.
+- `projects/configs/bevformer/bevformer_base_carla.py` (sedan) and
+  `bevformer_base_carla_{suv,bus}.py`.
+- `bev_det_benchmark/` — the VP (viewpoint-robustness) + CTS (cross-platform
+  transfer) NDS benchmark (see [Evaluation](#7-evaluation)).
 
-# News
-- [2022/6/16]: We added two BEVformer configurations, which require less GPU memory than the base version. Please pull this repo to obtain the latest codes.
-- [2022/6/13]: We release an initial version of BEVFormer. It achieves a baseline result of **51.7%** NDS on nuScenes.
-- [2022/5/23]: 🚀🚀Built on top of BEVFormer, **BEVFormer++**, gathering up all best practices in recent SOTAs and our unique modification,  ranks **1st** on [Waymo Open Datast 3D Camera-Only Detection Challenge](https://waymo.com/open/challenges/2022/3d-camera-only-detection/). We will present BEVFormer++ on CVPR 2022 Autonomous Driving [Workshop](https://cvpr2022.wad.vision/).
-- [2022/3/10]: 🚀BEVFormer achieve the SOTA on [nuScenes Detection Task](https://nuscenes.org/object-detection?externalData=all&mapData=all&modalities=Camera) with **56.9% NDS** (camera-only)!
-</br>
+**Modified (upstream files changed):**
 
+- `projects/mmdet3d_plugin/datasets/__init__.py` — register `CarlaNuScenesDataset`.
+- `projects/mmdet3d_plugin/bevformer/detectors/bevformer.py` — CARLA-eval support.
+- `tools/train.py`, `tools/test.py` — minor CARLA-eval / logging support.
 
-# Abstract
-In this work, the authors present a new framework termed BEVFormer, which learns unified BEV representations with spatiotemporal transformers to support multiple autonomous driving perception tasks. In a nutshell, BEVFormer exploits both spatial and temporal information by interacting with spatial and temporal space through predefined grid-shaped BEV queries. To aggregate spatial information, the authors design a spatial cross-attention that each BEV query extracts the spatial features from the regions of interest across camera views. For temporal information, the authors propose a temporal self-attention to recurrently fuse the history BEV information.
-The proposed approach achieves the new state-of-the-art **56.9\%** in terms of NDS metric on the nuScenes test set, which is **9.0** points higher than previous best arts and on par with the performance of LiDAR-based baselines.
+The original upstream files (`projects/configs/bevformer/bevformer_tiny.py`,
+`bevformer_base.py`, `tools/data_converter/nuscenes_converter.py`, etc.) are
+**not** modified by the CARLA work.
 
+---
 
-# Methods
-![method](figs/arch.png "model arch")
+## 2. What's different from upstream
 
+CARLA adaptations + fair-comparison fixes:
 
-# Getting Started
-- [Installation](docs/install.md) 
-- [Prepare Dataset](docs/prepare_dataset.md)
-- [Run and Eval](docs/getting_started.md)
+1. **`CarlaNuScenesDataset`** — wraps the upstream `CustomNuScenesDataset` and
+   overrides `_evaluate_single()` so the nuScenes devkit metric pipeline accepts
+   our custom DB version strings (`v1.0-carla_{sedan,suv,bus}` and `..._eval`)
+   and CARLA scene names. CARLA has no can-bus, so temporal is disabled.
+2. **Per-vehicle info builder** (`tools/create_carla_data.py`) — produces
+   `{sedan,suv,bus}_infos_{train,val}.pkl` from the per-vehicle CARLA "geobev"
+   DBs. `valid_flag = visibility_token >= '2'` (≈ ≥40% visible). The same
+   `split/{train,val}.txt` scene split is shared by all three vehicles; each
+   sample is assigned a unique `scene_token` to force `prev_bev_exists=False`
+   (temporal off without code surgery). `can_bus` is zeros, `sweeps` empty.
+3. **CARLA configs** — `bevformer_tiny_carla*.py` (and `bevformer_base_carla*.py`):
+   6 CARLA classes (`car, truck, bus, motorcycle, bicycle, pedestrian`),
+   `use_valid_flag=True`, `use_can_bus=False`, `queue_length=2`,
+   `dataset_type='CarlaNuScenesDataset'`, `data_root='data/nuscenes/'`.
+4. **6-class NDS, GT filtered to visibility≥2** — `_evaluate_single` recomputes
+   mAP/NDS over **exactly the 6 CARLA classes** with GT filtered to
+   `visibility ≥ 2`, **identical to the training valid_flag**, so val curves and
+   benchmark numbers are directly comparable. The result prints as a
+   `[CARLA-EVAL] 6-class mAP=.. NDS=..` line.
+5. **VP + CTS robustness benchmark** (`bev_det_benchmark/`) — NDS counterpart of
+   the CVT BEV-seg benchmark. VP = viewpoint robustness (yaw/pitch/roll
+   perturbations of camera extrinsics, 631-cell grid); CTS = cross-platform
+   transfer of the sedan-trained model onto suv/bus. Both are 100% driven by
+   cam-field swaps on a clone of the val pkl — the model runs unchanged.
+6. **Fast NDS-exact eval path** — RAM-staged images (tmpfs) + shared-memory JPEG
+   decode + NUMA-pinned 2-GPU sharding. Bit-identical NDS to the standard path;
+   full VP grid in ~16h.
 
-# Model Zoo
+> The mmdet3d plugin **auto-loads** because the CARLA configs set
+> `plugin = True` and `plugin_dir = 'projects/mmdet3d_plugin/'`. No `import`
+> hacks needed — running the config registers `CarlaNuScenesDataset`.
 
-| Backbone | Method | Lr Schd | NDS| mAP|memroy | Config | Download |
-| :---: | :---: | :---: | :---: | :---:|:---:| :---: | :---: |
-| R50 | BEVFormer-tiny_fp16 | 24ep | 35.9|25.7 | - |[config](projects/configs/bevformer_fp16/bevformer_tiny_fp16.py) |[model](https://github.com/zhiqi-li/storage/releases/download/v1.0/bevformer_tiny_fp16_epoch_24.pth)/[log](https://github.com/zhiqi-li/storage/releases/download/v1.0/bevformer_tiny_fp16_epoch_24.log) |
-| R50 | BEVFormer-tiny | 24ep | 35.4|25.2 | 6500M |[config](projects/configs/bevformer/bevformer_tiny.py) |[model](https://github.com/zhiqi-li/storage/releases/download/v1.0/bevformer_tiny_epoch_24.pth)/[log](https://github.com/zhiqi-li/storage/releases/download/v1.0/bevformer_tiny_epoch_24.log) |
-| [R101-DCN](https://github.com/zhiqi-li/storage/releases/download/v1.0/r101_dcn_fcos3d_pretrain.pth)  | BEVFormer-small | 24ep | 47.9|37.0 | 10500M |[config](projects/configs/bevformer/bevformer_small.py) |[model](https://github.com/zhiqi-li/storage/releases/download/v1.0/bevformer_small_epoch_24.pth)/[log](https://github.com/zhiqi-li/storage/releases/download/v1.0/bevformer_small_epoch_24.log) |
-| [R101-DCN](https://github.com/zhiqi-li/storage/releases/download/v1.0/r101_dcn_fcos3d_pretrain.pth)  | BEVFormer-base | 24ep | 51.7|41.6 |28500M |[config](projects/configs/bevformer/bevformer_base.py) | [model](https://github.com/zhiqi-li/storage/releases/download/v1.0/bevformer_r101_dcn_24ep.pth)/[log](https://github.com/zhiqi-li/storage/releases/download/v1.0/bevformer_r101_dcn_24ep.log) |
-| [R50](https://drive.google.com/file/d/1JTVcrFcOFdPp7rtZ6K__SfF0Np15vXL7/view?usp=sharing)  | BEVformerV2-t1-base | 24ep | 42.6 | 35.1 | 23952M |[config](projects/configs/bevformerv2/bevformerv2-r50-t1-base-24ep.py) | [model/log](https://drive.google.com/drive/folders/1nts_1XxAagCEN_Ub7W2f-507SiDdVS_u?usp=sharing) |
-| [R50](https://drive.google.com/file/d/1JTVcrFcOFdPp7rtZ6K__SfF0Np15vXL7/view?usp=sharing)  | BEVformerV2-t1-base | 48ep | 43.9 | 35.9 | 23952M |[config](projects/configs/bevformerv2/bevformerv2-r50-t1-base-48ep.py) | [model/log](https://drive.google.com/drive/folders/1nts_1XxAagCEN_Ub7W2f-507SiDdVS_u?usp=sharing) |
-| [R50](https://drive.google.com/file/d/1JTVcrFcOFdPp7rtZ6K__SfF0Np15vXL7/view?usp=sharing)  | BEVformerV2-t1 | 24ep | 45.3 | 38.1 | 37579M |[config](projects/configs/bevformerv2/bevformerv2-r50-t1-24ep.py) | [model/log](https://drive.google.com/drive/folders/1uVzQCJq6gYbRLhBde09yzEBeU5l1hAxk?usp=sharing) |
-| [R50](https://drive.google.com/file/d/1JTVcrFcOFdPp7rtZ6K__SfF0Np15vXL7/view?usp=sharing)  | BEVformerV2-t1 | 48ep | 46.5 | 39.5 | 37579M |[config](projects/configs/bevformerv2/bevformerv2-r50-t1-48ep.py) | [model/log](https://drive.google.com/drive/folders/1uVzQCJq6gYbRLhBde09yzEBeU5l1hAxk?usp=sharing) |
-| [R50](https://drive.google.com/file/d/1JTVcrFcOFdPp7rtZ6K__SfF0Np15vXL7/view?usp=sharing)  | BEVformerV2-t2 | 24ep | 51.8 | 42.0 | 38954M |[config](projects/configs/bevformerv2/bevformerv2-r50-t2-24ep.py) | [model/log](https://drive.google.com/drive/folders/1bSyuFWxfJSIidGV7bC8jx2NR7idRN9-s?usp=sharing) |
-| [R50](https://drive.google.com/file/d/1JTVcrFcOFdPp7rtZ6K__SfF0Np15vXL7/view?usp=sharing)  | BEVformerV2-t2 | 48ep | 52.6 | 43.1 | 38954M |[config](projects/configs/bevformerv2/bevformerv2-r50-t2-48ep.py) | [model/log](https://drive.google.com/drive/folders/1bSyuFWxfJSIidGV7bC8jx2NR7idRN9-s?usp=sharing) |
-| [R50](https://drive.google.com/file/d/1JTVcrFcOFdPp7rtZ6K__SfF0Np15vXL7/view?usp=sharing)  | BEVformerV2-t8 | 24ep | 55.3 | 46.0 | 40392M |[config](projects/configs/bevformerv2/bevformerv2-r50-t8-24ep.py) | [model/log](https://drive.google.com/drive/folders/1Ml_usx5BNx43CFH1Di2OTazuzSyAlBto?usp=sharing) |
+---
 
-The Baidu Driver Link for (BEVFormerV2 model and log)[https://pan.baidu.com/s/1ynzlAt1DQbH8NkqmisatTw?pwd=fdcv] is here.
+## 3. Environment setup
 
-# Catalog
-- [ ] BEVFormerV2 HyperQuery
-- [ ] BEVFormerV2 Optimization, including memory, speed, inference.
-- [x] BEVFormerV2 Release
-- [ ] BEV Segmentation checkpoints
-- [ ] BEV Segmentation code
-- [x] 3D Detection checkpoints
-- [x] 3D Detection code
-- [x] Initialization
+Conda env name: **`bevformer-b200`**. Install follows the upstream BEVFormer
+instructions (`docs/install.md`): CUDA-matched PyTorch, `mmcv-full` 1.x,
+`mmdet==2.14.0`, `mmsegmentation==0.14.1`, and `mmdet3d==0.17.1` from source.
 
+```bash
+conda create -n bevformer-b200 python=3.8 -y
+conda activate bevformer-b200
 
-# Bibtex
-If this work is helpful for your research, please consider citing the following BibTeX entry.
+# PyTorch matching your CUDA (upstream reference: torch 1.9.1 + cu111;
+# use the build that matches your GPU/driver).
+pip install torch torchvision torchaudio
+
+# OpenMMLab stack (mmcv-full 1.7.x is fine for the 1.x API used here)
+pip install mmcv-full==1.7.1
+pip install mmdet==2.14.0
+pip install mmsegmentation==0.14.1
+
+# mmdet3d 0.17.1 from source
+git clone https://github.com/open-mmlab/mmdetection3d.git
+cd mmdetection3d && git checkout v0.17.1 && python setup.py install && cd ..
+
+# extras used by the plugin
+pip install einops fvcore seaborn iopath==0.1.9 timm==0.6.13 \
+    typing-extensions==4.5.0 numpy==1.19.5 numba==0.48.0 \
+    nuscenes-devkit setuptools==59.5.0
+
+# Detectron2
+python -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
+```
+
+(`wandb` is optional; the configs add a `WandbLoggerHook`. `pip install wandb`
+and `wandb login`, or remove the hook from the config to skip it.)
+
+---
+
+## 4. Data
+
+The CARLA "geobev" dataset is in **nuScenes format**, with one DB per
+ego-vehicle viewpoint. Top-level layout (geobev root):
 
 ```
-@article{li2022bevformer,
-  title={BEVFormer: Learning Bird’s-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers},
-  author={Li, Zhiqi and Wang, Wenhai and Li, Hongyang and Xie, Enze and Sima, Chonghao and Lu, Tong and Qiao, Yu and Dai, Jifeng}
-  journal={arXiv preprint arXiv:2203.17270},
-  year={2022}
-}
-@article{Yang2022BEVFormerVA,
-  title={BEVFormer v2: Adapting Modern Image Backbones to Bird's-Eye-View Recognition via Perspective Supervision},
-  author={Chenyu Yang and Yuntao Chen and Haofei Tian and Chenxin Tao and Xizhou Zhu and Zhaoxiang Zhang and Gao Huang and Hongyang Li and Y. Qiao and Lewei Lu and Jie Zhou and Jifeng Dai},
-  journal={ArXiv},
-  year={2022},
-}
+carla_geobev/
+  v1.0-carla_sedan/        v1.0-carla_sedan_eval/      # sedan train / eval DBs
+  v1.0-carla_suv/          v1.0-carla_suv_eval/        # suv   train / eval DBs
+  v1.0-carla_bus/          v1.0-carla_bus_eval/        # bus   train / eval DBs
+  split/train.txt          split/val.txt               # scene-name split (shared)
+  sweeps/                  <hash>_CAM_*.jpg            # camera images
+  viewpoint_metadata.json                              # VR extrinsics (for VP eval)
 ```
 
-# Acknowledgement
+**Symlink the geobev root into the repo as `data/nuscenes`:**
 
-Many thanks to these excellent open source projects:
-- [dd3d](https://github.com/TRI-ML/dd3d) 
-- [detr3d](https://github.com/WangYueFt/detr3d) 
-- [mmdet3d](https://github.com/open-mmlab/mmdetection3d)
+```bash
+ln -s /NHNHOME/WORKSPACE/0526040099_A/jeongtae/carla_geobev \
+      data/nuscenes
+```
 
+**Build the per-vehicle info pkls** (reads in place; copies nothing):
 
-### &#8627; Stargazers
-[![Stargazers repo roster for @nastyox/Repo-Roster](https://reporoster.com/stars/fundamentalvision/BEVFormer)](https://github.com/fundamentalvision/BEVFormer/stargazers)
+```bash
+conda activate bevformer-b200
+python tools/create_carla_data.py \
+    --root-path data/nuscenes \
+    --out-dir   data/nuscenes \
+    --vehicles  sedan suv bus \
+    --workers   16
+```
 
-### &#8627; Forkers
-[![Forkers repo roster for @nastyox/Repo-Roster](https://reporoster.com/forks/fundamentalvision/BEVFormer)](https://github.com/fundamentalvision/BEVFormer/network/members)
+Produces, under `data/nuscenes/`:
+`{sedan,suv,bus}_infos_train.pkl` and `{sedan,suv,bus}_infos_val.pkl`
+(`valid_flag = visibility ≥ 2`).
 
+---
+
+## 5. Pretrained weights
+
+- **Backbone:** ResNet-50, `torchvision://resnet50`, downloaded automatically by
+  the tiny CARLA configs on first run. No manual download needed.
+- **Trained checkpoints** land in `work_dirs/bevformer_tiny_carla_<veh>/`
+  (e.g. `latest.pth`, `epoch_24.pth`). These are produced by training below;
+  they are **not** committed (see `.gitignore`).
+
+> Note: the base CARLA configs (`bevformer_base_carla*.py`) follow upstream and
+> use the R101-DCN FCOS3D pretrain (`ckpts/r101_dcn_fcos3d_pretrain.pth`). The
+> benchmark and the commands below target the **tiny** configs, which are the
+> runnable ones in this fork.
+
+---
+
+## 6. Training
+
+Training uses the upstream `tools/dist_train.sh` launcher
+(`dist_train.sh <CONFIG> <NUM_GPUS> [extra args]`). The CARLA tiny configs use
+`samples_per_gpu=8`, `total_epochs=24`.
+
+**Sedan (the base config the others inherit):**
+
+```bash
+conda activate bevformer-b200
+PORT=28509 bash tools/dist_train.sh \
+    projects/configs/bevformer/bevformer_tiny_carla.py 2 \
+    --work-dir work_dirs/bevformer_tiny_carla_sedan
+```
+
+**SUV:**
+
+```bash
+PORT=28510 bash tools/dist_train.sh \
+    projects/configs/bevformer/bevformer_tiny_carla_suv.py 2 \
+    --work-dir work_dirs/bevformer_tiny_carla_suv
+```
+
+**Bus:**
+
+```bash
+PORT=28510 bash tools/dist_train.sh \
+    projects/configs/bevformer/bevformer_tiny_carla_bus.py 2 \
+    --work-dir work_dirs/bevformer_tiny_carla_bus
+```
+
+To run all three sequentially on the same 2 GPUs (sedan → suv → bus), use the
+chain driver (waits for `epoch_24.pth` + free GPUs between runs):
+
+```bash
+bash tools/train_carla_tiny_chain.sh
+```
+
+(`bevformer_tiny_carla_{suv,bus}.py` inherit the sedan config and only repoint
+`ann_file` to the suv/bus pkls and rename the wandb run. `bevformer_base_carla*.py`
+exist analogously if you train the base variant.)
+
+---
+
+## 7. Evaluation
+
+**Metric:** 6-class **NDS** (car/truck/bus/motorcycle/bicycle/pedestrian), with
+GT filtered to **visibility ≥ 2** — identical to the training valid_flag.
+Printed as `[CARLA-EVAL] 6-class mAP=.. NDS=..`.
+
+### Plain single-config NDS (sanity / val score)
+
+Upstream test launcher (`dist_test.sh <CONFIG> <CKPT> <NUM_GPUS> ...`,
+which already appends `--eval bbox`):
+
+```bash
+conda activate bevformer-b200
+PORT=29503 bash tools/dist_test.sh \
+    projects/configs/bevformer/bevformer_tiny_carla.py \
+    work_dirs/bevformer_tiny_carla_sedan/latest.pth 1
+```
+
+### VP — viewpoint robustness (`eval_vp_robustness_det.py`)
+
+Camera-extrinsic perturbations (yaw/pitch/roll × ±{4,8,12,16,20}), per-cam and
+all-cam protocols. Scores: `mRRS`, `RRSALL`, `mVRS = ½(mRRS+RRSALL)`
+(RRS = NDS_cell / NDS_Normal); VR (image-only) is the primary condition.
+
+Quick single-GPU run via the launcher (loads the model once, loops the grid):
+
+```bash
+CUDA_VISIBLE_DEVICES=1 bash bev_det_benchmark/run_vp_bevformer.sh \
+    --config projects/configs/bevformer/bevformer_tiny_carla.py \
+    --ckpt   work_dirs/bevformer_tiny_carla_sedan/latest.pth \
+    --frames-per-scene 2 --protocol both --tag tiny_sedan
+```
+
+Full-data, NDS-exact, 2-GPU NUMA-pinned fast path (~16h, then merges shards):
+
+```bash
+bash bev_det_benchmark/run_vp_full.sh 8 tiny_sedan
+#   args: run_vp_full.sh [WORKERS] [TAG]
+```
+
+Outputs in `bev_det_benchmark/out/vp_<tag>/`:
+`eval_vp_per_config.csv`, `eval_vp.json`, `eval_vp_summary.txt`.
+
+### CTS — cross-platform transfer (`eval_cts_det.py`)
+
+The sedan-trained model evaluated on the suv/bus targets under 4 conditions
+(NORMAL / EXT / IMG / CAL). `CTS_c = NDS(cond c) / P_TARGET`, where `P_TARGET`
+is the target-native oracle (a model trained on that platform,
+`work_dirs/bevformer_tiny_carla_{suv,bus}`).
+
+```bash
+conda activate bevformer-b200
+python bev_det_benchmark/eval_cts_det.py \
+    --config projects/configs/bevformer/bevformer_tiny_carla.py \
+    --ckpt   work_dirs/bevformer_tiny_carla_sedan/latest.pth \
+    --ngpu 1 --tag tiny_sedan
+# smoke test: --targets suv --conditions IMG
+```
+
+Outputs in `bev_det_benchmark/out/cts_<tag>/`:
+`eval_cts.csv`, `eval_cts.json`, `eval_cts_summary.txt`. See
+`bev_det_benchmark/README.md` for the full condition tables and methodology.
+
+---
+
+## 8. License
+
+This project is licensed under the **Apache License 2.0**, inherited from
+upstream BEVFormer; see the unmodified `LICENSE` file. Changes made by this fork
+are listed in [Attribution](#attribution) per Apache-2.0 §4(b). Original
+BEVFormer © its respective authors (fundamentalvision / OpenDriveLab). The CARLA
+"geobev" data and `viewpoint_metadata.json` are external assets governed by their
+own terms and are **not** distributed with this repository.

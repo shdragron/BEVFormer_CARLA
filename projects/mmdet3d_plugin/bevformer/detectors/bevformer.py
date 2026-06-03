@@ -257,8 +257,12 @@ class BEVFormer(MVXTwoStageDetector):
             img_metas[0][0]['can_bus'][:3] -= self.prev_frame_info['prev_pos']
             img_metas[0][0]['can_bus'][-1] -= self.prev_frame_info['prev_angle']
         else:
-            img_metas[0][0]['can_bus'][-1] = 0
-            img_metas[0][0]['can_bus'][:3] = 0
+            # zero the ego-shift can_bus for EVERY sample in the batch, not just
+            # sample 0 (the original only handled batch=1; simple_test itself is
+            # batch-capable). Behaviour is identical for batch=1.
+            for _m in img_metas[0]:
+                _m['can_bus'][-1] = 0
+                _m['can_bus'][:3] = 0
 
         new_prev_bev, bbox_results = self.simple_test(
             img_metas[0], img[0], prev_bev=self.prev_frame_info['prev_bev'], **kwargs)

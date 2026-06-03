@@ -134,3 +134,24 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# ---- CARLA fork: data, outputs, weights, logs ----
+data/
+work_dirs/
+wandb/
+ckpts/
+*.pth
+*.log
+__pycache__/
+bev_det_benchmark/out/
+
+# Nested SEPARATE repos (independent clones living inside this dir; do NOT commit)
+BEVDet/
+BEVDepth/
+CAPE/
+PETR/
+bev_seg_benchmark/
+
+# model weights (ckpt) + weight dir — never commit
+*.ckpt
+pth/
