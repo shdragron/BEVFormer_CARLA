@@ -113,7 +113,7 @@ def main():
     ap.add_argument('--conditions', nargs='+', default=['NORMAL', 'EXT', 'IMG', 'CAL'],
                     choices=CTS_COND_NAMES)
     ap.add_argument('--framework', default='bevformer',
-                    choices=['bevformer', 'bevdepth'],
+                    choices=['bevformer', 'bevdepth', 'bevdet'],
                     help='detector stack: selects the runner, the condition-pkl '
                          'schema, and (bevdepth) the per-target exp')
     ap.add_argument('--exp-tmpl',
@@ -140,6 +140,15 @@ def main():
 
         def target_val_pkl(_t):
             return os.path.join(B.BEVDEPTH_DATA, f'carla_infos_val_{_t}.pkl')
+    elif args.framework == 'bevdet':
+        import build_condition_pkls_bevdet as B
+        run_sh = os.path.join(HERE, 'run_bevdet.sh')
+
+        def cfg_for(_t):
+            return config                              # single bevdet config; eval DB from cond-pkl version
+
+        def target_val_pkl(_t):
+            return os.path.join(B.BEVDET_DATA, f'{_t}_infos_val.pkl')
     else:
         import build_condition_pkls as B
         run_sh = os.path.join(HERE, 'run_bevformer.sh')

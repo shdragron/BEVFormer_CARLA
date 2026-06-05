@@ -150,6 +150,7 @@ BEVDet/
 BEVDepth/
 CAPE/
 PETR/
+detr3d/
 bev_seg_benchmark/
 
 # model weights (ckpt) + weight dir — never commit
