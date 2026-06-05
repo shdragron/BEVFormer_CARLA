@@ -1,0 +1,20 @@
+CTS detection eval  (NDS)   tag=tiny_sedan    [paper Eq.6]
+  numerator P_c = SEDAN model work_dirs/bevformer_tiny_carla_sedan/latest.pth deployed on target
+  denominator P_TARGET = ORACLE = target-trained model (work_dirs/bevformer_tiny_carla_{}/latest.pth) on its own platform
+  CTS_c^(r) = P_c^(r) / P_TARGET^(r)   [IMG primary]
+
+      P_SUV      EXT      IMG      CAL    P_BUS      EXT      IMG      CAL
+  NDS   0.5029   0.2266   0.1872   0.3615   0.5471   0.1371   0.0982   0.2192
+  CTS   1.0000   0.4505   0.3721   0.7188   1.0000   0.2507   0.1795   0.4006
+
+  platform  cond        NDS    mAP6   mATE   mASE   mAOE   mAVE   mAAE     CTS
+  suv       ORACLE   0.5029  0.4480  0.594  0.145  0.309  2.369  0.163  1.0000
+  suv       NORMAL   0.4766  0.3928  0.568  0.149  0.341  2.145  0.140  0.9476
+  suv       EXT      0.2266  0.0576  1.407  0.286  0.513  2.160  0.223  0.4505
+  suv       IMG      0.1872  0.0337  1.264  0.360  0.733  3.075  0.203  0.3721  <- primary
+  suv       CAL      0.3615  0.2361  0.911  0.184  0.370  2.383  0.099  0.7188
+  bus       ORACLE   0.5471  0.5186  0.582  0.141  0.265  2.324  0.134  1.0000
+  bus       NORMAL   0.4368  0.3232  0.593  0.152  0.358  2.229  0.145  0.7983
+  bus       EXT      0.1371  0.0204  1.227  0.425  0.870  2.649  0.436  0.2507
+  bus       IMG      0.0982  0.0021  1.192  0.609  0.870  2.150  0.551  0.1795  <- primary
+  bus       CAL      0.2192  0.0400  1.251  0.234  0.631  2.887  0.144  0.4006

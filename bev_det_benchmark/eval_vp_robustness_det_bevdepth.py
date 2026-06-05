@@ -122,13 +122,19 @@ def staged_path(real_abs, stage_root):
 
 
 def collect_real_paths(base, conditions, axes, mags, data_root_real):
-    """Every real image path any cell reads: baseline (subset x 6 cams) + VR
-    variants (if VR/CR present) for all (axis, mag) x all 6 cams x subset."""
+    """Real image paths to stage to tmpfs. ALWAYS the baseline (subset x 6 cams) --
+    the hot path read in every cell. Variants are staged ONLY if VP_STAGE_VARIANTS=1:
+    the full grid has ~30x more variant images than baseline (e.g. full-frames ->
+    ~247 GB), which overruns the container's cgroup memory (tmpfs is charged to it)
+    and the process is OOM-killed. Default (baseline-only) bounds staging to ~8 GB;
+    un-staged variants are read straight from their absolute carla_VR Lustre path
+    (stage_rewrite_infos leaves a filename alone when its staged copy is absent)."""
     paths = set()
     for s in base:
         for cam in CAM_NAMES:
             paths.add(_real_abs(s['cam_infos'][cam]['filename'], data_root_real))
-    if any(c in ('VR', 'CR') for c in conditions):
+    if os.environ.get('VP_STAGE_VARIANTS') == '1' and \
+            any(c in ('VR', 'CR') for c in conditions):
         variants = {B.variant_key(ax, mg) for ax in axes for mg in mags}
         for s in base:
             sc, fr = B.info_key(s)
@@ -165,12 +171,16 @@ def stage_images(real_paths, stage_root, workers=16):
 
 
 def stage_rewrite_infos(infos, data_root_real, stage_root):
-    """In-place: point every cam filename at its staged (tmpfs) absolute path."""
+    """In-place: point each cam filename at its staged (tmpfs) absolute path IF it
+    was staged; otherwise rewrite to the real absolute path (so un-staged variants
+    -- VP_STAGE_VARIANTS!=1 -- load straight from Lustre). data_root='' downstream,
+    so every filename must be absolute either way."""
     for s in infos:
         for cam in CAM_NAMES:
             ci = s['cam_infos'][cam]
-            ci['filename'] = staged_path(
-                _real_abs(ci['filename'], data_root_real), stage_root)
+            real = _real_abs(ci['filename'], data_root_real)
+            sp = staged_path(real, stage_root)
+            ci['filename'] = sp if osp.exists(sp) else real
 
 
 def build_model_and_dataset(ckpt, stage_root=None):

@@ -21,6 +21,9 @@ FRAMES=${1:-79}
 TAG=${2:-bevdepth_sedan}
 BATCH=${3:-32}
 WORKERS=${4:-12}
+# Retrained sedan ckpt (NDS 0.5354), NOT the driver's default old undertrained
+# baseline. Override with CKPT=... ; path is relative to the BEVF root.
+CKPT=${CKPT:-BEVDepth/outputs/cts_ckpt_sedan.ckpt}
 
 export VP_STAGE_ROOT=${VP_STAGE_ROOT:-/tmp/vpstage_bd}
 # OMP modest: 2 shards x WORKERS decode + the in-process NuScenes eval shouldn't
@@ -28,7 +31,7 @@ export VP_STAGE_ROOT=${VP_STAGE_ROOT:-/tmp/vpstage_bd}
 export OMP_NUM_THREADS=${OMP_NUM_THREADS:-2}
 export MKL_NUM_THREADS=${MKL_NUM_THREADS:-2}
 
-A="--frames-per-scene $FRAMES --protocol both --batch $BATCH --workers $WORKERS --tag $TAG"
+A="--frames-per-scene $FRAMES --protocol both --batch $BATCH --workers $WORKERS --tag $TAG --ckpt $CKPT"
 OUT="$BENCH/out"
 mkdir -p "$OUT"
 
