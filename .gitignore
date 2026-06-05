@@ -157,3 +157,6 @@ bev_det_benchmark/out/
 # model weights (ckpt) + weight dir — never commit
 *.ckpt
 pth/
+
+# qualitative viz images (large jpg grids) — local only
+results/*/qual/
