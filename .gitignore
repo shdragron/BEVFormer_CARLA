@@ -146,12 +146,13 @@ __pycache__/
 bev_det_benchmark/out/
 
 # Nested SEPARATE repos (independent clones living inside this dir; do NOT commit)
-BEVDet/
-BEVDepth/
-CAPE/
-PETR/
-detr3d/
-bev_seg_benchmark/
+# Root-anchored so a model's results/<Model>/ folder stays committable.
+/BEVDet/
+/BEVDepth/
+/CAPE/
+/PETR/
+/detr3d/
+/bev_seg_benchmark/
 
 # model weights (ckpt) + weight dir — never commit
 *.ckpt

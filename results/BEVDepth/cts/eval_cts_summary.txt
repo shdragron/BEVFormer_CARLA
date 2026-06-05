@@ -1,0 +1,20 @@
+CTS detection eval  (NDS)   tag=bevdepth    [paper Eq.6]
+  numerator P_c = SEDAN model BEVDepth/outputs/cts_ckpt_sedan.ckpt deployed on target
+  denominator P_TARGET = ORACLE = target-trained model (BEVDepth/outputs/cts_ckpt_{}.ckpt) on its own platform
+  CTS_c^(r) = P_c^(r) / P_TARGET^(r)   [IMG primary]
+
+      P_SUV      EXT      IMG      CAL    P_BUS      EXT      IMG      CAL
+  NDS   0.5474   0.3803   0.0564   0.0312   0.4182   0.1252   0.0006   0.0694
+  CTS   1.0000   0.6948   0.1031   0.0569   1.0000   0.2994   0.0014   0.1660
+
+  platform  cond        NDS    mAP6   mATE   mASE   mAOE   mAVE   mAAE     CTS
+  suv       ORACLE   0.5474  0.5150  0.418  0.137  0.393  2.444  0.153  1.0000
+  suv       NORMAL   0.5047  0.4366  0.384  0.133  0.380  2.672  0.240  0.9220
+  suv       EXT      0.3803  0.2562  0.744  0.149  0.412  2.634  0.173  0.6948
+  suv       IMG      0.0564  0.0115  1.109  0.731  1.007  1.339  0.762  0.1031  <- primary
+  suv       CAL      0.0312  0.0108  1.060  0.874  1.082  1.068  0.868  0.0569
+  bus       ORACLE   0.4182  0.2565  0.307  0.155  0.381  2.775  0.258  1.0000
+  bus       NORMAL   0.4666  0.3598  0.401  0.132  0.389  2.731  0.212  1.1158
+  bus       EXT      0.1252  0.0681  1.150  0.581  0.935  1.988  0.572  0.2994
+  bus       IMG      0.0006  0.0011  1.000  1.000  1.000  1.000  1.000  0.0014  <- primary
+  bus       CAL      0.0694  0.0052  0.980  0.740  0.903  2.062  0.708  0.1660
