@@ -28,14 +28,23 @@ cells (one cam perturbed); `RRSALL` = all-6-cams perturbed.
 
 | condition | mRRS (per-cam) | **RRSALL (all-cam)** | mVRS |
 |---|---|---|---|
-| ER | 0.939 | 0.610 | 0.774 |
-| **VR (primary)** | 0.886 | **0.190** | 0.538 |
-| CR | 0.888 | 0.240 | 0.564 |
+| ER (extrinsic) | 0.939 | 0.610 | 0.774 |
+| **VR (image, primary)** | 0.911 | **0.364** | 0.637 |
+| CR (both) | 0.937 | 0.521 | 0.729 |
 
-Perturbing ONE camera's viewpoint keeps ~89% NDS (the other 5 cams compensate); perturbing
-ALL 6 collapses it to **19%** (RRSALL VR). Image perturbation (VR) hurts more than extrinsic
-(ER) — same story as CTS (image domain shift dominates). Mirrors the BEVDepth VP setup
-(NDS_Normal 0.532; VR RRSALL 0.151) for a matched comparison.
+Per-axis (all-cam RRS): VR yaw 0.418 / **pitch 0.221 (worst)** / roll 0.452; CR yaw 0.951 /
+pitch 0.254 / roll 0.358 — so **pitch is the worst axis, yaw the most robust**. Perturbing ONE
+camera keeps ~91–94% NDS (the other 5 compensate); all-6 drops to VR 0.36 / CR 0.52 / ER 0.61.
+Image (VR) still hurts somewhat more than extrinsic (ER) all-cam, but far less catastrophically
+than first measured.
+
+> **Frame-index fix (2026-06-07, commit 3551b46).** carla_VR is rendered at 2× the geobev frame
+> rate (geobev frame N ≡ carla_VR frame 2N; verified pixel-diff 17.7 @2N vs 40 @N), but
+> `vr_image_path` used frame N — so the VR/CR (image-swap) cells were fed a DIFFERENT scene's
+> image than the GT, inflating the apparent collapse (old VR RRSALL **0.190**, CR **0.240**).
+> Fixed (`int(frame)*2`) and re-run (`bevdet_sedan_fix`): VR 0.190→**0.364**, CR 0.240→**0.521**.
+> ER and NDS_Normal are unchanged (Normal/ER use geobev images → unaffected), which confirms the
+> fix touched only the image-swap path.
 
 ## ckpts/  (gitignored — `*.pth`, local only)
 
