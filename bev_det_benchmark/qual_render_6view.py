@@ -19,10 +19,13 @@ import numpy as np
 import cv2
 import mmcv
 from pyquaternion import Quaternion
+from mmcv import Config
+from mmdet3d.datasets import build_dataset
 from mmdet3d.core.bbox import LiDARInstance3DBoxes
 from mmdet3d.core.visualizer.image_vis import draw_lidar_bbox3d_on_img
 
 ROOT = '/home/hanyan_arch/viewpoint/BEVFormer/BEVDet'
+CFG = ROOT + '/configs/bevdet/carla/bevdet-r50-carla.py'
 OUTDIR = '/home/hanyan_arch/viewpoint/BEVFormer/results/BEVDet/qual'
 CAM_NAMES = ['CAM_FRONT_LEFT', 'CAM_FRONT', 'CAM_FRONT_RIGHT',
              'CAM_BACK_LEFT', 'CAM_BACK', 'CAM_BACK_RIGHT']
@@ -73,12 +76,26 @@ def visible_mask(boxes, e2c, K, W=1600, H=900):
     return centre_ok & corn_ok
 
 
+def token2pred_map(veh, preds):
+    """CarlaNuScenesDataset reorders infos on load, so test.py preds[j] correspond
+    to dataset.data_infos[j] -- NOT the raw pkl order. Map each pred to its frame by
+    sample token so GT/image (raw order) and pred line up."""
+    cfg = Config.fromfile(CFG)
+    cfg.data.test.ann_file = f'/tmp/qual/{veh}_qual10.pkl'
+    cfg.data.test.test_mode = True
+    ds = build_dataset(cfg.data.test)
+    assert len(ds.data_infos) == len(preds), (len(ds.data_infos), len(preds))
+    return {ds.data_infos[j]['token']: preds[j] for j in range(len(preds))}
+
+
 def main():
     labels = json.load(open('/tmp/qual/labels.json'))
     for veh in VEHICLES:
         infos = pickle.load(open(f'/tmp/qual/{veh}_qual10.pkl', 'rb'))['infos']
         preds = mmcv.load(f'/tmp/qual/preds_{veh}.pkl')
-        for i, (info, pr) in enumerate(zip(infos, preds)):
+        t2p = token2pred_map(veh, preds)
+        for i, info in enumerate(infos):
+            pr = t2p[info['token']]            # token-aligned pred for THIS frame
             gtb = np.asarray(info['ann_infos'][0], np.float32).reshape(-1, 9)
             GT_all = LiDARInstance3DBoxes(gtb, box_dim=9, origin=(0.5, 0.5, 0.5))
             GT = GT_all[in_range_mask(GT_all)]

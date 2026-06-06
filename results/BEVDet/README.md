@@ -58,6 +58,7 @@ vs native-model pred (red) 3D boxes projected on the original images (EGO frame 
 mirroring `BEVDepth/_viz_qual.py`. ~122 MB local.
 
 Coordinate frames are verified (scene-0269: pred red wraps the parked cars, overlapping GT
-green). Where pred boxes don't match objects (e.g. scene-0267 parking lot) it is the model
-mis-detecting — predicting pedestrian FPs / missing the parked cars — not a projection error,
-which is itself the qualitative finding for camera-only BEVDet.
+green). NOTE: `CarlaNuScenesDataset` reorders infos on load, so `test.py` predictions are in
+`dataset.data_infos` order, NOT the raw pkl order — the renderer maps each pred to its frame
+by **sample token** so GT/image/pred line up. (Skipping this draws another scene's boxes on
+the image, which looks like spurious detections but is purely a frame-alignment bug.)
