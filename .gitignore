@@ -160,3 +160,6 @@ pth/
 
 # qualitative viz images (large jpg grids) — local only
 results/*/qual/
+
+# condition-aware qual (large jpg grids) — local only
+results/*/qual_conditions/
