@@ -177,8 +177,13 @@ def variant_key(axis, signed_mag):
 def vr_image_path(scene, frame, cam, variant):
     """ABSOLUTE carla_VR variant-image path (filenames use the dash scene form).
     Absolute so BEVDepth's os.path.join(data_root, filename) ignores data_root."""
+    # carla_geobev (val GT/images) is a 1/2-rate RELABEL of the carla_VR capture:
+    # geobev frame N is the SAME world-moment as carla_VR frame 2N (verified --
+    # geobev 0269/0150 == VR baseline 0300, exact 2.000x across clean-motion
+    # scenes). Joining by the bare frame number loads a DIFFERENT scene moment, so
+    # every image-swapped VR/CR condition was fed mismatched images -> use 2N.
     return (f"{VR_ROOT}/sweeps/RGB-{cam}_{variant}/"
-            f"SimBEV-scene-{scene}-frame-{int(frame):04d}-RGB-{cam}_{variant}.jpg")
+            f"SimBEV-scene-{scene}-frame-{int(frame) * 2:04d}-RGB-{cam}_{variant}.jpg")
 
 
 def variant_extrinsic_ego(scene, cam, variant, meta=None):
