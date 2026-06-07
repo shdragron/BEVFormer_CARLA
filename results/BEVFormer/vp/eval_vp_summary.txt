@@ -1,0 +1,9 @@
+VP viewpoint-robustness detection eval (NDS)   tag=tiny_sedan  [FRAME-FIXED 2026-06-07]
+  config=projects/configs/bevformer/bevformer_tiny_carla.py  ckpt=...sedan/latest.pth
+  subset=16/scene   Normal NDS=0.5051  mAP6=0.4449
+  NOTE: ER valid (no img swap); VR/CR re-run with carla_VR frame-2x fix (geobev N==VR 2N).
+
+  condition   mRRS(per-cam)   RRSALL(all-cam)        mVRS
+  ER(EXT)       0.8981          0.4275      0.6628
+  VR(IMG)       0.9067          0.4265      0.6666 <- primary
+  CR(CAL)       0.9614          0.7768      0.8691

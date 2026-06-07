@@ -1,0 +1,8 @@
+VP viewpoint-robustness detection eval (NDS)   tag=tiny_sedan
+  config=projects/configs/bevformer/bevformer_tiny_carla.py  ckpt=work_dirs/bevformer_tiny_carla_sedan/latest.pth
+  subset=16/scene   Normal NDS=0.5051  mAP6=0.4449
+
+  condition   mRRS(per-cam)   RRSALL(all-cam)        mVRS
+  ER               0.8981          0.4275      0.6628
+  VR               0.8862          0.3036      0.5949  <- primary
+  CR               0.8923          0.4278      0.6601
