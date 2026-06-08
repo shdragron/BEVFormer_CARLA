@@ -283,6 +283,70 @@ def shard_slice(cells, shard):
 
 
 # --------------------------------------------------------------------------- #
+# crash-resumable checkpointing -- each cell is fsync'd to a per-shard JSONL as
+# soon as it finishes, and Normal (the RRS denom) to its own json; a re-launch
+# with the SAME --tag/--shard loads them and SKIPS the cells already done. This
+# is what makes the ~18 h full run survive the periodic dataloader-OOM (cells
+# rebuild a fresh loader each time -> worker churn leaks over hundreds of cells).
+# --------------------------------------------------------------------------- #
+def ckpt_paths(outdir, shard):
+    i, n = shard.split('/')
+    sfx = f'{i}of{n}'
+    return (osp.join(outdir, f'normal_{sfx}.json'),
+            osp.join(outdir, f'progress_{sfx}.jsonl'))
+
+
+def _atomic_json(path, obj):
+    tmp = f'{path}.tmp.{os.getpid()}'
+    with open(tmp, 'w') as f:
+        json.dump(obj, f)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, path)
+
+
+def save_normal(path, nds, m6, detail):
+    _atomic_json(path, {'nds': nds, 'map6': m6, 'metrics': detail})
+
+
+def load_normal(path):
+    if not osp.exists(path):
+        return None
+    try:
+        d = json.load(open(path))
+        return float(d['nds']), float(d['map6']), d.get('metrics')
+    except Exception:
+        return None
+
+
+def append_cell(path, row):
+    """Append one finished cell as a JSON line, fsync'd so a crash mid-run keeps
+    every cell written before it."""
+    with open(path, 'a') as f:
+        f.write(json.dumps(row) + '\n')
+        f.flush()
+        os.fsync(f.fileno())
+
+
+def load_progress(path):
+    """-> (done_keys set, rows list). Tolerates a corrupt/partial last line
+    (a crash during the final append) by skipping unparseable lines."""
+    by_key = {}
+    if osp.exists(path):
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    r = json.loads(line)
+                    by_key[(r['cond'], r['axis'], r['mag'], r['proto'])] = r
+                except Exception:
+                    continue
+    return set(by_key), list(by_key.values())
+
+
+# --------------------------------------------------------------------------- #
 # outputs / aggregation
 # --------------------------------------------------------------------------- #
 def write_outputs(outdir, args, nds_norm, m6_norm, rows, normal_metrics=None):
@@ -375,6 +439,11 @@ def main():
     ckpt = args.ckpt if osp.isabs(args.ckpt) else osp.join(BEVF_ROOT, args.ckpt)
     stage_root = os.environ.get('VP_STAGE_ROOT')
 
+    # A fresh dataloader is built per cell; over hundreds of cells the default
+    # /dev/shm fd-sharing pool churns and a worker eventually gets SIGKILL'd.
+    # 'file_system' spills shared tensors to TMPDIR files instead -> robust.
+    torch.multiprocessing.set_sharing_strategy('file_system')
+
     set_deterministic(0)
     patch_nuscenes_cache()
     cfg = Config.fromfile(config)
@@ -394,34 +463,53 @@ def main():
           f'workers={args.workers} | shard={args.shard} | '
           f'stage={"on" if stage_root else "off"}', flush=True)
 
+    os.makedirs(outdir, exist_ok=True)
+    i, n = (int(x) for x in args.shard.split('/'))
+    norm_path, jsonl_path = ckpt_paths(outdir, args.shard)
     tmpdir = tempfile.mkdtemp(prefix='vp_bevdet_')
     t0 = time.perf_counter()
 
-    # Normal (oracle) -- every shard runs it (the RRS denominator).
-    nds_norm, m6_norm, norm_detail = run_cell(
-        model, cfg, metadata, base, 'Normal', None, None, None,
-        osp.join(tmpdir, 'cell.pkl'), tmpdir, args.workers, args.batch,
-        stage_root)
-    print(f'[VP] Normal NDS={nds_norm:.4f} mAP6={m6_norm:.4f} '
-          f'({time.perf_counter()-t0:.0f}s)', flush=True)
+    # Normal (oracle / RRS denom) -- every shard runs it; resume if checkpointed.
+    nm = load_normal(norm_path)
+    if nm is not None:
+        nds_norm, m6_norm, norm_detail = nm
+        print(f'[VP] Normal RESUMED NDS={nds_norm:.4f} mAP6={m6_norm:.4f}',
+              flush=True)
+    else:
+        nds_norm, m6_norm, norm_detail = run_cell(
+            model, cfg, metadata, base, 'Normal', None, None, None,
+            osp.join(tmpdir, 'cell.pkl'), tmpdir, args.workers, args.batch,
+            stage_root)
+        save_normal(norm_path, nds_norm, m6_norm, norm_detail)
+        print(f'[VP] Normal NDS={nds_norm:.4f} mAP6={m6_norm:.4f} '
+              f'({time.perf_counter()-t0:.0f}s)', flush=True)
 
     cells = shard_slice(all_cells(args.conditions, args.axes, args.mags,
                                   args.protocol), args.shard)
-    rows = []
+    done, rows = load_progress(jsonl_path)   # resume: skip cells already fsync'd
+    if done:
+        print(f'[VP] RESUME: {len(done)}/{len(cells)} cells already done '
+              f'-> skipping', flush=True)
+    n_new = 0
     for k, (cond, axis, mag, proto) in enumerate(cells):
+        if (cond, axis, mag, proto) in done:
+            continue
         tc = time.perf_counter()
         nds, m6, detail = run_cell(model, cfg, metadata, base, cond, axis, mag,
                                    proto, osp.join(tmpdir, 'cell.pkl'), tmpdir,
                                    args.workers, args.batch, stage_root)
         rrs = nds / nds_norm if nds_norm else float('nan')
-        rows.append({'cond': cond, 'axis': axis, 'mag': mag, 'proto': proto,
-                     'nds': nds, 'map6': m6, 'rrs': rrs, 'metrics': detail})
+        row = {'cond': cond, 'axis': axis, 'mag': mag, 'proto': proto,
+               'nds': nds, 'map6': m6, 'rrs': rrs, 'metrics': detail}
+        rows.append(row)
+        append_cell(jsonl_path, row)   # fsync'd -> crash keeps every prior cell
+        n_new += 1
         print(f'[VP {k+1}/{len(cells)}] {cond} {axis}{mag:+d} {proto:14s} '
               f'NDS={nds:.4f} RRS={rrs:.4f} ({time.perf_counter()-tc:.0f}s)',
               flush=True)
+    print(f'[VP] shard {args.shard}: {n_new} new + {len(done)} resumed '
+          f'= {len(rows)}/{len(cells)} cells', flush=True)
 
-    i, n = (int(x) for x in args.shard.split('/'))
-    os.makedirs(outdir, exist_ok=True)
     if n == 1:
         write_outputs(outdir, args, nds_norm, m6_norm, rows, norm_detail)
     else:
