@@ -1,0 +1,8 @@
+VP viewpoint-robustness (DETR3D-R50 NDS)   tag=detr3d_sedan
+  frames-per-scene=16  NDS_Normal=0.5368  mAP6_Normal=0.4843
+  RRS = NDS_cell / NDS_Normal   [VR primary]
+
+  condition   mRRS(per-cam)   RRSALL(all-cam)        mVRS
+  ER               0.9090          0.4382      0.6736
+  VR               0.9083          0.4215      0.6649  <- primary
+  CR               0.9749          0.8451      0.9100

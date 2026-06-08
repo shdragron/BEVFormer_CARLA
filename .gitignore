@@ -163,3 +163,8 @@ results/*/qual/
 
 # condition-aware qual (large jpg grids) — local only
 results/*/qual_conditions/
+results/_qual_conditions/
+results/*/qualitative/
+
+# generated result archives (tar) — local only
+results/*.tar

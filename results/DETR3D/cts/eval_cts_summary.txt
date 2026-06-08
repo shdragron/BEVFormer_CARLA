@@ -1,0 +1,7 @@
+DETR3D-R50 CARLA CTS (cross-platform transfer)  sedan model -> suv/bus
+  full 3792-frame val, vis>=2 GT, 6-class NDS. CTS = NDS_cond / P_TARGET (oracle).
+  conditions NORMAL/EXT/IMG/CAL (IMG=primary). geobev images -> carla_VR frame-bug UNAFFECTED.
+
+  target   ORACLE |          NORMAL             EXT       IMG(prim)             CAL
+  suv      0.5602 | 0.5041(CTS 0.900) 0.2401(CTS 0.429) 0.1955(CTS 0.349) 0.4308(CTS 0.769)
+  bus      0.6019 | 0.4660(CTS 0.774) 0.1848(CTS 0.307) 0.1593(CTS 0.265) 0.2261(CTS 0.376)
