@@ -168,3 +168,4 @@ results/*/qualitative/
 
 # generated result archives (tar) — local only
 results/*.tar
+results/*.tar.gz
