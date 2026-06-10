@@ -14,10 +14,12 @@ CONDS = ['ER', 'VR', 'CR']           # EXT / IMG(primary) / CAL
 AXES = ['roll', 'pitch', 'yaw']
 # BEVDet/BEVDepth per_config CSVs omit the Normal row; P_NORMAL taken from their
 # eval_vp_summary.txt. BEVFormer's CSV carries its own Normal row (overrides below).
+# BEVDet/BEVDepth = full-val(3792) Normal; BEVFormer = subset(768) from its CSV's
+# Normal row (overridden in aggregate()). full≈subset (≤0.01) so the mix is benign.
 P_NORMAL = {
-    'BEVDet':    {'nds': 0.5185, 'map6': 0.4695},
-    'BEVDepth':  {'nds': 0.5324, 'map6': 0.4931},
-    'BEVFormer': {'nds': 0.5051, 'map6': 0.4449},
+    'BEVDet':    {'nds': 0.5166, 'map6': 0.4717},   # full 3792
+    'BEVDepth':  {'nds': 0.5354, 'map6': 0.4969},   # full 3792
+    'BEVFormer': {'nds': 0.5051, 'map6': 0.4449},   # subset 768 (frame-fixed)
 }
 
 def load(model):

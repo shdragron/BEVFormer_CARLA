@@ -1,8 +1,8 @@
-VP viewpoint-robustness (BEVDet NDS)   tag=bevdet_sedan_fix
-  frames-per-scene=16  NDS_Normal=0.5185  mAP6_Normal=0.4695
+VP viewpoint-robustness (BEVDet NDS)   tag=bevdet_sedan_full
+  frames-per-scene=79  NDS_Normal=0.5166  mAP6_Normal=0.4717
   RRS = NDS_cell / NDS_Normal   [VR primary]
 
   condition   mRRS(per-cam)   RRSALL(all-cam)        mVRS
   ER               0.9385          0.6095      0.7740
-  VR               0.9107          0.3635      0.6371  <- primary
-  CR               0.9372          0.5209      0.7290
+  VR               0.9084          0.3596      0.6340  <- primary
+  CR               0.9354          0.5122      0.7238

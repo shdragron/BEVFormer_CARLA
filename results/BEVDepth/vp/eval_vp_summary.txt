@@ -1,8 +1,8 @@
-VP viewpoint-robustness (BEVDepth NDS)   tag=bevdepth_sedan  [carla_VR frame-2N FIX]
-  frames-per-scene=16  NDS_Normal=0.5324  mAP6_Normal=0.4931
-  RRS = NDS_cell / NDS_Normal   [VR primary]   (ER+Normal from orig run; VR/CR frame-fixed)
+VP viewpoint-robustness (BEVDepth NDS)   tag=bevdepth_sedan_full
+  frames-per-scene=79  NDS_Normal=0.5354  mAP6_Normal=0.4969
+  RRS = NDS_cell / NDS_Normal   [VR primary]
 
   condition   mRRS(per-cam)   RRSALL(all-cam)        mVRS
-  ER               0.9474          0.6525      0.7999
-  VR               0.9147          0.3278      0.6212  <- primary
-  CR               0.9423          0.4922      0.7173
+  ER               0.9449          0.6478      0.7963
+  VR               0.9120          0.3252      0.6186  <- primary
+  CR               0.9383          0.4852      0.7117

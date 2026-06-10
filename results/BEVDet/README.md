@@ -22,19 +22,21 @@ subset metric is recomputable via `bev_det_benchmark/recompute_subset_metric.py`
 ## vp/  (committed) — viewpoint robustness, sedan model
 
 631-cell yaw/pitch/roll perturbation grid (signed ±{4..20}°), `RRS = NDS_cell / NDS_Normal`.
-`NDS_Normal = 0.5185` (mAP6 0.4695; frames-per-scene=16 subset, 768 samples). Conditions:
-ER (extrinsic only) / **VR (image only, primary)** / CR (both). `mRRS` = mean over per-camera
-cells (one cam perturbed); `RRSALL` = all-6-cams perturbed.
+`NDS_Normal = 0.5166` (mAP6 0.4717; **full 3792-frame val** — `eval_vp.*` are now the full run).
+The fps-16 **768-subset** (NDS_Normal 0.5185) is preserved as `eval_vp.subset768.*`; the
+cross-model table stays matched at 768 for every model, and full≈subset (|ΔRRS| mean 0.005,
+≤0.01). Conditions: ER (extrinsic only) / **VR (image only, primary)** / CR (both). `mRRS` = mean
+over per-camera cells (one cam perturbed); `RRSALL` = all-6-cams perturbed.
 
 | condition | mRRS (per-cam) | **RRSALL (all-cam)** | mVRS |
 |---|---|---|---|
 | ER (extrinsic) | 0.939 | 0.610 | 0.774 |
-| **VR (image, primary)** | 0.911 | **0.364** | 0.637 |
-| CR (both) | 0.937 | 0.521 | 0.729 |
+| **VR (image, primary)** | 0.908 | **0.360** | 0.634 |
+| CR (both) | 0.935 | 0.512 | 0.724 |
 
-Per-axis (all-cam RRS): VR yaw 0.418 / **pitch 0.221 (worst)** / roll 0.452; CR yaw 0.951 /
-pitch 0.254 / roll 0.358 — so **pitch is the worst axis, yaw the most robust**. Perturbing ONE
-camera keeps ~91–94% NDS (the other 5 compensate); all-6 drops to VR 0.36 / CR 0.52 / ER 0.61.
+Per-axis (all-cam RRS, full 3792): VR yaw 0.417 / **pitch 0.212 (worst)** / roll 0.450; CR yaw
+0.944 / pitch 0.243 / roll 0.349 — so **pitch is the worst axis, yaw the most robust**. Perturbing
+ONE camera keeps ~91–94% NDS (the other 5 compensate); all-6 drops to VR 0.36 / CR 0.51 / ER 0.61.
 Image (VR) still hurts somewhat more than extrinsic (ER) all-cam, but far less catastrophically
 than first measured.
 
