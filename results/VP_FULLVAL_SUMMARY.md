@@ -29,7 +29,9 @@ subset 94.30/84.28/88.98 vs full 94.01/83.90/88.58로 Δ≤0.4pt.)
 | BEVDepth | EXT | 0.945 | 0.648 | 0.796 |
 | BEVDepth | **IMG** | 0.912 | 0.325 | **0.619** |
 | BEVDepth | CAL | 0.938 | 0.485 | 0.712 |
-| BEVFormer | (all-cam only) | — | EXT 0.425 / IMG 0.425 / CAL 0.779 | — |
+| BEVFormer | EXT | 0.8995 | 0.4248 | **0.832** |
+| BEVFormer | **IMG** | 0.9074 | 0.4250 | **0.839** |
+| BEVFormer | CAL | 0.9620 | 0.7785 | **0.936** |
 
 - per-cam은 0.91–0.95로 압축(6-view 융합이 한 카메라를 outvote) → **헤드라인 mVRS가 EXT–IMG 격차를 가림**(BEVDet IMG mVRS 0.634인데 all-cam은 0.360). 분석은 all-cam이 변별력.
 - BEVFormer full-val은 비용 절감으로 **all-cam만** 재계산(per-cam은 subset 사용; subset 대표성이 위에서 확인됨).
@@ -46,7 +48,9 @@ subset 94.30/84.28/88.98 vs full 94.01/83.90/88.58로 Δ≤0.4pt.)
   subset 대비 max Δ 0.009 — 5/5 모델에서 대표성 재확인).
 - **DFA3D bus oracle 학습 완료**(06-11 05:25, epoch 24) → 3개 차량 oracle 완비, full
   VP/CTS 평가 대기(GPU는 현재 PD-BEV 학습 + BEVFormer per-cam이 점유).
-- 실행 중: **BEVFormer per-cam full** 2-shard 262/540 셀(~7분/셀/샤드, ETA ~06-12 새벽).
+- **BEVFormer per-cam full 완료(06-12 새벽)** → 1/7 mVRS full = EXT 83.2 / IMG 83.9 /
+  CAL 93.6 (subset 대비 Δ≤0.1pt — 1/7 수준에서도 subset 대표성 재확인). **BEVFormer는
+  이제 완전 full: Table 2 dagger 제거 대상.** 본문 그림·초안 수치 교체 완료.
 - **중단: DETR3D per-cam 자동 체인** — allcam 종료 감시 워처가 06-11 kill됨. allcam은
   완료됐으나 per-cam 미시작. GPU 여유 시 같은 --tag 재실행으로 이어가면 됨(셀 resume).
 - **본문 그림 반영(figures/paper/):** Fig. C의 all-cam IMG를 det 5종 모두 full로 교체

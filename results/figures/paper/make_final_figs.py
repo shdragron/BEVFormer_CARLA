@@ -55,7 +55,7 @@ C = lambda mech: BLUE if mech == 'gated' else ORANGE
 # ================= shared data (verified) =================
 # model, task, mech, mVRS EXT, IMG, CAL  (%)
 VP = [
-    ('BEVFormer',   'det', 'gated',   83.1, 83.8, 93.5),
+    ('BEVFormer',   'det', 'gated',   83.2, 83.9, 93.6),   # full-3792 (percam+allcam)
     ('DETR3D',      'det', 'gated',   84.2, 83.9, 95.6),
     ('CAPE',        'det', 'extract', 94.0, 83.9, 88.6),
     ('BEVDet',      'det', 'extract', 89.2, 83.0, 87.5),

@@ -2,9 +2,10 @@
 
 > 표기: headline mVRS와 1/7 성분은 퍼센트, all-camera 분해는 0에서 1 비율.
 > 그룹 명칭: 투영 샘플링(projection sampling) / 추출 후 배치(extract then place).
-> SimpleBEV는 논문에서 완전 제외. VP 수치: BEVDet, BEVDepth, CAPE는 full(3792프레임,
-> 631셀), BEVFormer·DETR3D는 all-cam만 full(Fig. C의 IMG 0.425/0.424; 1/7 mVRS와
-> per-cam은 subset, full 진행 중), segmentation은 768프레임 subset.
+> SimpleBEV는 논문에서 완전 제외. VP 수치: **BEVFormer, BEVDet, BEVDepth, CAPE는
+> 완전 full**(3792프레임; BEVFormer 1/7 = 83.2/83.9/93.6, 06-12 percam 완료 — dagger
+> 제거 대상), DETR3D는 all-cam만 full(IMG 0.424; per-cam full 진행 중, ~06-14),
+> segmentation은 768프레임 subset.
 > 그림 대응(figures/paper/): **Fig. A** = fig_mechanism_diagnostic(통합: (a) EXT-IMG
 > 산점, (b) VP CAL−EXT 부호, (c) CTS CAL−EXT 부호), **Fig. B** = fig_cts_img_to_cal
 > (SUV 덤벨), **Fig. C** = fig_vp_cts_alignment(정렬 산점).
@@ -21,7 +22,7 @@
 
 **Extrinsic-only 교란은 실제 시점 변화의 손상을 과소보고한다.** Fig. A(a)에서 IMG 점수를 EXT 점수에 대해 그리면, 투영 샘플링 모델(BEVFormer, DETR3D, PointBeV)은 대각선 근처에 놓여 두 조건의 손상이 거의 같다. 반면 추출 후 배치 모델은 모두 대각선 아래에 놓이며 IMG가 EXT보다 대략 6--10%p 낮고, 두 그룹 사이는 거의 비어 있다. 한편 IMG 조건 자체에서는 모델 간 차이가 크게 압축된다(detection 82.8--83.9, segmentation 79.6--84.5). 즉 이미지를 그대로 두고 extrinsic만 바꾸는 평가는 점수를 일률적으로 올리는 것이 아니라, 어떤 모델이 강건해 보이는지 자체를 바꾼다. 시점 변화를 충실히 평가하려면 extrinsic-only 교란만으로는 부족하고 다시 렌더링한(re-rendered) 이미지가 필요하며, 이것이 RoboGeo가 IMG 조건을 제공하는 이유다.
 
-**CAL 응답은 모델이 extrinsic을 소비하는 위치를 가른다.** 바뀐 기하에 맞는 extrinsic을 함께 공급하는 CAL 조건에서 순위는 크게 재배열된다. BEVFormer는 83.1에서 93.5로, DETR3D는 84.2에서 95.6으로, PointBeV는 79.4에서 92.3으로 EXT 수준을 넘어 회복하는 반면, CAPE는 94.0에서 88.6으로, BEVDet은 89.2에서 87.5로, BEVDepth는 90.2에서 87.4로, LSS는 88.4에서 86.3으로 오히려 EXT보다 낮아진다. 이 분기는 extrinsic을 소비하는 위치와 함께 움직인다. 투영 샘플링 모델은 올바른 extrinsic이 주어지면 샘플링 좌표가 다시 맞춰지는 반면, 추출 후 배치 모델은 기울어진 시점이 이미 feature에 반영된 뒤라 올바른 extrinsic을 넣어도 되돌리기 어렵다. 실제로 CAL−EXT의 부호는 분석 대상 10개 모델 중 9개에서 이 구분과 일치한다(Fig. A(b)). 유일한 예외는 GaussianLSS로, 추출 후 배치 계열임에도 mVRS 기준 CAL이 EXT보다 높지만(92.1 대 90.7) all-camera 성분에서는 0.699 대 0.698로 사실상 경계선이다. 이 결과는 CAL−EXT 부호가 "calibration을 더 정확히 알면 도움이 되는가"를 모델별로 가려내는 유용한 진단 신호임을 시사하며, RoboGeo의 4-condition protocol이 이 질문을 분리해 답하게 한다.
+**CAL 응답은 모델이 extrinsic을 소비하는 위치를 가른다.** 바뀐 기하에 맞는 extrinsic을 함께 공급하는 CAL 조건에서 순위는 크게 재배열된다. BEVFormer는 83.2에서 93.6으로, DETR3D는 84.2에서 95.6으로, PointBeV는 79.4에서 92.3으로 EXT 수준을 넘어 회복하는 반면, CAPE는 94.0에서 88.6으로, BEVDet은 89.2에서 87.5로, BEVDepth는 90.2에서 87.4로, LSS는 88.4에서 86.3으로 오히려 EXT보다 낮아진다. 이 분기는 extrinsic을 소비하는 위치와 함께 움직인다. 투영 샘플링 모델은 올바른 extrinsic이 주어지면 샘플링 좌표가 다시 맞춰지는 반면, 추출 후 배치 모델은 기울어진 시점이 이미 feature에 반영된 뒤라 올바른 extrinsic을 넣어도 되돌리기 어렵다. 실제로 CAL−EXT의 부호는 분석 대상 10개 모델 중 9개에서 이 구분과 일치한다(Fig. A(b)). 유일한 예외는 GaussianLSS로, 추출 후 배치 계열임에도 mVRS 기준 CAL이 EXT보다 높지만(92.1 대 90.7) all-camera 성분에서는 0.699 대 0.698로 사실상 경계선이다. 이 결과는 CAL−EXT 부호가 "calibration을 더 정확히 알면 도움이 되는가"를 모델별로 가려내는 유용한 진단 신호임을 시사하며, RoboGeo의 4-condition protocol이 이 질문을 분리해 답하게 한다.
 
 축별로 보면 yaw는 calibration-type error에 가깝다. EXT와 IMG의 차이가 작고 CAL에서 대부분 회복된다. 반면 pitch와 roll은 특히 추출 후 배치 모델에서 content-type error에 가까워, 실제 시점이 바뀌면서 지면과 객체의 위치 관계가 image feature 자체에 반영되므로 올바른 extrinsic을 넣어도 손상이 복구되지 않는다. detection에서는 CAL-pitch가 가장 깨끗한 판별 조건이다(축별 수치는 부록 표 X).
 
