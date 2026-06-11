@@ -1,0 +1,1 @@
+[CARLA-EVAL] 6-class mAP=0.4694 NDS=0.5138 | 10-class mAP=0.2817 NDS=0.3251
