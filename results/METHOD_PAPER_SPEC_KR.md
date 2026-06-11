@@ -233,7 +233,15 @@ intrinsic 확장(nuScenes→Waymo): 투영은 해석적으로 새 K 소비, 파�
 VP-IMG 셀에서 진짜 Δ에 정점이 서는지; 평평하면 중단→통제 연구로 전환) → ③
 **training-free plug-in**(frozen 검출기+argmax-Δ 보정 → VP-IMG 회복 측정 — 이것만
 으로 헤드라인 후보) → ④ full 모델 + 소비기제 3–4암 ablation → ⑤ nuScenes→Waymo.
-남은 정찰 1건: "파운데이션 depth 앵커 기반 온라인 extrinsic 보정"의 선행 여부.
+
+**최종 정찰 완료(06-11 밤): 공백 확정.** 18회 검색 — 점유 연구 없음. 인용·구분
+필수 이웃: FrozenRecon(ICCV'23, frozen depth 앵커지만 trajectory), dCAP(트레일러
+회귀, 무일치도), Rig3R(자체 파운데이션이 calib 예측), 카메라-LiDAR depth-일치도
+계열(기제는 같으나 앵커가 LiDAR), BEVCalib. **동기 강화 증거**: Hashimoto
+2604.00597 Table 3 반사실 — 진짜 extrinsic 복원 시 L2 6.61m→0.51m인데 보정은
+future work로 방치 = 병목 미해결의 출판된 증명. 상세: LatentCalib/docs/
+NOVELTY_SCOUT.md. 3–4월 2026 preprint 2건이 최근접 — 제출 전 재정찰 필수.
+프로젝트 폴더: /home/hanyan_arch/viewpoint/LatentCalib (shdragron/LatentCalib).
 
 ### 부기
 - 출처: 문헌 4-에이전트(각 인용 venue/year 웹 확인) + 적대 기술 리뷰(기하 수치
