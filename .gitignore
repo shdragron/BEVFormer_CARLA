@@ -169,3 +169,22 @@ results/*/qualitative/
 # generated result archives (tar) — local only
 results/*.tar
 results/*.tar.gz
+
+# sibling project clones (own repos) — never commit here
+/3D-deformable-attention/
+/CoIn3D/
+/Generalizable-BEV/
+
+# paper draft pdf (local only)
+/_WACV_2027_*.pdf
+
+# benchmark run outputs / logs (results/ holds the curated copies)
+bev_det_benchmark/logs/
+bev_det_benchmark/out_vpfix/
+bev_det_benchmark/out_vpfull/
+bev_det_benchmark/sparse/out/
+bev_det_benchmark/sparse/out_vp_detr3d/
+
+# raw result archives/extractions (curated copies live in results/<Model>/)
+results/**/*.tar
+results/CAPE/cape_result/

@@ -420,30 +420,63 @@ def main():
     # it at this process's private tmpdir so every cell/shard is isolated.
     model.evaluator.output_dir = tmpdir
     t0 = time.perf_counter()
+    i, n = (int(x) for x in args.shard.split('/'))
+    os.makedirs(outdir, exist_ok=True)
 
-    # Normal (oracle) -- every shard runs it (RRS denominator).
-    nds_norm, m6_norm, _ = run_cell(model, ds, base, 'Normal', None, None,
-                                    None, args.batch, args.workers, tmpdir,
-                                    stage=stage)
-    print(f'[VP] Normal NDS={nds_norm:.4f} mAP6={m6_norm:.4f} '
-          f'({time.perf_counter()-t0:.0f}s)', flush=True)
+    # ---- checkpoint/resume ------------------------------------------------- #
+    # Each completed cell is fsync-appended to a per-shard JSONL; Normal is cached
+    # to its own json. On restart we reload both and SKIP done cells, so an OOM /
+    # kill loses at most the in-flight cell (not the whole run). These files use a
+    # '_ckpt_' prefix so merge_shards (which globs 'shard_*.json') ignores them.
+    normal_path = osp.join(outdir, f'_ckpt_{i}of{n}.normal.json')
+    partial_path = osp.join(outdir, f'_ckpt_{i}of{n}.partial.jsonl')
+
+    if osp.exists(normal_path):
+        nrec = json.load(open(normal_path))
+        nds_norm, m6_norm = nrec['nds_normal'], nrec['map6_normal']
+        print(f'[VP] resumed Normal NDS={nds_norm:.4f} mAP6={m6_norm:.4f} '
+              '(cached)', flush=True)
+    else:
+        nds_norm, m6_norm, _ = run_cell(model, ds, base, 'Normal', None, None,
+                                        None, args.batch, args.workers, tmpdir,
+                                        stage=stage)
+        json.dump({'nds_normal': nds_norm, 'map6_normal': m6_norm},
+                  open(normal_path, 'w'))
+        print(f'[VP] Normal NDS={nds_norm:.4f} mAP6={m6_norm:.4f} '
+              f'({time.perf_counter()-t0:.0f}s)', flush=True)
+
+    rows, done = [], set()
+    if osp.exists(partial_path):
+        for ln in open(partial_path):
+            ln = ln.strip()
+            if not ln:
+                continue
+            r = json.loads(ln)
+            done.add((r['cond'], r['axis'], r['mag'], r['proto']))
+            rows.append(r)
+        print(f'[VP] resumed {len(rows)} cells from checkpoint', flush=True)
 
     cells = shard_slice(all_cells(args.conditions, args.axes, args.mags,
                                   args.protocol), args.shard)
-    rows = []
+    pf = open(partial_path, 'a')
     for k, (cond, axis, mag, proto) in enumerate(cells):
+        if (cond, axis, mag, proto) in done:
+            continue                                 # already computed -> skip
         tc = time.perf_counter()
         nds, m6, _ = run_cell(model, ds, base, cond, axis, mag, proto,
                               args.batch, args.workers, tmpdir, stage=stage)
         rrs = nds / nds_norm if nds_norm else float('nan')
-        rows.append({'cond': cond, 'axis': axis, 'mag': mag, 'proto': proto,
-                     'nds': nds, 'map6': m6, 'rrs': rrs})
+        row = {'cond': cond, 'axis': axis, 'mag': mag, 'proto': proto,
+               'nds': nds, 'map6': m6, 'rrs': rrs}
+        rows.append(row)
+        pf.write(json.dumps(row) + '\n')             # durable per-cell save
+        pf.flush()
+        os.fsync(pf.fileno())
         print(f'[VP {k+1}/{len(cells)}] {cond} {axis}{mag:+d} {proto:14s} '
               f'NDS={nds:.4f} RRS={rrs:.4f} ({time.perf_counter()-tc:.0f}s)',
               flush=True)
+    pf.close()
 
-    i, n = (int(x) for x in args.shard.split('/'))
-    os.makedirs(outdir, exist_ok=True)
     if n == 1:
         write_outputs(outdir, args, nds_norm, m6_norm, rows)
     else:                                            # write this shard; merge later

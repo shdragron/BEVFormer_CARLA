@@ -31,13 +31,14 @@ import argparse
 import csv
 import json
 import os
+import os.path as osp
 import pickle as _pk
 import re
 import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-BEVF_ROOT = os.path.dirname(HERE)
+BEVF_ROOT = os.path.dirname(os.path.dirname(HERE))   # sparse/ -> bev_det_benchmark/ -> BEVFormer/
 sys.path.insert(0, HERE)
 
 CARLA_EVAL_RE = re.compile(r'\[CARLA-EVAL\]\s+\d+-class\s+mAP=([\d.]+)\s+NDS=([\d.]+)')
@@ -48,43 +49,6 @@ CTS_COND_NAMES = ['NORMAL', 'EXT', 'IMG', 'CAL']
 # main() from --framework, so adding bevdepth never touches the bevformer path.
 
 
-def _cell_path(cell_dir, target, cond):
-    """Per-cell result-cache path (resume: skip already-done cells on restart).
-
-    Persistent (lives in the run outdir/cells), NOT tmpfs/scratch."""
-    name = f"{target}_{cond}".replace('/', '-')
-    return os.path.join(cell_dir, name + '.pkl')
-
-
-def _save_cell(path, obj):
-    """Crash-safe per-cell cache write: dump to tmp, fsync, then atomic replace.
-
-    A SIGKILL mid-dump can only truncate the .tmp file; the real path is swapped
-    in by os.replace() (atomic on POSIX) only after data hits disk."""
-    tmp = path + '.tmp'
-    with open(tmp, 'wb') as f:
-        _pk.dump(obj, f)
-        f.flush()
-        os.fsync(f.fileno())
-    os.replace(tmp, path)
-
-
-def _load_cell(path):
-    """Safe per-cell cache read: return None (and drop the file) on any failure.
-
-    A truncated/corrupt .pkl (e.g. from an old non-atomic SIGKILL) raises on
-    load; we remove it so the cell recomputes instead of aborting the restart."""
-    try:
-        with open(path, 'rb') as f:
-            return _pk.load(f)
-    except Exception:
-        try:
-            os.remove(path)
-        except OSError:
-            pass
-        return None
-
-
 def nds_components(metrics):
     """Pull the 6-class NDS ingredients (+10-class headline) from a detail dict."""
     g = (lambda k: metrics.get(P + k)) if metrics else (lambda k: None)
@@ -92,6 +56,44 @@ def nds_components(metrics):
             'mAOE': g('mAOE_6class'), 'mAVE': g('mAVE_6class'),
             'mAAE': g('mAAE_6class'), 'nds_10class': g('NDS_10class'),
             'map_10class': g('mAP_10class')}
+
+
+def _cell_path(cell_dir, target, cond):
+    """Per-cell result-cache path (resume: skip already-done cells on restart).
+
+    Persistent (under the run outdir, NOT tmpfs/scratch); keyed by the cell
+    identity (target + condition, incl. the ORACLE denominator cell)."""
+    name = f"{target}_{cond}".replace('/', '-')
+    return osp.join(cell_dir, name + '.pkl')
+
+
+def _save_cell(path, obj):
+    """Crash-safe per-cell cache write: dump to a .tmp, fsync, then atomic rename.
+
+    A SIGKILL mid-write leaves only the (discarded) .tmp; ``path`` is never a
+    truncated half-pickle, so a restart's _load_cell always sees a complete file."""
+    tmp = path + '.tmp'
+    with open(tmp, 'wb') as f:
+        _pk.dump(obj, f)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, path)            # atomic on POSIX
+
+
+def _load_cell(path):
+    """Safe per-cell cache read: return the row, or None if missing/corrupt.
+
+    A truncated/corrupt .pkl (e.g. from a pre-hardening crash) is removed so the
+    cell falls through to recompute instead of aborting the whole restart."""
+    try:
+        with open(path, 'rb') as f:
+            return _pk.load(f)
+    except Exception:
+        try:
+            os.remove(path)         # drop the corrupt/truncated cache so it recomputes
+        except OSError:
+            pass
+        return None
 
 
 def run_one(run_sh, config, ckpt, ngpu, cond_pkl, log_path):
@@ -194,7 +196,7 @@ def main():
         # the bevformer condition-pkl builder verbatim. Only the runner differs
         # (run_<framework>.sh = single-GPU tools/test.py in the legacy env).
         import build_condition_pkls as B
-        run_sh = os.path.join(HERE, 'sparse', f'run_{args.framework}.sh')
+        run_sh = os.path.join(HERE, f'run_{args.framework}.sh')
 
         def cfg_for(_t):
             return config                              # single config; eval DB from cond-pkl version
@@ -216,8 +218,7 @@ def main():
     logdir = os.path.join(outdir, 'logs')
     # PER-CELL result cache (resume): each finished cell's row is dumped here the
     # moment it completes; on restart, done cells load from here and are SKIPPED.
-    # Persistent (in outdir), NOT tmpfs/scratch. No --shard here -> just cells/.
-    # Each cell is its own subprocess (run_one) -> single-process, no rank gating.
+    # Persistent (in outdir), NOT tmpfs/scratch. Non-shard driver -> plain cells/.
     cell_dir = os.path.join(outdir, 'cells')
     for d in (pkldir, logdir, cell_dir):
         os.makedirs(d, exist_ok=True)
@@ -233,36 +234,37 @@ def main():
     oracles = {}       # target -> P_TARGET (oracle: target model on target)
 
     def add_row(platform, cond, res, cts):
-        rows.append({'platform': platform, 'condition': cond, 'nds': res['nds'],
-                     'map6': res['map6'], 'cts': cts,
-                     'comp': nds_components(res['metrics']),
-                     'metrics': res['metrics']})
+        row = {'platform': platform, 'condition': cond, 'nds': res['nds'],
+               'map6': res['map6'], 'cts': cts,
+               'comp': nds_components(res['metrics']),
+               'metrics': res['metrics']}
+        rows.append(row)
+        return row
 
     ORDER = ['NORMAL', 'EXT', 'IMG', 'CAL']
     conds = [c for c in ORDER if c in args.conditions]
     for target in args.targets:
         exp = cfg_for(target)        # bevformer: config ; bevdepth: carla_<t>.py
         # denominator P_TARGET = platform-matched oracle (target model on target)
-        # resume: cache the ORACLE cell (the CTS denominator) too -> a restart
-        # loads its row + p_target instead of recomputing.
+        # resume: cache the ORACLE/denominator cell so a restart skips it.
+        target_pkl = target_val_pkl(target)
+        target_ckpt = abspath(args.target_ckpt_tmpl.format(target))
         ocp = _cell_path(cell_dir, target, 'ORACLE')
-        _cached = _load_cell(ocp)
+        _cached = _load_cell(ocp)                     # resume: skip done ORACLE cell
         if _cached is not None:
-            orow = _cached
-            p_target = orow['nds']
+            row = _cached
+            rows.append(row)
+            p_target = row['nds']
             oracles[target] = p_target
-            rows.append(orow)
             print(f'[{target}/ORACLE] (cached) P_TARGET (target-model on {target}) '
                   f'NDS={p_target:.4f}', flush=True)
         else:
-            target_pkl = target_val_pkl(target)
-            target_ckpt = abspath(args.target_ckpt_tmpl.format(target))
             den = run_one(run_sh, exp, target_ckpt, args.ngpu, target_pkl,
                           os.path.join(logdir, f'{target}_ORACLE.log'))
             p_target = den['nds']
             oracles[target] = p_target
-            add_row(target, 'ORACLE', den, 1.0)
-            _save_cell(ocp, rows[-1])                 # resume: per-cell save (atomic)
+            row = add_row(target, 'ORACLE', den, 1.0)
+            _save_cell(ocp, row)                      # resume: per-cell save (atomic)
             print(f'[{target}/ORACLE] P_TARGET (target-model on {target}) '
                   f'NDS={p_target:.4f}', flush=True)
         # numerators P_c = sedan model under each condition on the target eval set
@@ -280,8 +282,8 @@ def main():
             res = run_one(run_sh, exp, ckpt, args.ngpu, pkl,
                           os.path.join(logdir, f'{target}_{cond}.log'))
             cts = res['nds'] / p_target if p_target else float('nan')
-            add_row(target, cond, res, cts)
-            _save_cell(cp, rows[-1])                  # resume: per-cell save (atomic)
+            row = add_row(target, cond, res, cts)
+            _save_cell(cp, row)                       # resume: per-cell save (atomic)
             print(f'[{target}/{cond}] sedan NDS={res["nds"]:.4f} '
                   f'CTS={cts:.4f} (/{p_target:.4f})', flush=True)
 

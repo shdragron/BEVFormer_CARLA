@@ -477,6 +477,42 @@ def set_deterministic():
     set_random_seed(0, deterministic=True)
 
 
+def _cell_path(cell_dir, cond, axis, mag, proto):
+    """Per-cell result-cache path (resume: skip already-done cells on restart)."""
+    name = f"{cond}_{axis}_{mag:+d}_{proto}".replace('/', '-')
+    return osp.join(cell_dir, name + '.pkl')
+
+
+import pickle as _pk  # noqa: E402  (used by the crash-safe cache helpers below)
+
+
+def _save_cell(path, obj):
+    """Crash-safe per-cell cache WRITE: dump+flush+fsync to a .tmp, then atomic
+    os.replace() into place. A SIGKILL mid-dump leaves only the .tmp (never a
+    truncated `path`), so a restart never trips over a half-written .pkl."""
+    tmp = path + '.tmp'
+    with open(tmp, 'wb') as f:
+        _pk.dump(obj, f)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, path)            # atomic on POSIX
+
+
+def _load_cell(path):
+    """Crash-safe per-cell cache READ: return the unpickled object, or None if the
+    file is missing/corrupt/truncated. A corrupt cache is removed so the caller
+    falls through and recomputes the cell instead of aborting the whole restart."""
+    try:
+        with open(path, 'rb') as f:
+            return _pk.load(f)
+    except Exception:
+        try:
+            os.remove(path)         # drop the corrupt/truncated cache so it recomputes
+        except OSError:
+            pass
+        return None
+
+
 def main():
     args = parse_args()
     if args.merge:                               # CPU-only finalize, no dist/model
@@ -497,6 +533,11 @@ def main():
     si0 = int(args.shard.split('/')[0])
     tmpdir = osp.join(outdir, f'tmp_shard{si0}')
     os.makedirs(tmpdir, exist_ok=True)
+    # PER-CELL result cache (resume): each finished cell's row is dumped here the
+    # moment it completes; on restart, done cells load from here and are SKIPPED.
+    # Persistent (in outdir), unlike tmp_shard/ scratch. Per-shard to avoid clashes.
+    cell_dir = osp.join(outdir, f'cells_shard{si0}')
+    os.makedirs(cell_dir, exist_ok=True)
     ann_path = osp.join(tmpdir, 'cond_infos_val.pkl')
 
     metadata, base = build_subset_infos(args.frames_per_scene)
@@ -526,7 +567,7 @@ def main():
             max_workers=1, initializer=_eval_worker_init,
             initargs=(args.config, baseline_ann, {info['token'] for info in base}))
         eval_proc_pool.submit(_eval_ping).result()   # fork+build NOW (before CUDA)
-        eval_json_dir = f'/tmp/vpeval_shard{si0}'    # tmpfs; overwritten each cell
+        eval_json_dir = f'/tmp/vpeval_{args.tag}_shard{si0}'  # tmpfs; per-tag (no cross-run sharing)
         os.makedirs(eval_json_dir, exist_ok=True)
 
     model = build_model_once(cfg, args.ckpt, batch=args.batch)
@@ -653,15 +694,25 @@ def main():
                              args.workers, timing=timing, batch=args.batch)
 
     # ---- Normal (oracle) : every shard runs it (RRS denominator) -------------
+    # resume: cache the oracle row so a restart does not recompute it.
+    _normal_path = osp.join(cell_dir, 'normal.pkl')
     _tm = {}
-    nds_norm, m6_norm, norm_metrics = rc(
-        B.make_vp_infos(base, 'Normal', 'yaw', 0, 'all'), timing=_tm)
-    if rank == 0:
-        n = _tm.get('n', len(base))
-        print(f'[VP] Normal NDS={nds_norm:.4f} mAP6={m6_norm:.4f} | '
-              f'infer={_tm.get("infer",0):.1f}s ({_tm.get("infer",0)/max(n,1)*1000:.0f}'
-              f'ms/s) eval={_tm.get("eval",0):.1f}s build={_tm.get("build",0):.1f}s',
-              flush=True)
+    _d = _load_cell(_normal_path)
+    if _d is not None:
+        nds_norm, m6_norm, norm_metrics = _d['nds_norm'], _d['m6_norm'], _d['norm_metrics']
+        if rank == 0:
+            print(f'[VP] Normal (cached) NDS={nds_norm:.4f} mAP6={m6_norm:.4f}', flush=True)
+    else:
+        nds_norm, m6_norm, norm_metrics = rc(
+            B.make_vp_infos(base, 'Normal', 'yaw', 0, 'all'), timing=_tm)
+        if rank == 0:
+            _save_cell(_normal_path, {'nds_norm': nds_norm, 'm6_norm': m6_norm,
+                                      'norm_metrics': norm_metrics})
+            n = _tm.get('n', len(base))
+            print(f'[VP] Normal NDS={nds_norm:.4f} mAP6={m6_norm:.4f} | '
+                  f'infer={_tm.get("infer",0):.1f}s ({_tm.get("infer",0)/max(n,1)*1000:.0f}'
+                  f'ms/s) eval={_tm.get("eval",0):.1f}s build={_tm.get("build",0):.1f}s',
+                  flush=True)
 
     # full cell list (deterministic order), then this shard's slice
     all_cells = [(c, a, mg, p) for c in args.conditions for a in args.axes
@@ -685,11 +736,20 @@ def main():
             d, cond, axis, mag, proto, fut = pending.popleft()
             nds, m6, metrics = fut.result()
             row = mkrow(cond, axis, mag, proto, nds, m6, metrics)
+            _save_cell(_cell_path(cell_dir, cond, axis, mag, proto), row)  # resume: per-cell save (crash-safe)
             rows.append(row)
             print(f'[VP shard{si} {d}/{len(my_cells)}] {cond} {axis}{mag:+d} '
                   f'{proto:14s} NDS={nds:.4f} RRS={row["rrs"]:.4f}', flush=True)
 
         for done, (cond, axis, mag, proto) in enumerate(my_cells, 1):
+            cp = _cell_path(cell_dir, cond, axis, mag, proto)
+            _cached = _load_cell(cp)                  # resume: load-then-check (crash-safe)
+            if _cached is not None:                   # skip already-done cell
+                row = _cached
+                rows.append(row)
+                print(f'[VP shard{si} {done}/{len(my_cells)}] {cond} {axis}{mag:+d} '
+                      f'{proto:14s} (cached) NDS={row["nds"]:.4f} RRS={row["rrs"]:.4f}', flush=True)
+                continue
             infos = B.make_vp_infos(base, cond, axis, mag, proto)
             _, outputs = infer_fast(model, cfg, metadata, infos, ann_path,
                                     pool, batch=args.batch)
@@ -709,10 +769,23 @@ def main():
         eval_proc_pool.shutdown(wait=True)
     else:
         for done, (cond, axis, mag, proto) in enumerate(my_cells, 1):
+            cp = _cell_path(cell_dir, cond, axis, mag, proto)
+            # resume: load-then-check (crash-safe). ALL ranks load so a corrupt
+            # cache is treated as 'not done' uniformly -> all ranks skip OR all
+            # recompute together (collective-safe; a one-rank divergence would hang).
+            _cached = _load_cell(cp)
+            if _cached is not None:                  # skip done cell
+                if rank == 0:
+                    row = _cached
+                    rows.append(row)
+                    print(f'[VP shard{si} {done}/{len(my_cells)}] {cond} {axis}{mag:+d} '
+                          f'{proto:14s} (cached) NDS={row["nds"]:.4f} RRS={row["rrs"]:.4f}', flush=True)
+                continue
             infos = B.make_vp_infos(base, cond, axis, mag, proto)
             nds, m6, metrics = rc(infos)
             if rank == 0:
                 row = mkrow(cond, axis, mag, proto, nds, m6, metrics)
+                _save_cell(cp, row)                   # resume: per-cell save (crash-safe)
                 rows.append(row)
                 print(f'[VP shard{si} {done}/{len(my_cells)}] {cond} {axis}{mag:+d} '
                       f'{proto:14s} NDS={nds:.4f} RRS={row["rrs"]:.4f}', flush=True)
