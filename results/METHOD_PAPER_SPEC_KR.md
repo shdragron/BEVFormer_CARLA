@@ -205,14 +205,20 @@ nuScenes→Lyft/Waymo로 외부 타당성), (iv) AC가 요구한 통제 2×2가 
 **가칭 LatentCalib: "Calibration을 잠재변수로 — frozen depth 파운데이션을 앵커 삼아
 스스로 보정하는 BEV 검출기".** 메커니즘 논문 + 통제 연구를 ablation으로 내장.
 
-중심 연산 하나: **투영 일치도 A_i(Δ) = E_샘플[D_i(u_i(Δ), d_i(Δ))]** — frozen
-파운데이션이 입력 이미지에서 추정한 depth 분포(D_i, K_i 조건) vs 가설 calibration
-T·Δ로 투영한 BEV-pillar 샘플의 해석적 (u,d). grid_sample이라 Δ 미분 가능. 이 한
-함수가 3기능: (1) **Δ-추론**(자기보정; coarse 후보 soft-선택 + amortized 회귀;
-학습 신호 = 이미지 무손상 calib-jitter 역산쌍 → shortcut-free — C4(ii) 치명 결함
-해소; 앵커가 카메라별 절대 신호라 all-cam yaw 관측불능 문제도 해소), (2) **게이트**
-((1−α)+α·D, 가중치 경로만, 플로어), (3) **뷰 신뢰도**(잔여 일치도로 hit-count
-다운웨이트). 구조: frozen DINOv2 공유 백본에서 detection feature와 depth 분기(비용
+중심 연산 하나(06-12 기호 통일·점추정+가우시안 커널 확정 — 미정결정 (a) 종결):
+**a_k ≡ exp(−(s·D̂_i(u_k(Δ))−d_k(Δ))²/2σ_k²d_k²), A_i(Δ) = mean_k a_k** — D̂ =
+frozen 파운데이션 점추정, σ_k = per-pixel FM 불확실도(결정 (a)의 분포 가지를
+가우시안 형태 안에서 회수). grid_sample이라 Δ 미분 가능. **학습 파라미터 0**(s, σ는
+테스트타임 변수 — σ는 load-bearing 하이퍼: 게이트② basin 폭이 설계 근거; s는 Δ와
+공동최적화하되 scale prior 필수 — ②의 (δ×s) 슬라이스 실측: δ 식별, s는 ridge).
+한 함수 3기능: (1) **Δ-추론** — margin τ 게이트(이득<τ → Δ*=0); 학습 신호 =
+이미지 무손상 calib-jitter 역산쌍(워프-경계 shortcut 차단) + **회귀 헤드 입력 =
+A-증거만, calib 절대값 차단**(두 번째 shortcut을 사양 수준에서 차단; arbiter의
+재채점 기각은 defense-in-depth 부가 성질이지 입력 제한의 면제 사유 아님); 앵커가
+카메라별 절대 신호라 all-cam yaw 관측불능 문제도 해소, (2) **게이트**
+((1−α)+α·**a_k**, 가중치 경로만, 플로어), (3) **뷰 신뢰도** w_i = f(max_Δ A_i).
+**무해성은 가정이 아니라 측정 항목**: 올바른 calib에서의 정점 offset(FM bias),
+margin τ 트레이드오프, CTS-CAL false-correction rate로 보고. 구조: frozen DINOv2 공유 백본에서 detection feature와 depth 분기(비용
 상쇄+backbone OOD 완화) → 해석적 투영 샘플링(슬롯 파라미터 제거) → stock decoder.
 학습 = 단일 rig normal 이미지 + Δ-역산 지도만(depth GT/LiDAR/렌더링 불필요).
 추론 = 올바른 calib면 Δ≈0 구조적(무해성 내장), 낡은 calib면 회전 복구.
