@@ -1,0 +1,211 @@
+{
+  "summary": "Novelty check for 3 alternative paper framings",
+  "agentCount": 3,
+  "logs": [],
+  "result": {
+    "eq": {
+      "closest_works": [
+        {
+          "name": "VEDet: Viewpoint Equivariance for Multi-View 3D Object Detection (Chen et al., TRI)",
+          "venue_year": "CVPR 2023",
+          "what_it_does": "Query-based detector (PETR-family) that injects 3D perspective-geometry positional encodings and view-conditioned queries, then generates virtual camera frames during training and enforces multi-view prediction consistency as a loss. Goal is better localization on nuScenes (single rig), not cross-rig transfer. (arxiv.org/abs/2303.14548)",
+          "overlap": "Owns the exact phrase 'viewpoint equivariance' in multi-view 3D detection, and the intuition that predictions should transform consistently with a viewpoint change. Closest terminological collision.",
+          "gap_left": "Equivariance is a training-time regularizer (soft consistency loss over synthetic ego-viewpoints), not a formal property of the camera-to-BEV mapping under a rig/calibration transform g. No definition of which architectural components must be g-invariant, no audit of other architectures, no cross-rig/calibration-shift evaluation. A theory paper must explicitly contrast: VEDet learns approximate equivariance over scene viewpoints; we define exact calibration-equivariance of the view transform and test it architecturally."
+        },
+        {
+          "name": "CoIn3D: Revisiting Configuration-Invariant Multi-Camera 3D Object Detection",
+          "venue_year": "CVPR 2026 (arXiv 2603.05042)",
+          "what_it_does": "Empirical fix for cross-camera-configuration transfer: Spatial-aware Feature Modulation (focal map, ground depth/gradient, Plücker coordinates) + camera-aware novel-view data augmentation; evaluated on three paradigms (BEVDepth, BEVFormer, PETR) across nuScenes/Waymo/Lyft where naive transfer collapses to ~0 mAP.",
+          "overlap": "Biggest competitive threat. Occupies 'configuration-invariant detection', observes the same failure mode (spatial priors tied to source intrinsics/extrinsics/layout), and demonstrates multi-paradigm fixes. Note it is already checked out in this workspace (/home/hanyan_arch/viewpoint/BEVFormer/CoIn3D), so the user's group knows it.",
+          "gap_left": "Purely empirical and additive: new modulation modules + augmentation, applied uniformly. No formal equivariance/consistency condition, no mechanism-level audit locating WHERE calibration enters each forward pass and WHICH component violates invariance (e.g., BEVDepth's BN(27)+MLP degenerating under zero-variance single-rig input, camera-slot embeddings as hidden rig priors), and no minimal-repair methodology. Cross-dataset evaluation confounds rig change with scene/appearance change — the controlled same-scene re-rendered benchmark remains a differentiator."
+        },
+        {
+          "name": "Towards Viewpoint Robustness in Bird's Eye View Segmentation (Klinghoffer et al., NVIDIA)",
+          "venue_year": "ICCV 2023",
+          "what_it_does": "Shows BEV segmentation models trained on one rig drop sharply under small pitch/yaw/height/depth viewpoint changes (e.g., -10° pitch → -17% IoU); fixes it with novel-view synthesis to re-render training data at the target rig; releases CARLA + DRIVE Sim multi-viewpoint test sets. (arxiv.org/abs/2309.05192)",
+          "overlap": "Same phenomenon (rig-change brittleness), same controlled-simulation methodology (CARLA re-rendering across viewpoints), and a 'why are models not robust?' analysis section.",
+          "gap_left": "Segmentation only, single architecture family, and the remedy is data-centric (synthesize target-rig data), explicitly NOT making the model equivariant — they sidestep the architecture. No formal property, no audit of calibration entry points, no architectural repair, no stale-vs-corrected-extrinsics distinction."
+        },
+        {
+          "name": "UniDrive: Universal Driving Perception Across Camera Configurations",
+          "venue_year": "ICLR 2025 (arXiv 2410.13864)",
+          "what_it_does": "Projects all images into a unified set of virtual cameras via ground-aware projection before the detector, plus an optimization to place virtual cameras minimizing projection error; releases a CARLA benchmark with 8 camera configurations (160k frames).",
+          "overlap": "Cross-config generalization on a controlled CARLA multi-rig benchmark — overlaps the benchmark contribution and the 'canonicalization' family of fixes (invariance by preprocessing).",
+          "gap_left": "Treats the detector as a black box; canonicalization is the trivial-invariance solution, not equivariance of the mapping itself. No theory, no audit of internal violations, introduces projection artifacts. A theory+audit paper can position UniDrive as one point (input canonicalization) in the design space the formalism organizes."
+        },
+        {
+          "name": "EAFormer: Epipolar Attention Field Transformers for BEV Semantic Segmentation (Witte et al.)",
+          "venue_year": "WACV 2025 (arXiv 2412.01595)",
+          "what_it_does": "Replaces learned positional encodings in a transformer BEV segmenter with analytic epipolar-geometry attention fields computed from calibration; shows +2% mIoU and markedly better zero-shot transfer to a completely different camera setup than learned PE.",
+          "overlap": "Directly instantiates one of the framing's core claims for one model: analytic calibration use transfers, learned (rig-memorizing) PE does not. The 'learned PE = hidden rig prior' insight is partially published here.",
+          "gap_left": "Single architecture, segmentation task, no detection, no formal equivariance statement, no audit across paradigms, no analysis of other violation classes (calibration-conditioned normalization, depth priors, camera-slot embeddings). It is evidence FOR the thesis, not the thesis."
+        },
+        {
+          "name": "Group/azimuth-equivariant BEV detectors: GeqBevNet (arXiv 2304.13390), ProEqBEV (ICRA/IEEE 2024), AeDet (CVPR 2023), TED (AAAI 2023)",
+          "venue_year": "2022-2024",
+          "what_it_does": "Apply group-equivariant convolution theory to BEV or voxel features: rotation/reflection equivariance of the BEV plane (GeqBevNet, ProEqBEV), azimuth-equivariant sampling (AeDet), transformation-equivariant sparse conv on point clouds (TED). Formal group theory, properly defined equivariance.",
+          "overlap": "These are the works a reviewer will point to when seeing 'equivariant BEV detection' in a title — they own the formal-equivariance vocabulary in this space.",
+          "gap_left": "The group acts on the SCENE/feature map (in-plane rotations of the world), not on the CALIBRATION metadata. Equivariance w.r.t. a rig transform applied to extrinsics — where the image content also changes accordingly and learned components must be invariant to g — is a different, unclaimed group action. The paper must make this distinction in one crisp equation early."
+        },
+        {
+          "name": "A General Theory of Correct, Incorrect, and Extrinsic Equivariance (Wang et al.)",
+          "venue_year": "NeurIPS 2023 (arXiv 2303.04745)",
+          "what_it_does": "General theory quantifying when a model's built-in symmetry matches, contradicts, or extends beyond the data distribution; proves error lower bounds for mismatched symmetry. Robot-learning motivated; 'extrinsic' here means symmetry mapping data out-of-distribution, not camera extrinsics.",
+          "overlap": "Provides ready-made theoretical machinery (pointwise equivariance error, lower bounds) that a calibration-equivariance paper could and probably should cite/build on; superficial term collision on 'extrinsic'.",
+          "gap_left": "Says nothing about cameras, calibration, or BEV. The single-rig-training pathology (conditioning input has zero variance, so any function of it is unidentifiable — learned 'equivariance' degenerates to a constant) is exactly an instance their framework can express but never instantiated. Open to claim the instantiation."
+        },
+        {
+          "name": "RoboBEV: Robust BEV Perception under Corruptions (Xie et al.)",
+          "venue_year": "arXiv 2023 / TPAMI 2025 (arXiv 2304.06719, 2405.17426)",
+          "what_it_does": "Benchmarks 33 BEV models under 8 photometric/temporal corruptions (brightness, fog, motion blur, camera crash, frame loss) plus city/weather domain shifts; large empirical audit with design-level takeaways (depth-free transforms more robust, temporal fusion helps).",
+          "overlap": "Owns 'large-scale robustness audit of BEV models'. Some related work (e.g., the CFT paper, BEVCalib literature) additionally measures NDS drops under extrinsics noise for BEVFormer/PETR.",
+          "gap_left": "No geometric/rig corruptions beyond camera dropout — no extrinsics perturbation with stale-vs-corrected comparison, no cross-platform transfer, and the audit is black-box (input corruption → metric drop), not white-box (where calibration enters the forward pass and which component violates invariance). The mechanism-level audit dimension is untouched."
+        },
+        {
+          "name": "Calibration-free line: CFT (arXiv 2210.17252), BEVSegFormer (WACV 2023), CBR infrastructure (arXiv 2303.03583)",
+          "venue_year": "2022-2023",
+          "what_it_does": "Remove explicit intrinsics/extrinsics from the view transform entirely, learning an implicit image-to-BEV mapping, motivated by instability under noisy calibration; CFT reports BEVFormer/PETR degrade 0.6-7.6% NDS under extrinsics noise while calibration-free stays stable.",
+          "overlap": "Same motivating observation (calibration sensitivity); their noise experiments are a mini-audit of two architectures.",
+          "gap_left": "Achieves invariance by amputation — the implicit mapping bakes the training rig into the weights, so it cannot exploit CORRECTED calibration and should transfer worst across rigs. The framing's equivariance condition formally explains why calibration-free is the wrong end of the spectrum; nobody has articulated this trichotomy (analytic-equivariant / learned-conditioned / calibration-free) as theory."
+        },
+        {
+          "name": "Adjacent conditioning/DG works: NVAutoNet (arXiv 2303.12976), PD-BEV/Generalizable-BEV (arXiv 2310.11346, in workspace), DG-BEV (CVPR 2023), PCT (arXiv 2403.12530), Sensor Equivariance CamConv (CVPRW 2024), CAM-Convs (CVPR 2019), Metric3D canonical camera",
+          "venue_year": "2019-2025",
+          "what_it_does": "NVAutoNet claims resilience to sensor-mounting deviations via MLP-encoded camera parameters plus fine-tuning; PD-BEV/DG-BEV do dataset-level domain generalization via perspective debiasing/intrinsic decoupling; CamConv/Metric3D handle intrinsics generalization for monocular depth via camera-aware inputs or canonical camera spaces; 'Sensor Equivariance' (CVPRW24) uses the term for intrinsics-aware segmentation.",
+          "overlap": "Collectively cover learned calibration-conditioning, depth-prior canonicalization, and informal uses of 'sensor equivariance' — the ingredient list of the proposed audit's violation taxonomy.",
+          "gap_left": "All are point solutions or claims without verification of the conditioning mechanism. Notably, NVAutoNet's MLP camera-parameter encoding is precisely the pattern the user's audit shows degenerates under single-rig training (zero-variance conditioning input) — it is a foil, and no published work demonstrates or explains that degeneration. The monocular-metric-depth-prior-as-cross-platform-bottleneck finding is likewise only implicit in the depth literature, never shown for BEV detection transfer."
+        }
+      ],
+      "verdict": "PARTIALLY OCCUPIED at the edges, but the specific THEORY+AUDIT+REPAIR package is OPEN. Each ingredient exists in isolation: the term 'viewpoint equivariance' (VEDet, CVPR23 — but a soft training loss over synthetic ego-viewpoints on a single rig, not a formal property of the view transform under rig transforms); the empirical cross-configuration problem and multi-paradigm fixes (CoIn3D, CVPR26 — additive modules + augmentation, no formalism, no white-box audit, confounded cross-dataset eval); the controlled simulated rig-change benchmark (Klinghoffer ICCV23 for segmentation, UniDrive ICLR25 via black-box canonicalization); the 'analytic-beats-learned-PE for config transfer' evidence (EAFormer WACV25, one segmentation model); formal group-equivariant BEV detectors (GeqBevNet/AeDet/TED — but the group acts on the scene, not on calibration metadata); large black-box robustness audits (RoboBEV — no extrinsics corruptions, no mechanism localization); and general equivariance-mismatch theory (Wang et al. NeurIPS23 — never instantiated for cameras). NO work: (1) states the calibration-equivariance condition formally (rig transform g on extrinsics ⇒ analytically determined transform of BEV output, with learned components required to be g-invariant, plus the identifiability corollary that single-rig training makes any learned function of calibration degenerate/unidentifiable); (2) white-box audits a broad set of architectures (10) for where calibration enters the forward pass and classifies violations (calibration-conditioned normalization/MLPs, camera-slot embeddings as hidden rig priors, monocular metric-depth priors); (3) performs MINIMAL repairs of identified violations rather than adding modules or preprocessing; (4) validates with stale-vs-corrected extrinsics and same-scene cross-platform re-rendering that isolates geometry from appearance. EXACT AVAILABLE CLAIM: 'We formalize calibration-equivariance of the camera-to-BEV mapping, derive when learned calibration use is unidentifiable from single-rig data, audit 10 architectures at code level to localize violations into a three-class taxonomy, show minimal repairs restore equivariance, and validate on a controlled re-rendered cross-rig benchmark — including the first demonstration that learned calibration-conditioning (BEVDepth-style BN+MLP, NVAutoNet-style encodings) silently degenerates to a rig-specific constant.' RISKS: (a) CoIn3D must be engaged head-on — emphasize white-box mechanism + minimal repair + uncounfounded benchmark vs their additive empirical fix; (b) reviewers may find the equivariance condition itself mathematically thin ('the analytic projection trivially satisfies it'), so the load-bearing novelty is the identifiability/degeneration result, the violation taxonomy, and the controlled validation — frame the theory as organizing, not deep; (c) title should avoid plain 'viewpoint equivariance' (VEDet collision) and 'equivariant BEV' (group-equivariant collision) — 'calibration-equivariance' / 'rig-transform equivariance' is verbatim unclaimed per literal-phrase search. Key sources: arxiv.org/abs/2303.14548 (VEDet), arxiv.org/abs/2603.05042 (CoIn3D), arxiv.org/abs/2309.05192 (Klinghoffer), arxiv.org/abs/2410.13864 (UniDrive), arxiv.org/abs/2412.01595 (EAFormer), arxiv.org/abs/2304.13390 (GeqBevNet), arxiv.org/abs/2303.04745 (equivariance theory), arxiv.org/abs/2304.06719 + 2405.17426 (RoboBEV), arxiv.org/abs/2210.17252 (CFT), arxiv.org/abs/2303.12976 (NVAutoNet), arxiv.org/abs/2310.11346 (PD-BEV)."
+    },
+    "fm": {
+      "closest_works": [
+        {
+          "name": "Towards Viewpoint-Robust End-to-End Autonomous Driving with 3D Foundation Model Priors (Hashimoto et al., arXiv:2604.00597)",
+          "venue_year": "arXiv, Apr 2026 (Chiba Univ./SUZUCA.AI; CVPR-format preprint)",
+          "what_it_does": "Extends the World4Drive E2E planner with a FROZEN DA3 (Depth Anything 3, camera-token-conditioned, metric) depth model: per-pixel 3D positions computed from DA3 depth + CURRENT intrinsics/extrinsics are injected as positional embeddings, plus DA3 intermediate features fused via cross-attention. Evaluated on the VR-Drive nuScenes viewpoint-perturbation benchmark (pitch ±5/10°, height ±0.7/+1.0 m, depth +1.0 m rendered via OmniRe NVS). Ablates Metric3D vs DA3 as the depth estimator. Counterfactual diagnosis shows extrinsic-dependent 3D positional embeddings are the residual failure mode.",
+          "overlap": "Closest motivational match to framing B: frozen camera-conditioned metric-depth foundation model as an augmentation-free geometric anchor for camera-viewpoint robustness, depth recomputed with test-time camera parameters. Even reaches the same mechanism-level conclusion style (extrinsic-conditioned embeddings as bottleneck).",
+          "gap_left": "Task is trajectory planning (L2/collision), NOT multi-camera BEV 3D detection — no mAP/NDS, no detector depth-head replacement (depth enters as positional embedding, not as the LSS lifting distribution). No cross-platform vehicle transfer (sedan→suv/bus with per-platform oracles); only single-rig NVS perturbations. Results do NOT beat augmentation (VR-Drive wins). Crucially, its own conclusion names 'explicit BEV/voxel representations built from foundation-model geometry that decouple from extrinsics' as FUTURE work — i.e., it explicitly leaves framing B open, but also signals others are heading there."
+        },
+        {
+          "name": "Revisiting Bird's Eye View Perception Models with Frozen Foundation Models: DINOv2 and Metric3Dv2 (arXiv:2501.08118)",
+          "venue_year": "Electronic Imaging — Autonomous Vehicles and Machines Conf., 2025",
+          "what_it_does": "Plugs a FROZEN Metric3Dv2 (metric) into Lift-Splat-Shoot as the depth source, and into SimpleBEV as a PseudoLiDAR point cloud, with frozen DINOv2 features, for BEV VEHICLE SEGMENTATION on nuScenes. Gains +7.4 IoU (LSS) / +3 IoU (SimpleBEV) with half the training data.",
+          "overlap": "Closest MECHANICAL match: literally a frozen metric-depth foundation model replacing the learned depth in an LSS-style multi-camera BEV pipeline.",
+          "gap_left": "BEV segmentation, not 3D detection; motivation is data efficiency, not rig invariance; evaluated ONLY in-distribution on standard nuScenes val — zero cross-rig/height/pitch/cross-platform evaluation; no camera-parameter-conditioning analysis; does not compare against BEVDepth's learned camera-aware depth net or diagnose why it fails off-rig."
+        },
+        {
+          "name": "CHARM3R: Towards Unseen Camera Height Robust Monocular 3D Detector (arXiv:2508.11185)",
+          "venue_year": "ICCV 2025",
+          "what_it_does": "Monocular 3D detection under unseen camera heights (CARLA, car→truck, ΔH up to +0.76 m). Shows depth estimation is THE factor degrading under height change; fixes it by averaging camera-relative regressed depth with ground-relative depth inside the model. >45% generalization gain to unseen heights.",
+          "overlap": "Directly validates our premise that monocular metric depth is the cross-platform/height bottleneck, on CARLA, as the paper's headline. Same 'rig height transfer' evaluation philosophy.",
+          "gap_left": "Monocular single-camera, not multi-camera BEV surround detectors; no depth foundation models at all (architectural depth-target change instead); height only — no pitch/full extrinsics, no per-platform oracle comparison, no stale-vs-corrected calibration axis."
+        },
+        {
+          "name": "UniDrive: Towards Universal Driving Perception Across Camera Configurations (arXiv:2410.13864)",
+          "venue_year": "ICLR 2025",
+          "what_it_does": "CARLA benchmark with 8 camera configurations (4–8 cams, varying FoV/placement); canonicalizes inputs by reprojecting images to unified VIRTUAL cameras using a purely geometric ground-plane + cylinder depth assumption (no learned/foundation depth), then (re)trains detectors (e.g., BEVFusion-C) on virtual views as a plug-and-play module.",
+          "overlap": "Owns the 'cross-camera-configuration generalization for vision BEV perception in CARLA' problem statement and shows baseline detectors collapse across configs.",
+          "gap_left": "Input-space canonicalization with hand-crafted geometric depth, not a model-internal metric-depth anchor; no foundation models; requires retraining on virtual views; configs vary count/FoV more than vehicle platform height/pitch with same-scene per-platform oracles; no analysis of WHERE calibration enters detector forward passes (our audit) and no stale-vs-corrected extrinsics axis."
+        },
+        {
+          "name": "DetAny3D: Detect Anything 3D in the Wild (arXiv:2504.07958)",
+          "venue_year": "ICCV 2025 (OpenDriveLab)",
+          "what_it_does": "Promptable MONOCULAR 3D detection foundation model built on UniDepth-pretrained DINO features + SAM, with optional intrinsics prompts; zero-shot to unseen categories and 'novel camera configurations' = cross-DATASET intrinsics (KITTI/SUNRGBD → Cityscapes3D/Waymo/3RScan).",
+          "overlap": "Uses a metric-depth foundation model's priors to claim camera-configuration generalization for 3D detection.",
+          "gap_left": "Monocular, not multi-camera BEV; UniDepth is used as pretraining for features (then trained further), not as a frozen metric anchor replacing a detector's depth head; 'camera configuration' means intrinsics/dataset shift — no rig extrinsics/height/pitch transfer, no surround-view, no vehicle-platform evaluation."
+        },
+        {
+          "name": "BEVHeight / BEVHeight++ / CoBEV (roadside line)",
+          "venue_year": "CVPR 2023 / TPAMI 2025 / TIP 2024",
+          "what_it_does": "Roadside monocular 3D detection robust to varying camera installation height/extrinsics by regressing per-pixel height-above-ground instead of (or fused with) camera-centric depth; BEVHeight beats BEVDepth by ~27% under changed extrinsics on DAIR-V2X/Rope3D.",
+          "overlap": "Establishes 'camera-centric learned depth breaks under mounting-geometry change, replace the regression target with a rig-invariant quantity' — the same invariance argument as framing B, predating it.",
+          "gap_left": "Roadside single-camera; the invariant is a retrained in-domain height head, not a frozen zero-shot foundation model; no camera-parameter-conditioned foundation depth; no ego-vehicle multi-camera platforms; no zero-shot (still trains on target-domain-style data)."
+        },
+        {
+          "name": "DG-BEV (CVPR 2023), PD-BEV/Generalizable-BEV (AAAI 2025), UDGA (NeurIPS 2024), Weak-to-Strong Eliciting (arXiv:2404.06700)",
+          "venue_year": "CVPR 2023 / AAAI 2025 / NeurIPS 2024 / arXiv 2024",
+          "what_it_does": "Domain-generalization line for multi-camera 3D detection across DATASETS (nuScenes/Lyft/Waymo/DeepAccident): scale-invariant (intrinsics-decoupled) depth, homography-based extrinsic augmentation, perspective debiasing, adversarial pseudo-domains, 2D-foundation-feature distillation for multi-dataset training.",
+          "overlap": "Targets camera-parameter shift in multi-camera BEV detectors and identifies depth-intrinsics entanglement; PD-BEV is plug-and-play on BEVDepth (and is already in our repo as a baseline).",
+          "gap_left": "Cross-dataset shifts confound scene appearance, labels, AND rig — not a controlled same-scene rig change; intrinsics handled analytically but extrinsics only via augmentation; no metric-depth foundation models (2D semantic foundations at most); none isolate rig height/pitch as the variable or test stale-vs-corrected calibration."
+        }
+      ],
+      "verdict": "PARTIALLY OCCUPIED at the edges, but the exact claim is OPEN — with a freshness warning. No 2024–2026 work replaces the single-rig-learned depth network of a multi-camera BEV detector (BEVDepth/BEVDet-style LSS lifting) with a FROZEN camera-parameter-conditioned metric-depth foundation model (UniDepth/Metric3D v2/DepthAnything-metric/ZoeDepth) and evaluates controlled cross-platform rig transfer (same scenes, different vehicle heights/pitches, per-platform oracles, mAP/NDS) as the headline contribution. The two near-misses bracket framing B without covering it: (1) arXiv:2501.08118 has the exact mechanism (frozen Metric3Dv2 inside LSS) but for BEV segmentation, in-distribution only, motivated by data efficiency — no rig-generalization claim at all; (2) Hashimoto et al. arXiv:2604.00597 has the exact motivation (frozen DA3 depth + current camera params for viewpoint robustness) but for end-to-end planning on single-rig NVS perturbations, does not touch the detector depth head, loses to augmentation (VR-Drive), and explicitly names 'building explicit BEV/voxel representations from foundation-model geometry to decouple from extrinsics' as future work — i.e., framing B is publicly flagged as the next step, so the window is open but closing. CHARM3R (ICCV 2025) independently proves depth is THE camera-height bottleneck (monocular, no foundation models), which strengthens rather than preempts our premise. AVAILABLE CLAIM: first controlled evaluation of frozen metric-depth foundation models as drop-in, camera-conditioned replacements for the single-rig-learned depth head in multi-camera BEV 3D detectors, showing they restore the degenerate calibration-conditioning pathway (BEVDepth's zero-variance BN(27)+MLP under single-rig training) and recover cross-platform transfer (sedan→suv/bus) zero-shot — uniquely backed by our forward-pass calibration audit and the stale-vs-corrected extrinsics axis that no listed work has. Differentiators to defend in the paper: vs UniDrive (model-internal metric anchor, no retraining/virtual-view rendering, platform transfer not FoV/count sweep), vs BEVHeight (frozen zero-shot foundation invariance, surround-view ego rigs, not retrained roadside height heads), vs augmentation baselines (must include a viewpoint-augmentation baseline since Hashimoto's foundation-prior approach lost to VR-Drive's augmentation). One experimental risk to pre-empt: a 2025 zero-shot-occupancy paper reports off-the-shelf zero-shot metric depth (Metric3D, Depth Pro) is insufficient for occupancy without adaptation — so report per-model metric-depth error on the CARLA rigs alongside detection gains, and frame camera-conditioning (UniDepth-style) vs unconditioned (DA v2) as an axis of the study."
+    },
+    "study": {
+      "closest_works": [
+        {
+          "name": "Simple-BEV: What Really Matters for Multi-Sensor BEV Perception? (Harley et al.)",
+          "venue_year": "ICRA 2023",
+          "what_it_does": "The canonical controlled view-transform comparison: matches backbone, resolution, batch size, and augmentation, then varies only the lifting mechanism (parameter-free bilinear projection-sampling vs deformable attention vs depth-based splatting). Finds bilinear ≈ deformable attention > splatting, and that resolution/batch matter more than the lifting choice.",
+          "overlap": "Owns the 'single-variable, same-everything-else, vary the view transform' experimental template that framing C uses. Any reviewer will reach for it.",
+          "gap_left": "Evaluated only for in-distribution nuScenes/Lyft accuracy. No single-rig-train/cross-rig-test protocol, no stale-vs-corrected calibration factorization, no calibration-conditioning variants (rig-vector MLP, per-pixel rays, PETR-style PE) — its axis is lifting mechanics, not calibration consumption. Framing C is 'Simple-BEV for calibration robustness', which is unoccupied."
+        },
+        {
+          "name": "RoboBEV / Benchmarking and Improving BEV Perception Robustness (Xie, Kong et al.)",
+          "venue_year": "arXiv 2304.06719 (2023) + journal version arXiv 2405.17426 (2024/2025)",
+          "what_it_does": "Large observational robustness benchmark of off-the-shelf BEV models under image corruptions and sensor failures. Draws paradigm-level conclusions: depth-free view transformation and long temporal fusion correlate with better OOD robustness.",
+          "overlap": "The only prior work that ranks view-transform paradigms by robustness; its 'depth-free is more robust' claim is adjacent to your design laws.",
+          "gap_left": "Purely observational and confounded — compares whole released models with different backbones, heads, schedules. Corruption-centric: no camera-geometry change, no cross-rig transfer, no corrected-calibration condition, no causal mechanism isolation. Framing C's controlled, calibration-axis study is exactly the 'beyond RoboBEV' step."
+        },
+        {
+          "name": "CoIn3D: Revisiting Configuration-Invariant Multi-Camera 3D Object Detection",
+          "venue_year": "CVPR 2026 (arXiv 2603.05042; already checked out in your repo)",
+          "what_it_does": "Generalizable MC3D method: spatial-aware feature modulation (focal length, ground depth, ground gradient, Plücker ray coordinates) + camera-aware novel-view-synthesis augmentation, applied as a plug-in to BEVDepth, BEVFormer, and PETR; cross-configuration transfer on nuScenes/Waymo/Lyft.",
+          "overlap": "Closest in topic and most dangerous for novelty optics: it spans the three paradigms, targets configuration invariance, and its Plücker-coordinate modulation IS per-pixel ray conditioning — one of framing C's five variants — deployed as a fix.",
+          "gap_left": "It is a method paper, not a controlled study: paradigms are compared as whole architectures (confounded), there is no factorized perturbation protocol (stale vs corrected extrinsics; per-axis pitch/height), no diagnosis of WHY mechanisms fail (no conditioning-degeneracy or hidden-rig-prior analysis), and no with/without-normalization-fix ablation of learned conditioning. Must be cited and explicitly differentiated; do not claim ray conditioning itself as new."
+        },
+        {
+          "name": "UniDrive: Towards Universal Driving Perception Across Camera Configurations",
+          "venue_year": "ICLR 2025",
+          "what_it_does": "CARLA dataset with 8 camera configurations on identical routes; proposes virtual-camera reprojection as a plug-and-play input-space normalization so a model trained on one config transfers to others.",
+          "overlap": "Same simulator-controlled cross-config philosophy as your CARLA benchmark; train-on-one-config/test-on-others protocol.",
+          "gap_left": "Fixes the problem in input space rather than studying how architectures consume calibration; no paradigm comparison, no mechanism analysis, no stale-vs-corrected calibration axis, no per-platform oracle baselines. Differentiate your benchmark (re-rendered viewpoint perturbations + factorized EXT/IMG/CAL conditions) from its config-swap setup."
+        },
+        {
+          "name": "Towards Viewpoint Robustness in Bird's Eye View Segmentation (Klinghoffer et al., NVIDIA)",
+          "venue_year": "ICCV 2023",
+          "what_it_does": "Shows BEV segmentation trained on one rig collapses under small pitch/yaw/height viewpoint changes; mitigates by novel-view-synthesis retargeting of training data to the target rig (recovers ~14.7% IoU).",
+          "overlap": "Established the 'single rig → viewpoint change → collapse' phenomenon and the simulation-based evaluation; closest prior for your viewpoint-perturbation axis.",
+          "gap_left": "Segmentation, one Lift-Splat-style architecture, data-side fix. Never asks whether the failure depends on the calibration-consumption mechanism, and has no corrected-extrinsics condition (their model has no way to consume the new calibration — which is precisely your point)."
+        },
+        {
+          "name": "DG-BEV (CVPR 2023) — with siblings PD-BEV/Generalizable-BEV (AAAI 2025), Cross-Dataset Sensor Alignment (CoRL 2023), FCVL (ICML 2025)",
+          "venue_year": "CVPR 2023 / AAAI 2025 / CoRL 2023 / ICML 2025",
+          "what_it_does": "Cross-dataset domain generalization for multi-view 3D detection: intrinsics-decoupled (scale-invariant) depth, homography-based perspective augmentation, ego-frame alignment, perspective debiasing, frequency-domain augmentation.",
+          "overlap": "These works already contain ingredient-level fixes (intrinsic decoupling, extrinsic augmentation) that resemble pieces of your 'repaired recipe'; PD-BEV is literally in your repo.",
+          "gap_left": "All are method papers on dataset-level shift, where rig geometry is confounded with scenes, weather, and label policy. None isolates calibration consumption as the variable, none trains/evaluates same-scene cross-rig (your CARLA design removes the confound), none explains the BEVDepth-style conditioning degeneracy."
+        },
+        {
+          "name": "GenDepth (arXiv 2312.06021) — with CAM-Convs (CVPR 2019), Metric3D (ICCV 2023), 'Camera-Parameters-Invariant MDE' (ITSC 2023)",
+          "venue_year": "2019–2024, monocular depth line",
+          "what_it_does": "Studies and compares camera-parameter encoding choices (CAM-Convs channel embeddings vs ground-plane-depth embedding vs canonical-camera transforms) for metric monocular depth generalization across vehicle-camera setups; explicitly identifies single-rig perspective-geometry bias.",
+          "overlap": "The only prior literature that genuinely compares camera-parameter encoding mechanisms for cross-rig generalization — but for the depth-estimation task. Supports your 'monocular metric depth is the cross-platform bottleneck' finding.",
+          "gap_left": "Never touches BEV detection: no coupling to view transformation, no detection head, no multi-camera rig, no temporal stereo. Porting this question into the BEV-detector forward pass is open."
+        },
+        {
+          "name": "Do You Know Where Your Camera Is? View-Invariant Policy Learning with Camera Conditioning ('Know Your Camera')",
+          "venue_year": "ICRA 2026 (arXiv 2510.02268)",
+          "what_it_does": "Controlled study of explicit camera-geometry conditioning (per-pixel Plücker ray maps) for robot manipulation policies, showing conditioning yields view-invariance across simulated and real camera placements.",
+          "overlap": "Closest methodological analog of framing C — controlled, single-variable camera-conditioning study with viewpoint-transfer evaluation — proving the framing style is publishable.",
+          "gap_left": "Robot policy learning, single camera, no BEV, no detection, no calibration-mechanism taxonomy beyond ray maps. Different field entirely; cite as cross-domain precedent."
+        },
+        {
+          "name": "Temporal-stereo line: SOLOFusion/'Time Will Tell' (ICLR 2023), BEVStereo/++ (AAAI 2023), STS (arXiv 2022), StereoMV2D (arXiv 2512.17620, Dec 2025)",
+          "venue_year": "2022–2025",
+          "what_it_does": "Uses ego-motion temporal stereo (cost volumes across frames) to improve metric depth for multi-view 3D detection. SOLOFusion's analysis is about localization potential vs time window; BEVStereo's 'generalization' is KITTI accuracy; StereoMV2D's 'robustness' is occlusion/appearance/depth-ambiguity on nuScenes/AV2 — confirmed by direct fetch: no camera-rig, height, or cross-platform evaluation in any of them.",
+          "overlap": "Provides the machinery your side-angle would evaluate; RoboBEV's observational 'temporal helps robustness' is the only adjacent robustness claim (and it concerns image corruptions, not rig geometry).",
+          "gap_left": "Nobody has evaluated or framed temporal/MVS stereo depth as RIG-INVARIANT metric anchoring for cross-rig/camera-height transfer. Also untested: the failure interaction where stale extrinsics/ego-pose corrupt the cost volume itself — geometry-based depth is only rig-invariant if the rig is correctly known. Both the positive claim and this caveat are available."
+        },
+        {
+          "name": "Calibration-free / parameter-robust transformer line: CFT (arXiv 2210.17252), GKT (2022), WidthFormer (2024), CoBEV + BEVHeight/++ + SGV3D (roadside)",
+          "venue_year": "2022–2025",
+          "what_it_does": "Single-method papers that either remove calibration from the view transform (CFT) or ablate robustness to injected calibration noise (GKT, WidthFormer, CoBEV); roadside works handle camera height/pose variation across installations (SGV3D shows BEVHeight overfits camera poses).",
+          "overlap": "Contains scattered one-off evidence for your design laws (e.g., CFT shows PETR/BEVFormer drop 0.6–7.6% NDS under small parameter noise while calibration-free is stable; SGV3D documents pose overfitting).",
+          "gap_left": "Each ablates its own architecture against one baseline with synthetic noise — no common-backbone taxonomy across {projection-sampling, rig-vector conditioning, ray conditioning, PE, depth-splat}, no re-rendered (physically consistent) viewpoint change, no corrected-calibration recovery axis, vehicle-side cross-platform untouched."
+        }
+      ],
+      "verdict": "PARTIALLY OCCUPIED at the edges, OPEN at the core — for both sub-questions. (1) Framing C: no existing work performs a controlled, same-backbone/same-head, single-rig-trained comparison of calibration-CONSUMPTION mechanisms evaluated on factorized cross-rig transfer. The surrounding territory is claimed in three directions you must triangulate against: Simple-BEV owns the controlled view-transform-comparison template (but accuracy-only, no calibration axis); RoboBEV owns the observational paradigm-robustness ranking (confounded, corruption-centric); CoIn3D (CVPR 2026 — the sharpest threat, already in your repo) owns 'configuration-invariant MC3D via spatial/Plücker conditioning + camera-aware augmentation' across BEVDepth/BEVFormer/PETR (but as a confounded plug-in method paper with no mechanism diagnosis); UniDrive owns the CARLA cross-config benchmark + input-space virtual-camera fix. The exact claim that remains available: \"the first controlled, single-variable study of HOW a BEV detector should consume camera calibration — five consumption mechanisms {analytic projection-sampling, learned rig-vector conditioning with/without normalization repair, per-pixel ray conditioning, PETR-style PE, depth-splat} swapped into an otherwise identical detector, trained on one rig, evaluated under factorized re-rendered viewpoint perturbation (stale vs corrected extrinsics) and cross-platform transfer — yielding causal design laws (conditioning-input zero-variance degeneracy, camera-slot embeddings as hidden rig priors, metric-depth prior as the transfer bottleneck) and a repaired recipe.\" Do NOT claim per-pixel ray conditioning, intrinsic decoupling, or extrinsic augmentation as new mechanisms (CoIn3D/DG-BEV/GenDepth have them); claim the isolation, the causal explanation, and the stale-vs-corrected recovery axis, which nobody has. The zero-variance degeneracy diagnosis of BEVDepth-style BN+MLP conditioning under single-rig training appears nowhere in the literature. (2) Temporal-stereo side-angle: OPEN. Direct verification of SOLOFusion/BEVStereo/STS/StereoMV2D confirms the entire temporal-stereo line is accuracy-framed; none evaluates cross-rig, camera-height, or viewpoint generalization, and the only adjacent claim (RoboBEV: temporal fusion helps robustness) concerns image corruptions, observationally. The claim \"ego-motion temporal stereo as rig-invariant metric anchoring for cross-platform BEV transfer\" is unclaimed — including its built-in caveat (the cost volume presumes correct extrinsics/ego-pose, so stale calibration corrupts the supposedly invariant geometry — an untested interaction that fits your stale-vs-corrected protocol perfectly). Nearest neighbors are in monocular depth (GenDepth/Metric3D/CAM-Convs compare camera-parameter encodings for cross-rig depth) — cite them as the depth-task analog, and note they make metric depth rig-conditioned, whereas temporal stereo could make it rig-derived; that contrast is itself a fresh framing."
+    }
+  }
+}

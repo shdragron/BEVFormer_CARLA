@@ -147,9 +147,63 @@ calibration 오차다: BEV-공간 스윕+homography-학습 회귀가 N개 frozen
 
 ---
 
+## 7. 대안 프레이밍 검증(2차 정찰)과 최종 추천 — **추천 변경**
+
+C4 단독안에 대한 대안 3개를 추가 검증했다(원본 `_alt_idea_vetting.json`).
+
+**A. calibration-등변성 이론+감사+수리** — 가장자리 점유, **이론+감사+수리 패키지는
+공백**. 구분 필수 대상: VEDet(CVPR'23, "viewpoint equivariance" 용어 선점 — 단
+단일 rig 합성 시점에 대한 soft 학습 손실이지 rig 변환 하의 형식적 성질이 아님),
+군-등변 BEV 검출기들(GeqBevNet/AeDet/TED — 군이 장면에 작용, calibration
+메타데이터가 아님), Wang et al.(NeurIPS'23, correct/incorrect/extrinsic
+equivariance 일반 이론 — 카메라에 인스턴스화된 적 없음 = 우리가 빌릴 수학),
+EAFormer(한 모델짜리 증거), CoIn3D(경험적, 무형식). 우리의 10-모델 코드 감사가
+그대로 본문 자산.
+
+**B. frozen 파운데이션 metric depth를 rig-불변 앵커로** — **공백이되 창이 닫히는
+중**. 양쪽에서 조여옴: arXiv:2501.08118(frozen Metric3Dv2를 LSS에 — 단 seg,
+in-dist, 데이터 효율 동기, rig 일반화 주장 전무), Hashimoto arXiv:2604.00597
+(frozen DA3로 시점 강건 E2E 플래닝 — **"BEV/voxel 표현을 파운데이션 기하로 만들어
+extrinsic에서 분리"를 future work로 공개 명시** = 우리 프레이밍이 공개적으로
+예고된 다음 수). CHARM3R(ICCV'25)는 전제(depth가 높이 병목)를 독립 입증해주는
+지원군. 가용 주장: "frozen 카메라-조건 metric-depth 파운데이션을 다중 카메라 BEV
+검출기의 depth 앵커로 — 통제된 플랫폼 전이에서 최초 평가". **속도가 생명.**
+
+**C. calibration 소비 방식 통제 연구** — **핵심 공백**. Simple-BEV(ICRA'23)가
+"단일 변수 비교" 템플릿 선점(단 in-dist 정확도만), RoboBEV는 관찰적·교란,
+CoIn3D(CVPR'26)가 최예리 위협(Plücker ray 조건을 해법으로 씀 — 단 교란된 method
+논문, 기제 진단 없음). 가용 주장: "동일 backbone/head에 calibration 소비 기제
+{해석적 투영 / rig-벡터 조건(±정규화 수리) / ray 조건 / PE형 / depth-splat /
+**frozen 파운데이션-조건 depth(=B를 6번째 암으로)**}만 교체, 단일 rig 학습,
+인수분해된 교차 rig 평가 → 인과적 설계 법칙". 부가 발견: temporal stereo를
+rig-불변 앵커로 평가한 사람도 없음(단 stale extrinsic이 cost volume 자체를
+오염시키는 상호작용 미검토 — future work 한 단락감).
+
+**최종 추천 (변경): 합본 프레이밍 — "BEV 검출기는 calibration을 어떻게 소비해야
+하는가: 진단 → 법칙 → 처방".** C를 척추로, A의 등변성 조건을 조직 원리(이론층,
+Wang et al. 기계를 카메라에 인스턴스화 — zero-variance 퇴화를 그 안에서 형식화)
+로, B를 구성적 결론(normal-only 제약에서 metric 격차를 메우는 유일한 암)으로.
+근거: (i) 세 공백을 하나의 일관된 서사로 동시 점유, (ii) **킬스위치 없음** — C4와
+달리 어느 암이 이겨도 발견이 성립(연구 설계 자체가 산출물), (iii) 보유 자산
+직접 화폐화(코드 감사=감사 절, 벤치마크=계측기, BEVDepth 포크+PD-BEV=암 구현,
+nuScenes→Lyft/Waymo로 외부 타당성), (iv) AC가 요구한 통제 2×2가 부속 실험이
+아니라 본론이 됨. **C4 자기보정은 2호 논문으로 보류** — 공백(RoboBEV 계열에
+테스트타임 보정 부재)은 빨리 닫히지 않는 반면 B의 창은 닫히는 중.
+
+**즉시 실행 (B 선행 검증, 1–2주, 기존 인프라)**:
+1. *(1일)* frozen UniDepth/Metric3Dv2를 CARLA 이미지에 zero-shot 추론 → DPT GT
+   대비 depth 품질을 sedan/suv/bus 높이별로 측정. **sim-to-real 역방향 위험**
+   (파운데이션은 실사로 학습 — CARLA 합성에서 깨질 수 있음)을 여기서 판정.
+   깨지면 합본 논문에서 B 암은 nuScenes 쪽 실험으로만.
+2. *(1주)* BEVDepth 포크의 depth 분포를 frozen 파운데이션 출력(현재 카메라
+   파라미터 조건)으로 교체 → sedan 재학습 → 기존 CTS 인프라로 suv/bus 평가.
+   bus IMG 0.2 / CAL 16.6이 유의미하게 오르면 합본의 처방 암 확정.
+3. 이후 C의 나머지 암들(동일 골격에 기제 교체) 순차 구축.
+
 ### 부기
 - 출처: 문헌 4-에이전트(각 인용 venue/year 웹 확인) + 적대 기술 리뷰(기하 수치
   도출) + AC 시뮬레이션. 원본 `results/_method_paper_vetting.json` (103KB).
+- 2차 정찰(대안 3개): `results/_alt_idea_vetting.json` (2026-06-11).
 - 기술 리뷰의 핵심 검증 수치: sedan/suv rig 중력 정렬(elev 0.000°), VP 변형 =
   카메라 중심 순수 회전(translation Δ=0.0000 — homography 정확성의 근거이자
   "시차 잔차" 우려의 반박), 높이 파라미터 수평선 퇴화(0.1m 빈 = 2.5–10m 깊이),
