@@ -1,0 +1,8 @@
+VP viewpoint-robustness (BEVDet NDS)   tag=cape_sedan_fullframe
+  frames-per-scene=1000  NDS_Normal=0.5547  mAP6_Normal=0.5135
+  RRS = NDS_cell / NDS_Normal   [VR primary]
+
+  condition   mRRS(per-cam)   RRSALL(all-cam)    RRS(1/7)        mVRS
+  ER               0.9629          0.8031      0.9401      0.8830
+  VR               0.9122          0.3998      0.8390      0.6560  <- primary
+  CR               0.9412          0.5533      0.8858      0.7473

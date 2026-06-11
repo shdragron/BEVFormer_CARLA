@@ -28,6 +28,12 @@ VR/CR image swaps → the collapse was inflated). ER is valid (no image swap). C
 
 Per-cell breakdown in `eval_vp_per_config.csv` (buggy frame-N backed up as `*.buggy_frameN`).
 
+**[full-val confirmation]** `eval_vp_full3792_allcam.*` = the same grid re-run on the **full
+3792-frame val** (all-cam protocol only; per-cam is architecture-invariant). Normal NDS
+**0.5037** (vs 0.5051 subset); RRSALL ER **0.425** / VR **0.425** / CR **0.779** — matches the
+768-subset numbers (0.428/0.427/0.777) to ≤0.003, axis-wise too (CAL-yaw 0.938, EXT/IMG-pitch
+0.17–0.19). `eval_vp.*` stays the 768 full-grid run (the only one with per-cam cells).
+
 ## cts/  (committed)
 
 `eval_cts.{json,csv,summary.txt}` — cross-platform transfer (CTS): the **sedan**-trained

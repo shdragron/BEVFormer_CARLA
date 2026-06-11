@@ -1,5 +1,4 @@
-VP viewpoint-robustness RRS(1/7)   P_NORMAL(Sedan) NDS = 0.5508
-  [EXT=ER extrinsic | IMG=VR image(primary) | CAL=CR both] x [ROLL PITCH YAW ALL]
+VP RRS(1/7)  P_NORMAL(Sedan) NDS=0.5508   [single full x2 run; EXT=ER IMG=VR(primary) CAL=CR]
 
 metric        EXT                         IMG                         CAL                         
               ROLL    PITCH   YAW     ALL     ROLL    PITCH   YAW     ALL     ROLL    PITCH   YAW     ALL     

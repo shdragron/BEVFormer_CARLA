@@ -1,0 +1,8 @@
+VP viewpoint-robustness (BEVDet NDS)   tag=detr3d_sedan_full
+  frames-per-scene=79  NDS_Normal=0.5333  mAP6_Normal=0.4796
+  RRS = NDS_cell / NDS_Normal   [VR primary]
+
+  condition   mRRS(per-cam)   RRSALL(all-cam)        mVRS
+  ER                  nan          0.4400         nan
+  VR                  nan          0.4243         nan  <- primary
+  CR                  nan          0.8545         nan

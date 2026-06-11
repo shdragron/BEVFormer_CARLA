@@ -35,9 +35,11 @@ Not committed (size). Stable backup: `BEVDepth/archive_carla_results/` (ckpts + 
 ## vp/  (committed) — viewpoint robustness, sedan model
 
 631-cell yaw/pitch/roll perturbation grid (signed ±{4..20}°), `RRS = NDS_cell / NDS_Normal`.
-`NDS_Normal = 0.5324` (frames-per-scene=16 subset, 768 samples). Conditions: ER (extrinsic
-only) / **VR (image only, primary)** / CR (both). `mRRS` = mean over per-camera cells (one
-cam perturbed); `RRSALL` = all-6-cams perturbed.
+`NDS_Normal = 0.5354` (mAP6 0.4969; **full 3792-frame val** — `eval_vp.*` are now the full run).
+The fps-16 **768-subset** (NDS_Normal 0.5324) is preserved as `eval_vp.subset768.*`; the
+cross-model table stays matched at 768 for every model, and full≈subset (|ΔRRS| ≤0.01).
+Conditions: ER (extrinsic only) / **VR (image only, primary)** / CR (both). `mRRS` = mean over
+per-camera cells (one cam perturbed); `RRSALL` = all-6-cams perturbed.
 
 > **carla_VR frame-2N fix applied** (commits `3551b46` / `3e987d1`). carla_geobev is a
 > ½-rate relabel of carla_VR (geobev frame N == carla_VR frame **2N**, verified: geobev
@@ -49,18 +51,19 @@ cam perturbed); `RRSALL` = all-6-cams perturbed.
 
 | condition | mRRS (per-cam) | **RRSALL (all-cam)** | mVRS | _(pre-fix RRSALL)_ |
 |---|---|---|---|---|
-| ER | 0.947 | 0.653 | 0.800 | _0.653 (unchanged)_ |
-| **VR (primary)** | 0.915 | **0.328** | 0.621 | _0.151_ |
-| CR | 0.942 | **0.492** | 0.717 | _0.240_ |
+| ER | 0.945 | 0.648 | 0.796 | _0.653 (unchanged)_ |
+| **VR (primary)** | 0.912 | **0.325** | 0.619 | _0.151_ |
+| CR | 0.938 | **0.485** | 0.712 | _0.240_ |
 
 Perturbing ONE camera's viewpoint keeps ~92% NDS (the other 5 cams compensate); perturbing
-ALL 6 is where the conditions separate, and the failure is **axis-specific** (RRSALL all-cam):
+ALL 6 is where the conditions separate, and the failure is **axis-specific** (RRSALL all-cam,
+full 3792):
 
 | axis | ER | VR (uninformed) | CR (calibrated) |
 |---|---|---|---|
-| yaw | 0.43 | 0.40 | **0.96** |
-| **pitch** | 0.69 | **0.14** | **0.13** |
-| roll | 0.84 | 0.44 | 0.38 |
+| yaw | 0.43 | 0.40 | **0.95** |
+| **pitch** | 0.68 | **0.15** | **0.13** |
+| roll | 0.84 | 0.43 | 0.38 |
 
 **Yaw is a *consistency* problem**: when the image and the extrinsic agree (CR) the model is
 essentially robust (0.96); a yaw mismatch in either alone (ER/VR ≈ 0.4) breaks it. **Pitch

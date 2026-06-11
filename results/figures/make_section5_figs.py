@@ -28,12 +28,13 @@ VP = [
     ('seg', 'LaRa',        'extract', 0.703, 0.378, 0.627),
     ('seg', 'LSS',         'extract', 0.619, 0.354, 0.510),
     ('seg', 'PointBeV',    'gated',   0.364, 0.289, 0.756),
-    ('seg', 'SimpleBEV',   'outlier', 0.539, 0.242, 0.183),
 ]
 
 # CTS (%, Table 2): model -> (suv_IMG, suv_CAL, bus_IMG, bus_CAL)
+# BEVDet corrected 2026-06-10: paper Table 2 cells were raw NDS x100 (oracle division
+# omitted); values below are the true CTS from results/BEVDet/cts/eval_cts.csv.
 CTS = {
-    'BEVDet':      (9.1,  8.6,  0.1,  8.5,  'det', 'extract+depth'),
+    'BEVDet':      (17.0, 16.1, 0.2,  22.8, 'det', 'extract+depth'),
     'BEVDepth':    (10.3, 5.7,  0.1, 16.6,  'det', 'extract+depth'),
     'BEVFormer':   (37.2, 71.9, 18.0, 40.1, 'det', 'gated'),
     'CAPE':        (33.8, 34.3, 36.0, 32.9, 'det', 'extract'),
@@ -41,7 +42,6 @@ CTS = {
     'LSS':         (25.0, 24.2, 17.1, 17.1, 'seg', 'extract+depth'),
     'GaussianLSS': (36.1, 40.6, 14.0, 36.4, 'seg', 'extract+depth'),
     'CVT':         (44.3, 30.4, 17.7, 1.8,  'seg', 'extract'),
-    'SimpleBEV':   (11.8, 13.9, 12.2, 3.4,  'seg', 'outlier'),
     'LaRa':        (31.0, 38.5, 27.7, 21.4, 'seg', 'extract'),
     'PointBeV':    (20.2, 68.4, 11.4, 15.6, 'seg', 'gated'),
 }
@@ -49,25 +49,25 @@ CTS = {
 # NORMAL absolute performance (det NDS / seg IoU)
 NORMAL = {
     'CAPE': 0.5508, 'DETR3D': 0.5368, 'BEVDepth': 0.5354, 'BEVDet': 0.5166, 'BEVFormer': 0.5051,
-    'SimpleBEV': 0.504, 'GaussianLSS': 0.489, 'PointBeV': 0.481, 'LaRa': 0.454, 'LSS': 0.445, 'CVT': 0.424,
+    'GaussianLSS': 0.489, 'PointBeV': 0.481, 'LaRa': 0.454, 'LSS': 0.445, 'CVT': 0.424,
 }
 
 COL = {'gated': '#1f77b4', 'extract': '#d62728', 'extract+depth': '#8c1515', 'outlier': '#7f7f7f'}
 
 # ---------------- Fig A: EXT vs IMG scatter (headline 1/7 mVRS, Table-2 scale %) ----------------
 # task, model, mech, EXT, IMG (Table 2 mVRS %)
+# det full-3792 values for BEVDet/BEVDepth/CAPE (2026-06-10); BEVFormer/DETR3D subset768
 VP17 = [
     ('det', 'BEVFormer',   'gated',   83.1, 83.8),
     ('det', 'DETR3D',      'gated',   84.2, 83.9),
-    ('det', 'CAPE',        'extract', 94.3, 84.3),
-    ('det', 'BEVDepth',    'extract', 90.5, 83.1),
-    ('det', 'BEVDet',      'extract', 89.1, 83.3),
+    ('det', 'CAPE',        'extract', 94.0, 83.9),
+    ('det', 'BEVDepth',    'extract', 90.2, 82.8),
+    ('det', 'BEVDet',      'extract', 89.2, 83.0),
     ('seg', 'CVT',         'extract', 90.9, 83.5),
     ('seg', 'GaussianLSS', 'extract', 90.7, 84.5),
     ('seg', 'LaRa',        'extract', 91.1, 82.5),
     ('seg', 'LSS',         'extract', 88.4, 81.9),
     ('seg', 'PointBeV',    'gated',   79.4, 79.6),
-    ('seg', 'SimpleBEV',   'outlier', 75.9, 78.1),
 ]
 fig, ax = plt.subplots(figsize=(5.2, 5.0))
 LO, HI = 72, 98
@@ -87,7 +87,6 @@ for task, m, mech, e, i in VP17:
     ax.annotate(m, (e + dx, i + dy), fontsize=7.5)
 hs = [plt.Line2D([], [], color=COL['gated'], marker='s', ls='', label='sampling-gated'),
       plt.Line2D([], [], color=COL['extract'], marker='s', ls='', label='extract-then-place'),
-      plt.Line2D([], [], color=COL['outlier'], marker='s', ls='', label='SimpleBEV (outlier)'),
       plt.Line2D([], [], color='k', marker='o', ls='', label='detection (SDS)'),
       plt.Line2D([], [], color='k', marker='^', ls='', label='segmentation (IoU)')]
 ax.legend(handles=hs, fontsize=7.5, loc='upper left', framealpha=.9)
@@ -108,7 +107,7 @@ print(f'[FigA] Spearman(EXT, IMG) all-camera : {st.spearmanr(ext, img).statistic
 
 # ---------------- Fig B: CTS IMG -> CAL dumbbell ----------------
 order = ['BEVDet', 'BEVDepth', 'BEVFormer', 'CAPE', 'DETR3D',
-         'LSS', 'GaussianLSS', 'CVT', 'SimpleBEV', 'LaRa', 'PointBeV']
+         'LSS', 'GaussianLSS', 'CVT', 'LaRa', 'PointBeV']
 fig, axes = plt.subplots(1, 2, figsize=(9.2, 4.6), sharey=True)
 for ax, (i_idx, c_idx, title) in zip(axes, [(0, 1, 'SUV'), (2, 3, 'Bus')]):
     ys = np.arange(len(order))[::-1]
@@ -122,7 +121,7 @@ for ax, (i_idx, c_idx, title) in zip(axes, [(0, 1, 'SUV'), (2, 3, 'Bus')]):
         ax.scatter([cal_v], [y], color=col, s=40, zorder=3, edgecolors='k', linewidths=.4)
         ax.text(-3.5, y, m, ha='right', va='center', fontsize=8,
                 color=COL.get(mech, 'k') if mech != 'extract+depth' else COL['extract+depth'])
-    ax.axhline(5.5, color='0.8', lw=.8)
+    ax.axhline(4.5, color='0.8', lw=.8)
     ax.text(0.985, 0.02, 'detection (top) / segmentation (bottom)',
             transform=ax.transAxes, fontsize=6.5, ha='right', color='0.5')
     ax.set_title(f'{title}: CTS IMG $\\rightarrow$ CAL', fontsize=10)
@@ -142,7 +141,7 @@ def ranks(d):  # higher value = better -> rank 1 best
     return {m: r + 1 for r, (m, _) in enumerate(items)}
 
 det_models = ['CAPE', 'DETR3D', 'BEVDepth', 'BEVDet', 'BEVFormer']
-seg_models = ['SimpleBEV', 'GaussianLSS', 'PointBeV', 'LaRa', 'LSS', 'CVT']
+seg_models = ['GaussianLSS', 'PointBeV', 'LaRa', 'LSS', 'CVT']
 vp_img = {m: i for _, m, _, e, i, c in VP}
 vp_cal = {m: c for _, m, _, e, i, c in VP}
 cts_img = {m: (CTS[m][0] + CTS[m][2]) / 2 for m in CTS}

@@ -14,16 +14,20 @@ CONDS = ['ER', 'VR', 'CR']           # EXT / IMG(primary) / CAL
 AXES = ['roll', 'pitch', 'yaw']
 # BEVDet/BEVDepth per_config CSVs omit the Normal row; P_NORMAL taken from their
 # eval_vp_summary.txt. BEVFormer's CSV carries its own Normal row (overrides below).
-# BEVDet/BEVDepth = full-val(3792) Normal; BEVFormer = subset(768) from its CSV's
-# Normal row (overridden in aggregate()). full≈subset (≤0.01) so the mix is benign.
+# Cross-model table stays MATCHED at the 768 subset for every model (per-model
+# eval_vp.* may be the full-3792 run; full≈subset, |ΔRRS| ≤0.01 — confirmed for
+# BEVDet/BEVDepth/BEVFormer-allcam). load() prefers the *.subset768.csv backup
+# when the canonical CSV has been promoted to full.
 P_NORMAL = {
-    'BEVDet':    {'nds': 0.5166, 'map6': 0.4717},   # full 3792
-    'BEVDepth':  {'nds': 0.5354, 'map6': 0.4969},   # full 3792
-    'BEVFormer': {'nds': 0.5051, 'map6': 0.4449},   # subset 768 (frame-fixed)
+    'BEVDet':    {'nds': 0.5185, 'map6': 0.4695},   # 768 subset
+    'BEVDepth':  {'nds': 0.5324, 'map6': 0.4931},   # 768 subset
+    'BEVFormer': {'nds': 0.5051, 'map6': 0.4449},   # 768 subset (frame-fixed)
 }
 
 def load(model):
-    path = os.path.join(RESULTS, model, 'vp', 'eval_vp_per_config.csv')
+    sub = os.path.join(RESULTS, model, 'vp', 'eval_vp_per_config.subset768.csv')
+    path = sub if os.path.exists(sub) else \
+        os.path.join(RESULTS, model, 'vp', 'eval_vp_per_config.csv')
     rows = []
     with open(path) as f:
         for r in csv.DictReader(f):
