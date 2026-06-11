@@ -200,6 +200,41 @@ nuScenes→Lyft/Waymo로 외부 타당성), (iv) AC가 요구한 통제 2×2가 
    bus IMG 0.2 / CAL 16.6이 유의미하게 오르면 합본의 처방 암 확정.
 3. 이후 C의 나머지 암들(동일 골격에 기제 교체) 순차 구축.
 
+## 8. 최종 아이디어 확정본 (2026-06-11, 사용자 논의 후 — §0/§7 권고를 대체)
+
+**가칭 LatentCalib: "Calibration을 잠재변수로 — frozen depth 파운데이션을 앵커 삼아
+스스로 보정하는 BEV 검출기".** 메커니즘 논문 + 통제 연구를 ablation으로 내장.
+
+중심 연산 하나: **투영 일치도 A_i(Δ) = E_샘플[D_i(u_i(Δ), d_i(Δ))]** — frozen
+파운데이션이 입력 이미지에서 추정한 depth 분포(D_i, K_i 조건) vs 가설 calibration
+T·Δ로 투영한 BEV-pillar 샘플의 해석적 (u,d). grid_sample이라 Δ 미분 가능. 이 한
+함수가 3기능: (1) **Δ-추론**(자기보정; coarse 후보 soft-선택 + amortized 회귀;
+학습 신호 = 이미지 무손상 calib-jitter 역산쌍 → shortcut-free — C4(ii) 치명 결함
+해소; 앵커가 카메라별 절대 신호라 all-cam yaw 관측불능 문제도 해소), (2) **게이트**
+((1−α)+α·D, 가중치 경로만, 플로어), (3) **뷰 신뢰도**(잔여 일치도로 hit-count
+다운웨이트). 구조: frozen DINOv2 공유 백본에서 detection feature와 depth 분기(비용
+상쇄+backbone OOD 완화) → 해석적 투영 샘플링(슬롯 파라미터 제거) → stock decoder.
+학습 = 단일 rig normal 이미지 + Δ-역산 지도만(depth GT/LiDAR/렌더링 불필요).
+추론 = 올바른 calib면 Δ≈0 구조적(무해성 내장), 낡은 calib면 회전 복구.
+
+핵심 통찰 3개(전부 측정/코드 검증): ① IMG 손상=배치 오류(feature 생존, 헤드룸
+0.425→0.779), ② 일반화 depth는 출력이 아니라 가중치에 산다(BN 포화 법칙 vs
+파운데이션의 학습 분산), ③ extrinsic 오차는 이미지측 관측불가(CAPE)지만 "이미지의
+depth 구조 vs 믿는 투영" 불일치로는 카메라별 절대 관측 가능.
+
+intrinsic 확장(nuScenes→Waymo): 투영은 해석적으로 새 K 소비, 파운데이션은 K-조건
+(Metric3D CSTM이 본업), 입력 canonical-K 리샘플은 시차 없는 정확한 정준화, 슬롯
+제거가 카메라 수 가변성(6→5)까지 해결. "훈련만 depth" 불가 판정: 증류 student는
+단일 rig 데이터로 rig prior를 재학습(법칙이 예측), 자기보정 앵커는 정의상 테스트
+이미지에서 나와야 함 — 비용은 백본 공유/비동기 실행으로 해소.
+
+검증 사다리(각 단이 자체 논문감, 킬스위치 내장): ① 파운데이션 CARLA zero-shot
+품질(1–2일, 학습 0) → ② **A(Δ) 지형 관문 실험**(frozen BEVFormer+파운데이션,
+VP-IMG 셀에서 진짜 Δ에 정점이 서는지; 평평하면 중단→통제 연구로 전환) → ③
+**training-free plug-in**(frozen 검출기+argmax-Δ 보정 → VP-IMG 회복 측정 — 이것만
+으로 헤드라인 후보) → ④ full 모델 + 소비기제 3–4암 ablation → ⑤ nuScenes→Waymo.
+남은 정찰 1건: "파운데이션 depth 앵커 기반 온라인 extrinsic 보정"의 선행 여부.
+
 ### 부기
 - 출처: 문헌 4-에이전트(각 인용 venue/year 웹 확인) + 적대 기술 리뷰(기하 수치
   도출) + AC 시뮬레이션. 원본 `results/_method_paper_vetting.json` (103KB).
