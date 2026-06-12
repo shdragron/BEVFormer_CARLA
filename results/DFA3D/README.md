@@ -44,11 +44,32 @@ scraped from the training logs (`indist_<veh>_ep24.txt` + full
 **bus > suv > sedan** — same ordering as DETR3D (and the reverse of BEVDepth),
 consistent with projection-sampling handling the higher mount natively.
 
-## vp/, cts/  (pending)
+## vp/ (768-subset, fps16), cts/ (full 3792)  — arrived 2026-06-12 (external server)
 
-Full-val VP (631 cells) and CTS (oracle + NORMAL/EXT/IMG/CAL × suv/bus) to be run
-via the fork's `bev_det_benchmark/run_vp_full_dfa3d.sh` / `run_cts_dfa3d.sh`
-(both crash-resumable). Smoke-verified 2026-06-11: VP Normal NDS 0.4841 (48-frame
-subset) + VR pitch−8 all-cam RRS 0.362; CTS path SUV-oracle 1-scene NDS 0.4743
-with pred/GT tokens 79/79. Waiting on GPU (BEVFormer per-cam full + PD-BEV
-training occupy both B200s); merged outputs will be copied here.
+**VP 1/7 mVRS (%, subset768 — dagger):** EXT **90.4** / IMG **86.1** / CAL **93.2**
+(per-cam .9449/.9219/.9618, all-cam .6593/.4959/.7508, Normal NDS 0.4900).
+**CTS (full, oracle-normalized %):** suv EXT 68.7 / IMG **38.8** / CAL 47.5;
+bus EXT 37.1 / IMG **28.8** / CAL 48.1 (oracles suv 0.5138 / bus 0.5560).
+
+### Quadrant verdict (sampling × depth — the controlled case study)
+
+1. **VP(같은 rig): depth 게이트는 강건성을 더한다.** vs BEVFormer(83.2/83.9/93.6
+   full): EXT +7.2pt, IMG +2.2pt, CAL 동급. CAL−EXT 부호 **양성 유지(+2.8)** —
+   weight-path 게이트가 투영 샘플링의 CAL 회복을 깨지 않음(설계 예측 ✓). 우려했던
+   "게이트가 stale extrinsic 손상을 증폭"은 mVRS 수준에서 나타나지 않음 — 오히려
+   잘못 투영된 샘플을 게이트가 죽이고 hit-count 정규화가 재가중해 **내장 outlier
+   rejection**처럼 작동.
+2. **CTS(새 rig): 학습 depth의 rig prior가 게이트를 오염.** bus IMG 28.8 —
+   BEVDet(0.2)식 붕괴는 면했고 BEVFormer(18.0)보다도 높음(depth를 splat이 아니라
+   가중치로 쓰는 것의 가치 ✓). 그러나 **CAL 회복이 제한**: suv CAL 47.5 vs
+   BEVFormer 71.9, 그리고 **suv에서 CAL−EXT 부호가 음수(−21.2pt)로 반전** —
+   올바른 extrinsic이 샘플 좌표는 고치지만, sedan 이미지로만 학습된 image-only
+   depth head가 새 플랫폼 이미지에서 편향된 분포를 내놓아 게이트가 올바른 샘플을
+   억압. 6캠 mAP가 suv IMG/CAL에서 0.039/0.094로 붕괴하는 것이 그 흔적.
+
+**종합**: 게이트 메커니즘 자체는 검증(온-rig 강건성+CAL 보존), 전이 실패의
+원인은 메커니즘이 아니라 **depth의 출처(단일 rig 학습)** — "learned modules must
+not carry rig priors" 법칙의 사분면 확장이자, frozen 파운데이션 depth로 게이트
+분포를 교체하는 LatentCalib 설계의 직접적 motivation 실험. 벤치마크 §5 관점:
+부호 진단의 정밀화 — *부호는 extrinsic 소비 위치를 따르되, 소비 경로에 학습된
+rig prior가 끼면(CTS에서) 오염된다.*

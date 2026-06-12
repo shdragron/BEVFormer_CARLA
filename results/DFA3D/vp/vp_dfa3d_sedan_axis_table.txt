@@ -1,0 +1,14 @@
+VP viewpoint-robustness RRS(1/7)   P_NORMAL(Sedan) NDS = 0.4900   (fps16, 768 samples)
+  [EXT=ER extrinsic | IMG=VR image(primary) | CAL=CR both] x [ROLL PITCH YAW ALL]
+  RRS(1/7) = (6*mRRS_percam + RRSALL)/7
+
+metric       EXT                         IMG                         CAL                         
+             ROLL    PITCH   YAW     ALL     ROLL    PITCH   YAW     ALL     ROLL    PITCH   YAW     ALL     
+RRS_1of7     0.9661  0.8932  0.8531  0.9041  0.8838  0.8382  0.8611  0.8610  0.9017  0.9036  0.9896  0.9317  
+mRRS_percam  0.9819  0.9471  0.9057  0.9449  0.9352  0.9182  0.9122  0.9219  0.9464  0.9482  0.9908  0.9618  
+RRSALL       0.8714  0.5692  0.5373  0.6593  0.5751  0.3582  0.5544  0.4959  0.6336  0.6366  0.9823  0.7508  
+
+--- TSV (RRS 1/7) ---
+P_NORMAL(Sedan)	EXT				IMG				CAL
+0.4900	ROLL	PITCH	YAW	ALL	ROLL	PITCH	YAW	ALL	ROLL	PITCH	YAW	ALL
+RRS(1/7)	0.9661	0.8932	0.8531	0.9041	0.8838	0.8382	0.8611	0.8610	0.9017	0.9036	0.9896	0.9317

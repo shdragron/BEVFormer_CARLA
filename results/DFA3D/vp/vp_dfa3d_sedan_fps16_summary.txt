@@ -1,0 +1,8 @@
+VP viewpoint-robustness detection eval (NDS)   tag=dfa3d_sedan_fps16
+  config=projects/configs/bevformer/bevformer_DFA3D_carla.py  ckpt=work_dirs/bevformer_DFA3D_carla/epoch_24.pth
+  subset=4/scene   Normal NDS=0.4900  mAP6=0.4377
+
+  condition   mRRS(per-cam)   RRSALL(all-cam)        mVRS
+  ER               0.9449          0.6593      0.8021
+  VR               0.9219          0.4959      0.7089  <- primary
+  CR               0.9618          0.7508      0.8563
