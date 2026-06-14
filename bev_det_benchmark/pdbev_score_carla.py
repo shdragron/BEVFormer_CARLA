@@ -26,10 +26,12 @@ def main():
     ap.add_argument('--vehicle', default='sedan', choices=list(CFG))
     args = ap.parse_args()
 
+    dets_path = os.path.abspath(args.dets)
+    os.chdir(BEVDET)   # configs use relative ann_file (data/nuscenes/...): cwd must be BEVDet
     cfg = Config.fromfile(os.path.join(BEVDET, CFG[args.vehicle]))
     cfg.data.test.test_mode = True
     ds = build_dataset(cfg.data.test)            # CarlaNuScenesDataset <veh> val + v1.0-carla_<veh>_eval
-    dets = pickle.load(open(args.dets, 'rb'))
+    dets = pickle.load(open(dets_path, 'rb'))
     miss = [info['token'] for info in ds.data_infos if info['token'] not in dets]
     if miss:
         raise SystemExit(f'{len(miss)} val tokens missing from dets (need full-val dump); e.g. {miss[:2]}')

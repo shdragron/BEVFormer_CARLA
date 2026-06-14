@@ -1,0 +1,11 @@
+VP viewpoint-robustness (PD-BEV NDS)   tag=pdbev_sedan384
+  frames-per-scene=16  NDS_Normal=0.5598  mAP6_Normal=0.5614
+  RRS = NDS_cell / NDS_Normal   [VR primary]
+  mVRS(1/7) = (6*mRRS + RRSALL)/7  = paper Table-2 headline
+
+  condition   mRRS(per-cam)   RRSALL(all-cam)    mVRS(1/2)   mVRS(1/7)
+  ER               0.9490          0.7020      0.8255      0.9137
+  VR               0.9378          0.5955      0.7666      0.8889  <- primary
+  CR               0.9747          0.8076      0.8912      0.9509
+
+  Table-2 row (1/7 mVRS %, ER=Ext VR=Img CR=Cal): ER=91.4 VR=88.9 CR=95.1

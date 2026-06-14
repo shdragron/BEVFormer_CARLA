@@ -25,10 +25,14 @@ def main():
     ap.add_argument('out')
     ap.add_argument('--batch', type=int, default=8)
     ap.add_argument('--workers', type=int, default=6)
+    ap.add_argument('--ann-file', default=None,
+                    help='override cfg.data.test.ann_file (e.g. a CTS condition pkl)')
     args = ap.parse_args()
 
     cfg = Config.fromfile(args.config)
     cfg.data.test.test_mode = True
+    if args.ann_file is not None:
+        cfg.data.test.ann_file = os.path.abspath(args.ann_file)
     ds = build_dataset(cfg.data.test)
     loader = build_dataloader(ds, samples_per_gpu=args.batch, workers_per_gpu=args.workers,
                               dist=False, shuffle=False)

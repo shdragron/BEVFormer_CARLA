@@ -1,0 +1,91 @@
+{
+  "tag": "pdbev_sedan384",
+  "model": "PD-BEV (Generalizable-BEV / BEVDepth_DG), sedan384 native-384",
+  "note": "CTS_c = NDS(c)/P_TARGET, IMG primary; comp errors not retained",
+  "oracle_nds_per_target": {
+    "suv": 0.5464,
+    "bus": 0.6064
+  },
+  "rows": [
+    {
+      "platform": "suv",
+      "condition": "ORACLE",
+      "nds": 0.5464,
+      "map6": null,
+      "cts_nds": 1.0,
+      "primary": ""
+    },
+    {
+      "platform": "suv",
+      "condition": "NORMAL",
+      "nds": 0.5281,
+      "map6": 0.5042,
+      "cts_nds": 0.9665080527086384,
+      "primary": ""
+    },
+    {
+      "platform": "suv",
+      "condition": "EXT",
+      "nds": 0.4004,
+      "map6": 0.4008,
+      "cts_nds": 0.732796486090776,
+      "primary": ""
+    },
+    {
+      "platform": "suv",
+      "condition": "IMG",
+      "nds": 0.3263,
+      "map6": 0.2248,
+      "cts_nds": 0.5971815519765739,
+      "primary": "IMG"
+    },
+    {
+      "platform": "suv",
+      "condition": "CAL",
+      "nds": 0.3053,
+      "map6": 0.2654,
+      "cts_nds": 0.5587481698389458,
+      "primary": ""
+    },
+    {
+      "platform": "bus",
+      "condition": "ORACLE",
+      "nds": 0.6064,
+      "map6": null,
+      "cts_nds": 1.0,
+      "primary": ""
+    },
+    {
+      "platform": "bus",
+      "condition": "NORMAL",
+      "nds": 0.4787,
+      "map6": 0.413,
+      "cts_nds": 0.7894129287598944,
+      "primary": ""
+    },
+    {
+      "platform": "bus",
+      "condition": "EXT",
+      "nds": 0.2288,
+      "map6": 0.1333,
+      "cts_nds": 0.37730870712401055,
+      "primary": ""
+    },
+    {
+      "platform": "bus",
+      "condition": "IMG",
+      "nds": 0.0054,
+      "map6": 0.0108,
+      "cts_nds": 0.008905013192612136,
+      "primary": "IMG"
+    },
+    {
+      "platform": "bus",
+      "condition": "CAL",
+      "nds": 0.2537,
+      "map6": 0.1579,
+      "cts_nds": 0.41837071240105533,
+      "primary": ""
+    }
+  ]
+}
