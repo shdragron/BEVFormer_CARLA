@@ -44,10 +44,14 @@ scraped from the training logs (`indist_<veh>_ep24.txt` + full
 **bus > suv > sedan** — same ordering as DETR3D (and the reverse of BEVDepth),
 consistent with projection-sampling handling the higher mount natively.
 
-## vp/ (768-subset, fps16), cts/ (full 3792)  — arrived 2026-06-12 (external server)
+## vp/ (FULL 3792 fps79; fps16 subset also kept), cts/ (full 3792)  — full arrived 2026-06-14
 
-**VP 1/7 mVRS (%, subset768 — dagger):** EXT **90.4** / IMG **86.1** / CAL **93.2**
-(per-cam .9449/.9219/.9618, all-cam .6593/.4959/.7508, Normal NDS 0.4900).
+**VP 1/7 mVRS (%, FULL 3792):** EXT **90.5** / IMG **86.1** / CAL **93.1**
+(per-cam .9461/.9219/.9614, all-cam .6601/.4947/.7462, Normal NDS 0.4892).
+per-axis(roll/pitch/yaw) EXT .9667/.8946/.8545, IMG .8831/.8391/.8603,
+CAL .9009/.9028/.9883; per-cam IMG F/FL/FR/B/BL/BR
+.8964/.9365/.9680/.8414/.9230/.9659. (fps16 subset Δ≤0.1pt — 대표성 재확인;
+**"(sub)" 제거, 완전 full**.)
 **CTS (full, oracle-normalized %):** suv EXT 68.7 / IMG **38.8** / CAL 47.5;
 bus EXT 37.1 / IMG **28.8** / CAL 48.1 (oracles suv 0.5138 / bus 0.5560).
 

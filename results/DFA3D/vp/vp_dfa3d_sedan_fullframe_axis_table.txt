@@ -1,0 +1,8 @@
+VP viewpoint-robustness RRS(1/7)  FULL-FRAME (all 3792)  P_NORMAL(Sedan) NDS = 0.4892
+  [EXT=ER | IMG=VR(primary) | CAL=CR] x [ROLL PITCH YAW ALL]   RRS(1/7)=(6*mRRS_percam+RRSALL)/7
+
+metric       EXT                         IMG                         CAL                         
+             ROLL    PITCH   YAW     ALL     ROLL    PITCH   YAW     ALL     ROLL    PITCH   YAW     ALL     
+RRS_1of7     0.9667  0.8946  0.8545  0.9053  0.8831  0.8391  0.8603  0.8608  0.9009  0.9028  0.9883  0.9307  
+mRRS_percam  0.9828  0.9490  0.9067  0.9461  0.9351  0.9187  0.9118  0.9219  0.9463  0.9474  0.9904  0.9614  
+RRSALL       0.8701  0.5687  0.5415  0.6601  0.5709  0.3616  0.5515  0.4947  0.6280  0.6350  0.9757  0.7462  
