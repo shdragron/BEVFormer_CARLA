@@ -199,6 +199,10 @@ results_dfa3d.tar
 /bevformer_seg/out/
 /PDBEV_results/
 /HANDOFF.md
+
+# keep PD-BEV run logs (override the global *.log ignore) for the record/move
+!results/PDBEV/logs/
+!results/PDBEV/logs/*.log
 /GaussianLSS/
 /VEDet/
 # old duplicate memory copy (canonical = top-level memory_snapshot/)
