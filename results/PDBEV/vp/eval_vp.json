@@ -1,0 +1,5768 @@
+{
+  "tag": "pdbev_sedan384_full",
+  "frames_per_scene": 79,
+  "nds_normal": 0.5605391298160954,
+  "map6_normal": 0.5682455263162304,
+  "normal_metrics": {
+    "pts_bbox_NuScenes/car_AP_dist_0.5": 0.2852,
+    "pts_bbox_NuScenes/car_AP_dist_1.0": 0.5379,
+    "pts_bbox_NuScenes/car_AP_dist_2.0": 0.736,
+    "pts_bbox_NuScenes/car_AP_dist_4.0": 0.8559,
+    "pts_bbox_NuScenes/car_trans_err": 0.4168,
+    "pts_bbox_NuScenes/car_scale_err": 0.1693,
+    "pts_bbox_NuScenes/car_orient_err": 0.4721,
+    "pts_bbox_NuScenes/car_vel_err": 2.0281,
+    "pts_bbox_NuScenes/car_attr_err": 0.1417,
+    "pts_bbox_NuScenes/mATE": 0.6388,
+    "pts_bbox_NuScenes/mASE": 0.4745,
+    "pts_bbox_NuScenes/mAOE": 0.6842,
+    "pts_bbox_NuScenes/mAVE": 1.7639,
+    "pts_bbox_NuScenes/mAAE": 0.3905,
+    "pts_bbox_NuScenes/truck_AP_dist_0.5": 0.2853,
+    "pts_bbox_NuScenes/truck_AP_dist_1.0": 0.5462,
+    "pts_bbox_NuScenes/truck_AP_dist_2.0": 0.7097,
+    "pts_bbox_NuScenes/truck_AP_dist_4.0": 0.8241,
+    "pts_bbox_NuScenes/truck_trans_err": 0.4246,
+    "pts_bbox_NuScenes/truck_scale_err": 0.1204,
+    "pts_bbox_NuScenes/truck_orient_err": 0.1718,
+    "pts_bbox_NuScenes/truck_vel_err": 2.0234,
+    "pts_bbox_NuScenes/truck_attr_err": 0.1763,
+    "pts_bbox_NuScenes/bus_AP_dist_0.5": 0.4652,
+    "pts_bbox_NuScenes/bus_AP_dist_1.0": 0.746,
+    "pts_bbox_NuScenes/bus_AP_dist_2.0": 0.9032,
+    "pts_bbox_NuScenes/bus_AP_dist_4.0": 0.9559,
+    "pts_bbox_NuScenes/bus_trans_err": 0.3141,
+    "pts_bbox_NuScenes/bus_scale_err": 0.023,
+    "pts_bbox_NuScenes/bus_orient_err": 0.1871,
+    "pts_bbox_NuScenes/bus_vel_err": 1.5441,
+    "pts_bbox_NuScenes/bus_attr_err": 0.4144,
+    "pts_bbox_NuScenes/motorcycle_AP_dist_0.5": 0.3303,
+    "pts_bbox_NuScenes/motorcycle_AP_dist_1.0": 0.54,
+    "pts_bbox_NuScenes/motorcycle_AP_dist_2.0": 0.6998,
+    "pts_bbox_NuScenes/motorcycle_AP_dist_4.0": 0.749,
+    "pts_bbox_NuScenes/motorcycle_trans_err": 0.3914,
+    "pts_bbox_NuScenes/motorcycle_scale_err": 0.146,
+    "pts_bbox_NuScenes/motorcycle_orient_err": 0.2053,
+    "pts_bbox_NuScenes/motorcycle_vel_err": 2.1427,
+    "pts_bbox_NuScenes/motorcycle_attr_err": 0.1209,
+    "pts_bbox_NuScenes/bicycle_AP_dist_0.5": 0.3649,
+    "pts_bbox_NuScenes/bicycle_AP_dist_1.0": 0.4883,
+    "pts_bbox_NuScenes/bicycle_AP_dist_2.0": 0.552,
+    "pts_bbox_NuScenes/bicycle_AP_dist_4.0": 0.5732,
+    "pts_bbox_NuScenes/bicycle_trans_err": 0.2745,
+    "pts_bbox_NuScenes/bicycle_scale_err": 0.1992,
+    "pts_bbox_NuScenes/bicycle_orient_err": 0.4936,
+    "pts_bbox_NuScenes/bicycle_vel_err": 2.983,
+    "pts_bbox_NuScenes/bicycle_attr_err": 0.0863,
+    "pts_bbox_NuScenes/pedestrian_AP_dist_0.5": 0.1729,
+    "pts_bbox_NuScenes/pedestrian_AP_dist_1.0": 0.3342,
+    "pts_bbox_NuScenes/pedestrian_AP_dist_2.0": 0.4476,
+    "pts_bbox_NuScenes/pedestrian_AP_dist_4.0": 0.5351,
+    "pts_bbox_NuScenes/pedestrian_trans_err": 0.5668,
+    "pts_bbox_NuScenes/pedestrian_scale_err": 0.0875,
+    "pts_bbox_NuScenes/pedestrian_orient_err": 1.6278,
+    "pts_bbox_NuScenes/pedestrian_vel_err": 1.39,
+    "pts_bbox_NuScenes/pedestrian_attr_err": 0.1843,
+    "pts_bbox_NuScenes/NDS": 0.5605391298160954,
+    "pts_bbox_NuScenes/mAP": 0.5682455263162304,
+    "pts_bbox_NuScenes/NDS_10class": 0.3516720988794149,
+    "pts_bbox_NuScenes/mAP_10class": 0.3409473157897382,
+    "pts_bbox_NuScenes/mATE_6class": 0.3980407453386325,
+    "pts_bbox_NuScenes/mASE_6class": 0.12421790181039809,
+    "pts_bbox_NuScenes/mAOE_6class": 0.5262743540590159,
+    "pts_bbox_NuScenes/mAVE_6class": 2.018537193188098,
+    "pts_bbox_NuScenes/mAAE_6class": 0.18730333221215015
+  },
+  "aggregate": {
+    "CR": {
+      "mRRS_percam": 0.9751835850353523,
+      "RRSALL_allcam": 0.8034021284107191,
+      "mVRS": 0.8892928567230357,
+      "mVRS_1of7": 0.950643376946119
+    },
+    "ER": {
+      "mRRS_percam": 0.9490110683306106,
+      "RRSALL_allcam": 0.7019519836027699,
+      "mVRS": 0.8254815259666902,
+      "mVRS_1of7": 0.9137169133694905
+    },
+    "VR": {
+      "mRRS_percam": 0.938381120554316,
+      "RRSALL_allcam": 0.593049507153681,
+      "mVRS": 0.7657153138539985,
+      "mVRS_1of7": 0.8890480329256538
+    }
+  },
+  "rows": [
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.4616871371363609,
+      "map6": 0.37482833233752494,
+      "rrs": 0.8236483638311451
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5331220380493231,
+      "map6": 0.5184071336224616,
+      "rrs": 0.9510879967010198
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5053150666659021,
+      "map6": 0.46640250910504566,
+      "rrs": 0.901480449423198
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.456026729930816,
+      "map6": 0.4010171053874602,
+      "rrs": 0.8135502156297841
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5399625537831477,
+      "map6": 0.534941319153153,
+      "rrs": 0.963291454711291
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5535560202259513,
+      "map6": 0.555433825635284,
+      "rrs": 0.9875421550098827
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.2929392154551841,
+      "map6": 0.17323482211792643,
+      "rrs": 0.5226026157197858
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.4597571914243147,
+      "map6": 0.37837107968223044,
+      "rrs": 0.8202053469044244
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5272255657047905,
+      "map6": 0.5162207134711516,
+      "rrs": 0.940568709052953
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5269769787413798,
+      "map6": 0.5145136313144912,
+      "rrs": 0.9401252307118562
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.4981257482711669,
+      "map6": 0.5096353160197703,
+      "rrs": 0.8886547285906597
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5495575318223926,
+      "map6": 0.5521457538366373,
+      "rrs": 0.9804088645920122
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5589466179016908,
+      "map6": 0.567423673787991,
+      "rrs": 0.9971589638801359
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.5447487277474385,
+      "map6": 0.5634844634157542,
+      "rrs": 0.971829973629428
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.549348902356198,
+      "map6": 0.5470320005054562,
+      "rrs": 0.9800366702970964
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5531162256650407,
+      "map6": 0.5591202907668948,
+      "rrs": 0.9867575629314406
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5421019876022715,
+      "map6": 0.5301866226022444,
+      "rrs": 0.9671081977454938
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.4714562408805724,
+      "map6": 0.42969857867586664,
+      "rrs": 0.8410764134080171
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5443335088441398,
+      "map6": 0.5498018233956955,
+      "rrs": 0.9710892244449152
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5578387017331868,
+      "map6": 0.5648901490360894,
+      "rrs": 0.9951824450082645
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.47451628647337546,
+      "map6": 0.5214062413194013,
+      "rrs": 0.8465355248777319
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5580118117377217,
+      "map6": 0.5692195516142401,
+      "rrs": 0.9954912726981203
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5591622957086488,
+      "map6": 0.568060973901257,
+      "rrs": 0.9975437323922447
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5582272702621481,
+      "map6": 0.565714079814841,
+      "rrs": 0.9958756500108997
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.5456623225658325,
+      "map6": 0.559004793836713,
+      "rrs": 0.9734598238393387
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5533652722722835,
+      "map6": 0.5599311984405851,
+      "rrs": 0.9872018612756516
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5531632364042481,
+      "map6": 0.5618917868890563,
+      "rrs": 0.9868414299385893
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.10399919695639252,
+      "map6": 0.03807258856175505,
+      "rrs": 0.18553423200002667
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.46391033549581806,
+      "map6": 0.39716792127891337,
+      "rrs": 0.8276145425351842
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5424245719785394,
+      "map6": 0.5354137157491252,
+      "rrs": 0.9676836872325058
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5346884237856118,
+      "map6": 0.5252090509425436,
+      "rrs": 0.953882423803375
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.4932202417617244,
+      "map6": 0.469312873729058,
+      "rrs": 0.8799033207967883
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5120915715027042,
+      "map6": 0.4909752753244141,
+      "rrs": 0.9135697121995995
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5354909120016647,
+      "map6": 0.532697946932421,
+      "rrs": 0.9553140601929989
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.19681191679618235,
+      "map6": 0.055764510583649875,
+      "rrs": 0.3511118248974936
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5107496630590693,
+      "map6": 0.47531961332611833,
+      "rrs": 0.9111757518634581
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5439095386041276,
+      "map6": 0.5465342483900849,
+      "rrs": 0.9703328629039265
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5403430878105492,
+      "map6": 0.5290003502778574,
+      "rrs": 0.9639703261890525
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.5159392939486691,
+      "map6": 0.4921528040633012,
+      "rrs": 0.9204340366353034
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5519071343505961,
+      "map6": 0.5565956819663348,
+      "rrs": 0.9846005479254742
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5585767049466093,
+      "map6": 0.5666095911303596,
+      "rrs": 0.996499040361143
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.4497433541303947,
+      "map6": 0.4257529543658929,
+      "rrs": 0.8023406934640741
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.527318484452562,
+      "map6": 0.5107720503571404,
+      "rrs": 0.9407344757993387
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5379632282673305,
+      "map6": 0.5379220010825541,
+      "rrs": 0.9597246644383741
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5380477032813803,
+      "map6": 0.5295592848140136,
+      "rrs": 0.9598753675910293
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.5005858516934716,
+      "map6": 0.4907358866735004,
+      "rrs": 0.893043545162862
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5388727911158122,
+      "map6": 0.5470474241801244,
+      "rrs": 0.9613473216269636
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5570944918550661,
+      "map6": 0.5642265453227461,
+      "rrs": 0.9938547769855791
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.5167790702867378,
+      "map6": 0.5225530937791184,
+      "rrs": 0.9219321949143591
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5504466176230626,
+      "map6": 0.55556498532968,
+      "rrs": 0.9819949907933384
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5555162390498632,
+      "map6": 0.5603953812596708,
+      "rrs": 0.9910391790705493
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5471311485777097,
+      "map6": 0.5434075991901669,
+      "rrs": 0.9760802047079484
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.4843934307015122,
+      "map6": 0.45604269271417813,
+      "rrs": 0.8641563183295241
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5558868494531767,
+      "map6": 0.5645909095412996,
+      "rrs": 0.9917003468349389
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5536461700850186,
+      "map6": 0.5585168507889867,
+      "rrs": 0.9877029820677491
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.5270231077929994,
+      "map6": 0.5275174949165613,
+      "rrs": 0.9402075247911914
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5528970558099898,
+      "map6": 0.5612368094354082,
+      "rrs": 0.9863665646167952
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5607680662883023,
+      "map6": 0.5681017277661502,
+      "rrs": 1.0004084219281568
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5544622423412704,
+      "map6": 0.5629005389479528,
+      "rrs": 0.989158852341283
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.5415192872348861,
+      "map6": 0.5518035310279085,
+      "rrs": 0.9660686621691343
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5449471388624287,
+      "map6": 0.5420287005054908,
+      "rrs": 0.9721839384187466
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.559881307081055,
+      "map6": 0.5667148288565294,
+      "rrs": 0.9988264463619939
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.37102688147894114,
+      "map6": 0.3576766200267307,
+      "rrs": 0.661910760093893
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5464274944917249,
+      "map6": 0.553207004703142,
+      "rrs": 0.9748248880876517
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.555409205962919,
+      "map6": 0.5643269968569643,
+      "rrs": 0.9908482323885943
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5556310822257426,
+      "map6": 0.5605101081206146,
+      "rrs": 0.9912440589259789
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.5400343764086595,
+      "map6": 0.5481896832493027,
+      "rrs": 0.9634195860435948
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5471754522343865,
+      "map6": 0.5447693970275237,
+      "rrs": 0.9761592422885921
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.553253065337648,
+      "map6": 0.5584834269723126,
+      "rrs": 0.9870016844660997
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.3310724764012469,
+      "map6": 0.289161554793736,
+      "rrs": 0.5906322302777807
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5296341167857902,
+      "map6": 0.5129167997677208,
+      "rrs": 0.9448655564145099
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5532725674194557,
+      "map6": 0.560915619421833,
+      "rrs": 0.9870364761171557
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5432645152724996,
+      "map6": 0.5383201106116416,
+      "rrs": 0.9691821433603336
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.5241504321190241,
+      "map6": 0.541987410408537,
+      "rrs": 0.9350826806524464
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.55618744196545,
+      "map6": 0.5622748758270237,
+      "rrs": 0.9922366029075024
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5584279935370914,
+      "map6": 0.566041020390201,
+      "rrs": 0.9962337396861185
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.4911582097549723,
+      "map6": 0.4907064969520905,
+      "rrs": 0.8762246623462558
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5300550660602548,
+      "map6": 0.526887703140661,
+      "rrs": 0.9456165285627035
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5497810426815798,
+      "map6": 0.5538133966287111,
+      "rrs": 0.980807607244038
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5306823148804578,
+      "map6": 0.5111105984527402,
+      "rrs": 0.9467355384352325
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5009549720508055,
+      "map6": 0.45620888714407676,
+      "rrs": 0.8937020546900293
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.4368792262631824,
+      "map6": 0.36567651331015294,
+      "rrs": 0.7793911308324112
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5154309200682341,
+      "map6": 0.49478032330460225,
+      "rrs": 0.9195270992719801
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5526913861921272,
+      "map6": 0.5585519530133194,
+      "rrs": 0.9859996506817589
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.39667083029780115,
+      "map6": 0.32566790769181925,
+      "rrs": 0.7076594820917194
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.46772368839359413,
+      "map6": 0.39878841105178386,
+      "rrs": 0.8344175518077521
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5309345730973789,
+      "map6": 0.5207585267084224,
+      "rrs": 0.947185566280753
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.49688841390602895,
+      "map6": 0.44792460499449316,
+      "rrs": 0.886447328073333
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.47028358864588765,
+      "map6": 0.4678877472478913,
+      "rrs": 0.8389844056028358
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5399964275207255,
+      "map6": 0.5359521679618688,
+      "rrs": 0.9633518853498958
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5571323102455787,
+      "map6": 0.5650948430834067,
+      "rrs": 0.9939222448722992
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.5014787946537946,
+      "map6": 0.5389845902089893,
+      "rrs": 0.8946365525245711
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5579054764690964,
+      "map6": 0.5638222757791037,
+      "rrs": 0.995301570921796
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5557434873597964,
+      "map6": 0.5629941761895877,
+      "rrs": 0.9914445893226537
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5455999464877235,
+      "map6": 0.5376655723722124,
+      "rrs": 0.9733485451171388
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.48111663742363575,
+      "map6": 0.44522277845543634,
+      "rrs": 0.8583105296885928
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5355932802940583,
+      "map6": 0.5173829816256601,
+      "rrs": 0.9554966848965183
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5570823764426329,
+      "map6": 0.56288629653547,
+      "rrs": 0.9938331631288674
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.45310294250751787,
+      "map6": 0.4885583051174314,
+      "rrs": 0.8083341882950691
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5513748805761691,
+      "map6": 0.5667519796439499,
+      "rrs": 0.9836510089082755
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5596938947774062,
+      "map6": 0.5691761221494075,
+      "rrs": 0.99849210341664
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5599860679966702,
+      "map6": 0.5666216219508853,
+      "rrs": 0.9990133394976248
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.5500641797610548,
+      "map6": 0.5644790130427445,
+      "rrs": 0.9813127228807785
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5560469246231357,
+      "map6": 0.5637431867758469,
+      "rrs": 0.9919859204219452
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5558896245885508,
+      "map6": 0.5653125635190156,
+      "rrs": 0.9917052976674973
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.47154595326430204,
+      "map6": 0.46567868324320916,
+      "rrs": 0.8412364600112917
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.45601917498515665,
+      "map6": 0.3786323989976364,
+      "rrs": 0.8135367376310906
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5333447860169815,
+      "map6": 0.5211446338435713,
+      "rrs": 0.9514853783570186
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5173472754735029,
+      "map6": 0.49360419708404296,
+      "rrs": 0.9229458711352352
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.49752445856839467,
+      "map6": 0.46750405283471236,
+      "rrs": 0.887582029699916
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.535621916099368,
+      "map6": 0.5317470041533622,
+      "rrs": 0.9555477710808479
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.544179355419373,
+      "map6": 0.5428417753705209,
+      "rrs": 0.9708142152322358
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.22541733715843568,
+      "map6": 0.0973628197776883,
+      "rrs": 0.4021438025787633
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.4696250871765958,
+      "map6": 0.3988967008570142,
+      "rrs": 0.8378096411051139
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.538916314178779,
+      "map6": 0.542212319143888,
+      "rrs": 0.961424966630946
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5390070512994866,
+      "map6": 0.5249732541083493,
+      "rrs": 0.9615868413616847
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.4861659189076736,
+      "map6": 0.4481356746969419,
+      "rrs": 0.8673184315735056
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5415851119879727,
+      "map6": 0.5415542238256249,
+      "rrs": 0.9661860933163733
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5571247465890039,
+      "map6": 0.5623080070907408,
+      "rrs": 0.9939087513333605
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.5090074689554251,
+      "map6": 0.5046006895065576,
+      "rrs": 0.9080676832006767
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5361517144598749,
+      "map6": 0.5275441129238206,
+      "rrs": 0.9564929296475311
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5424751548941356,
+      "map6": 0.5411105591280386,
+      "rrs": 0.9677739269908125
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5384757881201863,
+      "map6": 0.5213173260538241,
+      "rrs": 0.9606390695629976
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.48187944186038545,
+      "map6": 0.45878387234086565,
+      "rrs": 0.8596713703439097
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5324967691616767,
+      "map6": 0.5345136618631408,
+      "rrs": 0.949972519021787
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5548839501112075,
+      "map6": 0.5610972644825416,
+      "rrs": 0.9899111776429537
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.48086992550831315,
+      "map6": 0.4877859679496986,
+      "rrs": 0.8578703964272386
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5558013522651823,
+      "map6": 0.5629005068789427,
+      "rrs": 0.9915478201272631
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5583787408886172,
+      "map6": 0.5644833749621847,
+      "rrs": 0.9961458731200673
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5484308095888544,
+      "map6": 0.5481052678863726,
+      "rrs": 0.978398795760764
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.4985126331051554,
+      "map6": 0.4827688042060536,
+      "rrs": 0.8893449298868931
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5314040682769129,
+      "map6": 0.5256087908036798,
+      "rrs": 0.9480231441670427
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5484669504278826,
+      "map6": 0.5460743849821993,
+      "rrs": 0.9784632709010457
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.5231528106973322,
+      "map6": 0.5240211281339189,
+      "rrs": 0.9333029272532158
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.553991041235669,
+      "map6": 0.5641475462313711,
+      "rrs": 0.9883182310883902
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.561483231392996,
+      "map6": 0.5685128646281623,
+      "rrs": 1.0016842741687104
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5552719107451295,
+      "map6": 0.5632623823555123,
+      "rrs": 0.990603298162799
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.5455326628368906,
+      "map6": 0.5532652380150861,
+      "rrs": 0.9732285113010251
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5479727425374976,
+      "map6": 0.5479381174013053,
+      "rrs": 0.9775816056182899
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5604178690732123,
+      "map6": 0.5666990308076758,
+      "rrs": 0.9997836712257306
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.508178456632413,
+      "map6": 0.5183157391131045,
+      "rrs": 0.9065887278897707
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5450296456854529,
+      "map6": 0.5488577329972474,
+      "rrs": 0.9723311303249588
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5541237270645175,
+      "map6": 0.5615272363500834,
+      "rrs": 0.9885549421791789
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5538648577843294,
+      "map6": 0.554955995836099,
+      "rrs": 0.9880931202181089
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.5435955563741003,
+      "map6": 0.5532307086512724,
+      "rrs": 0.9697727196180682
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5547849863585657,
+      "map6": 0.5593464338072377,
+      "rrs": 0.9897346266273728
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5563189578570837,
+      "map6": 0.5638213128741577,
+      "rrs": 0.9924712268340726
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.4002426526370312,
+      "map6": 0.3972253357159527,
+      "rrs": 0.714031601626714
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5320124017466179,
+      "map6": 0.5150317740154701,
+      "rrs": 0.9491084091152803
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.549454215865895,
+      "map6": 0.5554875003183114,
+      "rrs": 0.9802245492587873
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.542334150497602,
+      "map6": 0.5311094455597871,
+      "rrs": 0.967522375602099
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.5139746584921221,
+      "map6": 0.5275834376802405,
+      "rrs": 0.9169291333162585
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5547082353382653,
+      "map6": 0.5591678454014665,
+      "rrs": 0.9895977030546589
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5588620710686099,
+      "map6": 0.5671017613475499,
+      "rrs": 0.997008132602561
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.5174392199611058,
+      "map6": 0.5208863570110513,
+      "rrs": 0.9231098998046218
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5421689597569351,
+      "map6": 0.5459744871234381,
+      "rrs": 0.9672276758534462
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5515757845427464,
+      "map6": 0.5572606661597272,
+      "rrs": 0.9840094209367867
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5395538502722271,
+      "map6": 0.5297309363682627,
+      "rrs": 0.9625623289657704
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5008536183618084,
+      "map6": 0.45240667490572917,
+      "rrs": 0.8935212400356976
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.41862100436337635,
+      "map6": 0.33016995465143995,
+      "rrs": 0.746818521841142
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5035048566631204,
+      "map6": 0.47176806023469675,
+      "rrs": 0.8982510406156888
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5423245476274516,
+      "map6": 0.5427878858674038,
+      "rrs": 0.9675052441127174
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.4073305724181626,
+      "map6": 0.3414286636489645,
+      "rrs": 0.7266764276595672
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.47754985231763564,
+      "map6": 0.4238587993681169,
+      "rrs": 0.8519473965614366
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5363567215008258,
+      "map6": 0.5284947743036811,
+      "rrs": 0.9568586615474935
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.4996059077442526,
+      "map6": 0.4535126015605422,
+      "rrs": 0.891295328317518
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.4260590553880787,
+      "map6": 0.3119778042201948,
+      "rrs": 0.760087980883444
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5254233242514406,
+      "map6": 0.513597556524338,
+      "rrs": 0.9373535161119334
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5537803905237701,
+      "map6": 0.5590749043538478,
+      "rrs": 0.9879424308976561
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.4602266999594929,
+      "map6": 0.48963254786862015,
+      "rrs": 0.8210429486171401
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5588071475965158,
+      "map6": 0.5718791486335899,
+      "rrs": 0.9969101493054592
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.559100001420181,
+      "map6": 0.5677743356254044,
+      "rrs": 0.9974325995825009
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5529164285355578,
+      "map6": 0.5506903689351608,
+      "rrs": 0.9864011254967364
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.49433039694944875,
+      "map6": 0.4744040642576108,
+      "rrs": 0.8818838340717288
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5421135079853718,
+      "map6": 0.5325161189890977,
+      "rrs": 0.9671287500717947
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5550197803520334,
+      "map6": 0.5543146109671154,
+      "rrs": 0.99015349835457
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.4296415357607103,
+      "map6": 0.44865721746856924,
+      "rrs": 0.7664791143156576
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5417873676102103,
+      "map6": 0.5581883835235603,
+      "rrs": 0.9665469166942238
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5589849486576873,
+      "map6": 0.5686591971648968,
+      "rrs": 0.9972273458252272
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5582167914262484,
+      "map6": 0.5655454580988653,
+      "rrs": 0.995856955801446
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.5539249618726108,
+      "map6": 0.5658209387352824,
+      "rrs": 0.988200345717783
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.559582612582633,
+      "map6": 0.5665743644970228,
+      "rrs": 0.9982935763400206
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5571685176169833,
+      "map6": 0.5670109333573351,
+      "rrs": 0.9939868387061256
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.5014052028153521,
+      "map6": 0.5114043697883963,
+      "rrs": 0.8945052649221039
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.4537281956957033,
+      "map6": 0.3727547533466227,
+      "rrs": 0.809449637966514
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5234998826411357,
+      "map6": 0.5091732315663925,
+      "rrs": 0.933922102481745
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5127928409688669,
+      "map6": 0.4851384827371956,
+      "rrs": 0.9148207746658232
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.4525710090076888,
+      "map6": 0.38738483226377096,
+      "rrs": 0.8073852206467204
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5331530588189358,
+      "map6": 0.5326572728529824,
+      "rrs": 0.9511433376539751
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5548315741437037,
+      "map6": 0.558027972046736,
+      "rrs": 0.9898177390858256
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.2788692127489833,
+      "map6": 0.17389241123169244,
+      "rrs": 0.4975017762639981
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.471712634753444,
+      "map6": 0.4029413034476028,
+      "rrs": 0.8415338192504168
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5336785092455373,
+      "map6": 0.519520904699743,
+      "rrs": 0.952080739520592
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5382880712874912,
+      "map6": 0.5216283850969426,
+      "rrs": 0.9603041833388073
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.4670702227961966,
+      "map6": 0.42527594801837093,
+      "rrs": 0.8332517712892504
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5301972850577996,
+      "map6": 0.5224537425806747,
+      "rrs": 0.9458702467957044
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5508970639739309,
+      "map6": 0.5547194538169523,
+      "rrs": 0.982798585630716
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.5052374411703349,
+      "map6": 0.48741742767713775,
+      "rrs": 0.901341965789428
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5476319175080345,
+      "map6": 0.5458271546757947,
+      "rrs": 0.9769735748647992
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5483474004468647,
+      "map6": 0.549049629782805,
+      "rrs": 0.9782499941204271
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5371271423675925,
+      "map6": 0.527315113444566,
+      "rrs": 0.9582330898893998
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.46298913581380763,
+      "map6": 0.4335155105089202,
+      "rrs": 0.8259711252731053
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5295320477541713,
+      "map6": 0.5217459951204313,
+      "rrs": 0.9446834655912476
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5522710945155245,
+      "map6": 0.5570710159095257,
+      "rrs": 0.9852498516860302
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.42293199796309633,
+      "map6": 0.4136330909742521,
+      "rrs": 0.7545093205212169
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.551876854328375,
+      "map6": 0.5637422684032023,
+      "rrs": 0.9845465284634769
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5605625488100658,
+      "map6": 0.567427600881021,
+      "rrs": 1.0000417794097232
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5515521050892062,
+      "map6": 0.5553705656574444,
+      "rrs": 0.9839671768680309
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.517977768366335,
+      "map6": 0.5150937083773033,
+      "rrs": 0.9240706684228732
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5372178382005808,
+      "map6": 0.5403699240878358,
+      "rrs": 0.9583948909629806
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5500959019000441,
+      "map6": 0.5498884251315742,
+      "rrs": 0.9813693150744398
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.5192054394467418,
+      "map6": 0.5227861742433527,
+      "rrs": 0.9262608296714011
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.554626838775023,
+      "map6": 0.5644297530640977,
+      "rrs": 0.9894524918483171
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.561450682495,
+      "map6": 0.5690918263865301,
+      "rrs": 1.0016262070396469
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5538008011222507,
+      "map6": 0.5611997056707084,
+      "rrs": 0.9879788433395266
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.5469852036796804,
+      "map6": 0.5534551833279617,
+      "rrs": 0.9758198394804982
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5519077596197267,
+      "map6": 0.5533878325454072,
+      "rrs": 0.9846016634035869
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5592695050805379,
+      "map6": 0.5666438793897176,
+      "rrs": 0.9977349935659726
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.5174341111418267,
+      "map6": 0.5210543741029432,
+      "rrs": 0.9231007856875025
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5400088304877613,
+      "map6": 0.5395573526509756,
+      "rrs": 0.9633740122030913
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5525170633168109,
+      "map6": 0.557530171875175,
+      "rrs": 0.9856886592343403
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5499773189270846,
+      "map6": 0.5493423636865286,
+      "rrs": 0.981157763433079
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.5378452031758035,
+      "map6": 0.5515528524583657,
+      "rrs": 0.9595141080556902
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5557982688688805,
+      "map6": 0.5631918325412532,
+      "rrs": 0.9915423193582037
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5596950576482931,
+      "map6": 0.5671975218680269,
+      "rrs": 0.9984941779745523
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.4515756946304653,
+      "map6": 0.46575034015331335,
+      "rrs": 0.8056095830073818
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5476020175771229,
+      "map6": 0.5485308333904478,
+      "rrs": 0.9769202334844723
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5424092414897226,
+      "map6": 0.5413513719260884,
+      "rrs": 0.9676563376898933
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5419668912391804,
+      "map6": 0.5272581281429368,
+      "rrs": 0.9668671862693897
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.5015883772424952,
+      "map6": 0.4996012038782807,
+      "rrs": 0.8948320475094377
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5478160085021336,
+      "map6": 0.5513968411310961,
+      "rrs": 0.9773019926046268
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5562639515503985,
+      "map6": 0.5650419100109141,
+      "rrs": 0.9923730957603272
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.5049688906533604,
+      "map6": 0.5191161199766332,
+      "rrs": 0.9008628725331507
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5508544733222088,
+      "map6": 0.5609180018612666,
+      "rrs": 0.9827226040453875
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5560623359443932,
+      "map6": 0.5618992185468008,
+      "rrs": 0.9920134141693713
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.541883774580983,
+      "map6": 0.5349833332400044,
+      "rrs": 0.9667189064191951
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.4893296343744211,
+      "map6": 0.4718293710548383,
+      "rrs": 0.8729624897640293
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.41322414642571453,
+      "map6": 0.31372517096950386,
+      "rrs": 0.7371905446838068
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.4998844404094969,
+      "map6": 0.46614798881561065,
+      "rrs": 0.8917922296941189
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5367176383178752,
+      "map6": 0.5341876892445911,
+      "rrs": 0.9575025359852475
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.29520277153635066,
+      "map6": 0.18053001136712057,
+      "rrs": 0.5266407924692114
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5083130414076809,
+      "map6": 0.4843557487024024,
+      "rrs": 0.9068288266948479
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5439824343640505,
+      "map6": 0.538926289467831,
+      "rrs": 0.9704629087045592
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5035258869505619,
+      "map6": 0.466057617596358,
+      "rrs": 0.8982885585806673
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.4324186793718237,
+      "map6": 0.3238388374487882,
+      "rrs": 0.771433529562323
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.4889280355876851,
+      "map6": 0.45088125343234536,
+      "rrs": 0.8722460388235432
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5479563914604977,
+      "map6": 0.5497227310080605,
+      "rrs": 0.97755243534965
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.3911147575238288,
+      "map6": 0.40794027134840666,
+      "rrs": 0.6977474661798325
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5536167656469198,
+      "map6": 0.5666555076351355,
+      "rrs": 0.9876505246450024
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5589579273843854,
+      "map6": 0.5691213274104266,
+      "rrs": 0.9971791399607931
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5601157187315909,
+      "map6": 0.5631188291914331,
+      "rrs": 0.9992446359906338
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.5156488952702472,
+      "map6": 0.5169050459688634,
+      "rrs": 0.9199159663294584
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5452999662021578,
+      "map6": 0.5425513821416976,
+      "rrs": 0.9728133812550475
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5572770779107683,
+      "map6": 0.5588360067792382,
+      "rrs": 0.9941805099201596
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.29284664574996455,
+      "map6": 0.12720299974877602,
+      "rrs": 0.5224374716641873
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5334839679495483,
+      "map6": 0.5478672327328123,
+      "rrs": 0.9517336784758925
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5576859154053264,
+      "map6": 0.5677569275241732,
+      "rrs": 0.9949098746920574
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5569973408533896,
+      "map6": 0.5655217463641239,
+      "rrs": 0.9936814599118747
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.5524529100821561,
+      "map6": 0.5668753631791855,
+      "rrs": 0.9855742100705935
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5612197263035011,
+      "map6": 0.56615293435432,
+      "rrs": 1.0012141819387863
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5576830753103172,
+      "map6": 0.5672602682733394,
+      "rrs": 0.9949048079717197
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.5256690049227778,
+      "map6": 0.5458338468314193,
+      "rrs": 0.9377918096373432
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5439216780629096,
+      "map6": 0.546844616673319,
+      "rrs": 0.970354519659247
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5109713582958664,
+      "map6": 0.49074465790962235,
+      "rrs": 0.9115712554509949
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5134491656099189,
+      "map6": 0.4833457040212079,
+      "rrs": 0.915991655708985
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.4355170672018235,
+      "map6": 0.3509080787160382,
+      "rrs": 0.7769610434595532
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5091583245618887,
+      "map6": 0.49431335712177354,
+      "rrs": 0.9083368091161379
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.552565126314471,
+      "map6": 0.5561033416764842,
+      "rrs": 0.9857744034671753
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.39349130821633976,
+      "map6": 0.3236022031745707,
+      "rrs": 0.7019872249515184
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.4749613357123346,
+      "map6": 0.41111935414108663,
+      "rrs": 0.8473294912848678
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.535681623865441,
+      "map6": 0.5256003694567796,
+      "rrs": 0.9556542895429803
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.48670852093838074,
+      "map6": 0.4338086108259822,
+      "rrs": 0.8682864318465378
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.4524603022463921,
+      "map6": 0.41094299729906386,
+      "rrs": 0.8071877201415673
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5251928456155502,
+      "map6": 0.5131925190108663,
+      "rrs": 0.9369423429687384
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.543795909327294,
+      "map6": 0.5390330289393251,
+      "rrs": 0.9701301486404801
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.3993444980431296,
+      "map6": 0.32121043750818784,
+      "rrs": 0.712429296727507
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5545618810012003,
+      "map6": 0.560367504016502,
+      "rrs": 0.9893366073892893
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5563389361431691,
+      "map6": 0.5603324336804086,
+      "rrs": 0.9925068680320241
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5398025135504286,
+      "map6": 0.5380703999912386,
+      "rrs": 0.9630059434522079
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.48779496874929995,
+      "map6": 0.48412283538693873,
+      "rrs": 0.870224651237708
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5132794860933284,
+      "map6": 0.4829977679727199,
+      "rrs": 0.9156889479985595
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5503254356857312,
+      "map6": 0.5537640752935408,
+      "rrs": 0.9817788026079193
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.3744392804367629,
+      "map6": 0.3097622294705905,
+      "rrs": 0.667998468830554
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5469055026291405,
+      "map6": 0.5614847249841056,
+      "rrs": 0.9756776530633501
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5612285526441174,
+      "map6": 0.5682349382627777,
+      "rrs": 1.0012299281019832
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5530481143592192,
+      "map6": 0.5591952415460941,
+      "rrs": 0.9866360525814961
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.5374283200382857,
+      "map6": 0.540324206924014,
+      "rrs": 0.9587703898826972
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5421388715929796,
+      "map6": 0.5484371923910625,
+      "rrs": 0.9671739986659759
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5516981062899254,
+      "map6": 0.5534443499909637,
+      "rrs": 0.9842276425392985
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.3057087446256109,
+      "map6": 0.21354201551753807,
+      "rrs": 0.5453834145814395
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5552081654405396,
+      "map6": 0.5654965166047367,
+      "rrs": 0.9904895767449726
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5620744202277412,
+      "map6": 0.5701120847088,
+      "rrs": 1.0027389531434665
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5544952536849432,
+      "map6": 0.5612175295167113,
+      "rrs": 0.9892177444719423
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.5467854158279246,
+      "map6": 0.5536226579179013,
+      "rrs": 0.9754634185972294
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5560385840755329,
+      "map6": 0.5622958674919504,
+      "rrs": 0.9919710409119179
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5593589507255877,
+      "map6": 0.5677413940388508,
+      "rrs": 0.9978945643083028
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.5225309109509649,
+      "map6": 0.5266499099850538,
+      "rrs": 0.9321934601111604
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5596350897163462,
+      "map6": 0.5731162930346655,
+      "rrs": 0.99838719537734
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5517786319749599,
+      "map6": 0.5550238531131754,
+      "rrs": 0.9843713001017258
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5423133088957519,
+      "map6": 0.5402733424814202,
+      "rrs": 0.9674851942516071
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.5285651973530946,
+      "map6": 0.5450976030268865,
+      "rrs": 0.9429586075935662
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5528743739489111,
+      "map6": 0.5599924036043191,
+      "rrs": 0.9863261002497739
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5562742925379055,
+      "map6": 0.5634036670056771,
+      "rrs": 0.9923915440486926
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.5070787412615555,
+      "map6": 0.5157487823255335,
+      "rrs": 0.904626839214455
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5503586787259167,
+      "map6": 0.5525131390036552,
+      "rrs": 0.9818381080844101
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.548253206099339,
+      "map6": 0.5472345228650779,
+      "rrs": 0.9780819517081935
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5436803264864427,
+      "map6": 0.5328359036005034,
+      "rrs": 0.9699239492251257
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.48774197850109713,
+      "map6": 0.4689470670547328,
+      "rrs": 0.8701301168057938
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5397011319378591,
+      "map6": 0.5415879505300204,
+      "rrs": 0.962825078982313
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5546247599134065,
+      "map6": 0.5630681147494951,
+      "rrs": 0.9894487831658972
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.462251757167954,
+      "map6": 0.49018994870622085,
+      "rrs": 0.8246556441467555
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5564451527297368,
+      "map6": 0.5672095009361825,
+      "rrs": 0.9926963580799403
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5587544090621738,
+      "map6": 0.5657850799471423,
+      "rrs": 0.9968160639302609
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5456337419011736,
+      "map6": 0.5432006148054714,
+      "rrs": 0.9734088360257525
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.5052242600695427,
+      "map6": 0.4995007859113754,
+      "rrs": 0.9013184507481204
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5297387109792031,
+      "map6": 0.5144159414682,
+      "rrs": 0.9450521521182697
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.48808089148172745,
+      "map6": 0.44942848838239785,
+      "rrs": 0.8707347364703326
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5316105045386674,
+      "map6": 0.5246628560415989,
+      "rrs": 0.9483914257923098
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.2457061325784066,
+      "map6": 0.10504434502871383,
+      "rrs": 0.4383389481819389
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5129011259985884,
+      "map6": 0.4913420807320681,
+      "rrs": 0.9150139548096555
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5530573542844892,
+      "map6": 0.5539416195405543,
+      "rrs": 0.9866525365783815
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.510061396410342,
+      "map6": 0.47990588227183234,
+      "rrs": 0.9099478863816083
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.44172773913921637,
+      "map6": 0.3483688393790209,
+      "rrs": 0.7880408621680715
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.49799429713875376,
+      "map6": 0.46541002648859187,
+      "rrs": 0.8884202201943302
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5223994990616452,
+      "map6": 0.5070145630158092,
+      "rrs": 0.9319590217243829
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.32984031724587615,
+      "map6": 0.3194738329529037,
+      "rrs": 0.5884340623179899
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5430744087977664,
+      "map6": 0.5504227607619497,
+      "rrs": 0.968842994022453
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5577621127043642,
+      "map6": 0.5686761343416726,
+      "rrs": 0.9950458104278244
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.558036194552472,
+      "map6": 0.5645519804590212,
+      "rrs": 0.9955347715610066
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.544777096477181,
+      "map6": 0.5503610436915786,
+      "rrs": 0.9718805833518067
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5503430732743514,
+      "map6": 0.553394050461691,
+      "rrs": 0.9818102680091411
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5585671934506736,
+      "map6": 0.5617121034238564,
+      "rrs": 0.9964820718830659
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.34263261028940983,
+      "map6": 0.18831255797927074,
+      "rrs": 0.6112554718558587
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5212954437932413,
+      "map6": 0.5304901625144823,
+      "rrs": 0.9299893906858396
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5553718524573024,
+      "map6": 0.5662754341267001,
+      "rrs": 0.9907815938550295
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5562857291361979,
+      "map6": 0.564030059358278,
+      "rrs": 0.9924119469031663
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.5327609815084238,
+      "map6": 0.5619752074713156,
+      "rrs": 0.9504438729963682
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.560038377511956,
+      "map6": 0.5664564984311701,
+      "rrs": 0.9991066595042102
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5579668212110744,
+      "map6": 0.5673217903373566,
+      "rrs": 0.9954110097436643
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.542062646028426,
+      "map6": 0.5631812637538645,
+      "rrs": 0.9670380125046198
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5514731692589635,
+      "map6": 0.5586495449432928,
+      "rrs": 0.9838263556014255
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5571812464228014,
+      "map6": 0.5647311199030706,
+      "rrs": 0.9940095468546581
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5120475169375964,
+      "map6": 0.48021508507954574,
+      "rrs": 0.9134911189975116
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.4279666880406975,
+      "map6": 0.3303613916461203,
+      "rrs": 0.7634911913841002
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.49627871546732044,
+      "map6": 0.4753209492700366,
+      "rrs": 0.8853596280247948
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5420550613282001,
+      "map6": 0.5425541618006,
+      "rrs": 0.9670244814238755
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.3817131319517794,
+      "map6": 0.3212289878207068,
+      "rrs": 0.680974996477077
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.4868018159603015,
+      "map6": 0.44010476561759554,
+      "rrs": 0.8684528698647923
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5388434892319263,
+      "map6": 0.5323290933025318,
+      "rrs": 0.961295047160602
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.49300743787728474,
+      "map6": 0.4495253111090512,
+      "rrs": 0.8795236793531848
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.4093274974305528,
+      "map6": 0.32308012723162555,
+      "rrs": 0.730238935442111
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5223540559181867,
+      "map6": 0.5061863745770672,
+      "rrs": 0.9318779513029952
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5414008963659468,
+      "map6": 0.5331721790474279,
+      "rrs": 0.9658574532407262
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.2959792891625683,
+      "map6": 0.1682196193574221,
+      "rrs": 0.5280260974103177
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5514978407192661,
+      "map6": 0.558469529936456,
+      "rrs": 0.9838703694070463
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5599660480699711,
+      "map6": 0.5663008920936484,
+      "rrs": 0.9989776240129528
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5459127721450885,
+      "map6": 0.5477577426808459,
+      "rrs": 0.9739066250810972
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.5082342837887992,
+      "map6": 0.510828761126045,
+      "rrs": 0.9066883233567358
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5210015734784513,
+      "map6": 0.5000127665588004,
+      "rrs": 0.9294651269919091
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5378545106891285,
+      "map6": 0.5244933376466903,
+      "rrs": 0.9595307126294476
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.28930931543323607,
+      "map6": 0.19966696772525697,
+      "rrs": 0.5161268857861077
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5377008300550207,
+      "map6": 0.5472684669444354,
+      "rrs": 0.959256546873779
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5589608860655707,
+      "map6": 0.5664084175353955,
+      "rrs": 0.9971844182384867
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5521230168677972,
+      "map6": 0.5575926027903543,
+      "rrs": 0.9849856816399963
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.5457641877723484,
+      "map6": 0.5515535238736194,
+      "rrs": 0.9736415510392744
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5513877595080849,
+      "map6": 0.556860240697231,
+      "rrs": 0.9836739848812822
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5545752658827782,
+      "map6": 0.5596049796256287,
+      "rrs": 0.9893604859748615
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.37322101082368614,
+      "map6": 0.30783521750520343,
+      "rrs": 0.6658250797694256
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.554097774447083,
+      "map6": 0.5671243901065158,
+      "rrs": 0.9885086427933661
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5611699400734711,
+      "map6": 0.568194750164248,
+      "rrs": 1.0011253634649602
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.555221053692353,
+      "map6": 0.5602507281082992,
+      "rrs": 0.9905125693446464
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.5450752985043328,
+      "map6": 0.5528246134138816,
+      "rrs": 0.9724125748066221
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5552293966880816,
+      "map6": 0.5636291237106718,
+      "rrs": 0.9905274532221222
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5615045619683988,
+      "map6": 0.5667615122980267,
+      "rrs": 1.0017223278464433
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.5242480682979577,
+      "map6": 0.5240992981913768,
+      "rrs": 0.9352568632808127
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5601217756232086,
+      "map6": 0.5716354898635746,
+      "rrs": 0.999255441465748
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5583937981529702,
+      "map6": 0.5649517223751271,
+      "rrs": 0.9961727352311174
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5406694162656305,
+      "map6": 0.5359832519881143,
+      "rrs": 0.9645524951005937
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.5183826295370612,
+      "map6": 0.5363880182012425,
+      "rrs": 0.9247929394458774
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5425246732862753,
+      "map6": 0.5466243438423813,
+      "rrs": 0.967862267642706
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.550409720986683,
+      "map6": 0.5605693359552459,
+      "rrs": 0.9819291673130192
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.5071877389613114,
+      "map6": 0.5256186367295983,
+      "rrs": 0.9048212907593305
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5523148929236006,
+      "map6": 0.5558908440406926,
+      "rrs": 0.9853279879047996
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5529332877808374,
+      "map6": 0.5546147758540682,
+      "rrs": 0.9864312023359486
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5453292589521646,
+      "map6": 0.5418292236518625,
+      "rrs": 0.9728656394265981
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.4785855770988777,
+      "map6": 0.4580685853527615,
+      "rrs": 0.8537951262312312
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5370815552475662,
+      "map6": 0.5325683305181049,
+      "rrs": 0.9581517626142794
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5524184977888325,
+      "map6": 0.5594204767115546,
+      "rrs": 0.9855128186502747
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.4214774656694691,
+      "map6": 0.4247426182873562,
+      "rrs": 0.7519144395998716
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5481365431435657,
+      "map6": 0.563367881218989,
+      "rrs": 0.9778738253713014
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5599972501537417,
+      "map6": 0.5684373579304577,
+      "rrs": 0.9990332884297809
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5491399243307227,
+      "map6": 0.5503648272374865,
+      "rrs": 0.9796638541735477
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.521673022498565,
+      "map6": 0.5265127742480945,
+      "rrs": 0.9306629898785445
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5380614557899558,
+      "map6": 0.5287358515716669,
+      "rrs": 0.9598999020219797
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5502284278176511,
+      "map6": 0.5533665360212412,
+      "rrs": 0.9816057408840894
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5221855095265374,
+      "map6": 0.505647457229725,
+      "rrs": 0.9315772650838109
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.22424024000812723,
+      "map6": 0.06704259687537027,
+      "rrs": 0.40004386505844314
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.48437796482579226,
+      "map6": 0.42961604213492527,
+      "rrs": 0.8641287272571131
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5507472070307127,
+      "map6": 0.5548552929877163,
+      "rrs": 0.9825312413272641
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.532368969329663,
+      "map6": 0.5194659668933842,
+      "rrs": 0.9497445245335957
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.45834133938857863,
+      "map6": 0.38712241323518465,
+      "rrs": 0.8176794714384232
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5053565958157495,
+      "map6": 0.47691202414526446,
+      "rrs": 0.9015545372926053
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5308957170709333,
+      "map6": 0.5180320968952937,
+      "rrs": 0.9471162472548746
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.12937626578510752,
+      "map6": 0.02908441022012521,
+      "rrs": 0.23080684095605236
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5265571912076572,
+      "map6": 0.5248102560905191,
+      "rrs": 0.9393763311053999
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5573718015509568,
+      "map6": 0.5673761218438722,
+      "rrs": 0.9943494965887969
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.555849808909992,
+      "map6": 0.5606648176116306,
+      "rrs": 0.9916342666253435
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.5552822554357577,
+      "map6": 0.5645402094657203,
+      "rrs": 0.9906217530575209
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5549872138793797,
+      "map6": 0.5609231384607418,
+      "rrs": 0.9900953998723742
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5596457384353395,
+      "map6": 0.5643569593088357,
+      "rrs": 0.9984061926576846
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.38676214105271045,
+      "map6": 0.28537911164622987,
+      "rrs": 0.6899824124314058
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5194649939821019,
+      "map6": 0.48742744333884014,
+      "rrs": 0.9267238741254882
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5535692874594287,
+      "map6": 0.5629129323542065,
+      "rrs": 0.987565823711623
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5558160214321155,
+      "map6": 0.563012766178854,
+      "rrs": 0.9915739898737675
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.5170337716983262,
+      "map6": 0.5476281844936121,
+      "rrs": 0.9223865814112876
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.55690026890248,
+      "map6": 0.563843736523685,
+      "rrs": 0.9935082838644836
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5591901126720046,
+      "map6": 0.5678418551351244,
+      "rrs": 0.997593357765169
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.5501695068967145,
+      "map6": 0.5642679983902352,
+      "rrs": 0.981500626151143
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5582741528083737,
+      "map6": 0.5692722426673028,
+      "rrs": 0.9959592883221822
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5580162350230411,
+      "map6": 0.5667933076010181,
+      "rrs": 0.9954991638248661
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.545864018092277,
+      "map6": 0.5481404655586729,
+      "rrs": 0.9738196480081005
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.41819227502325235,
+      "map6": 0.31137716892239264,
+      "rrs": 0.7460536700809005
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.49061407553385167,
+      "map6": 0.4571727295940425,
+      "rrs": 0.875253928650467
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5371600497669325,
+      "map6": 0.5335567734255914,
+      "rrs": 0.9582917965837047
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.28315070215496874,
+      "map6": 0.15980264712781553,
+      "rrs": 0.505139939557594
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5118763090065919,
+      "map6": 0.49358731743927936,
+      "rrs": 0.9131856846007002
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.545627102666919,
+      "map6": 0.5436661791191063,
+      "rrs": 0.9733969916532521
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.49960320665957864,
+      "map6": 0.4625455396762604,
+      "rrs": 0.8912905095911698
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.41514384250566005,
+      "map6": 0.33524441741542327,
+      "rrs": 0.7406152762999125
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.49226308001832975,
+      "map6": 0.4532198569922778,
+      "rrs": 0.8781957473331683
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5372193826185884,
+      "map6": 0.5252134610196983,
+      "rrs": 0.9583976461997258
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.20489724180371166,
+      "map6": 0.09775951333873201,
+      "rrs": 0.36553601863786994
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5386866856347341,
+      "map6": 0.5343203402111975,
+      "rrs": 0.9610153100488616
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5595468348761667,
+      "map6": 0.5661718533274644,
+      "rrs": 0.9982297490270585
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5521046317795504,
+      "map6": 0.557980490517234,
+      "rrs": 0.9849528827018512
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.5272792410979295,
+      "map6": 0.5324158342923049,
+      "rrs": 0.9406644657812238
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5258443425126295,
+      "map6": 0.5167527635127219,
+      "rrs": 0.9381046113322208
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5429040704361985,
+      "map6": 0.5377804917891403,
+      "rrs": 0.9685391109347126
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.15949912952291603,
+      "map6": 0.060614652130132285,
+      "rrs": 0.28454593272595496
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5295174698001938,
+      "map6": 0.5282626282080205,
+      "rrs": 0.9446574585683618
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.555869980671351,
+      "map6": 0.5622134160834129,
+      "rrs": 0.9916702529825592
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5491869274495841,
+      "map6": 0.5516454694151613,
+      "rrs": 0.9797477075860238
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.5437680131968187,
+      "map6": 0.5501741101494196,
+      "rrs": 0.9700803820336698
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5560339157262139,
+      "map6": 0.561283071932691,
+      "rrs": 0.991962712591787
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5578987488809783,
+      "map6": 0.563230143386944,
+      "rrs": 0.9952895689262883
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.4428766842937274,
+      "map6": 0.4078437203812717,
+      "rrs": 0.7900905766186719
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5214067975717404,
+      "map6": 0.5045246203415973,
+      "rrs": 0.930188045467595
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5596365822267177,
+      "map6": 0.5656807106108508,
+      "rrs": 0.9983898580110299
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5560542925611575,
+      "map6": 0.5609685187256753,
+      "rrs": 0.9919990647996164
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.5409434131385354,
+      "map6": 0.5463774125290547,
+      "rrs": 0.9650413046382881
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5545643389420611,
+      "map6": 0.5638240734116039,
+      "rrs": 0.9893409923478589
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5584041476924373,
+      "map6": 0.5672944496786808,
+      "rrs": 0.9961911987761521
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.5308087353189654,
+      "map6": 0.5299707957692683,
+      "rrs": 0.9469610720898574
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5586252267255848,
+      "map6": 0.5694786371329883,
+      "rrs": 0.9965856030583653
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5585191131113938,
+      "map6": 0.5662453911716049,
+      "rrs": 0.9963962967128371
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5566916757239437,
+      "map6": 0.5671803508878804,
+      "rrs": 0.9931361543066334
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.5050097039076548,
+      "map6": 0.5236619418382292,
+      "rrs": 0.9009356832471997
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5387102029477863,
+      "map6": 0.5435569396027726,
+      "rrs": 0.9610572648595096
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5454439722696665,
+      "map6": 0.5475178589803512,
+      "rrs": 0.9730702876151011
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.4662522078423367,
+      "map6": 0.501799144498815,
+      "rrs": 0.8317924352494483
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5561889833064408,
+      "map6": 0.5635121885827352,
+      "rrs": 0.9922393526548596
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5575587145054426,
+      "map6": 0.564211118036724,
+      "rrs": 0.9946829486968543
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5471117747662172,
+      "map6": 0.5500590537204976,
+      "rrs": 0.9760456418907213
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.5099329056086048,
+      "map6": 0.5207880730401523,
+      "rrs": 0.9097186592056584
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5156954403316527,
+      "map6": 0.48904538982617457,
+      "rrs": 0.9199990025689103
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5495277540398497,
+      "map6": 0.5563263855194372,
+      "rrs": 0.980355741123981
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.36700588326068495,
+      "map6": 0.3337667295484345,
+      "rrs": 0.6547373122391904
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5489463028671823,
+      "map6": 0.558489380891955,
+      "rrs": 0.9793184341069702
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5603850456025391,
+      "map6": 0.568621062719481,
+      "rrs": 0.9997251142598967
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5533795681693773,
+      "map6": 0.5577883513187355,
+      "rrs": 0.9872273651099663
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.5341922162855648,
+      "map6": 0.5426717078757025,
+      "rrs": 0.9529971912234304
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5504443637398986,
+      "map6": 0.5489771484757645,
+      "rrs": 0.981990969873042
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5524543955844311,
+      "map6": 0.556521978932068,
+      "rrs": 0.9855768602018617
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.3014561741001464,
+      "map6": 0.23013121265962336,
+      "rrs": 0.5377968424774372
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.1266652335240222,
+      "map6": 0.04080807749085046,
+      "rrs": 0.2259703681446453
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.4733495126080632,
+      "map6": 0.4010160382412282,
+      "rrs": 0.844454004064555
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5423943375127548,
+      "map6": 0.5391909538991806,
+      "rrs": 0.9676297490430442
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5333414640730397,
+      "map6": 0.5222930726529685,
+      "rrs": 0.9514794520197388
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.504074997440115,
+      "map6": 0.469008076574191,
+      "rrs": 0.8992681699232924
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5150125774750336,
+      "map6": 0.4973823518300872,
+      "rrs": 0.9187807774347556
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5365268051849714,
+      "map6": 0.5268292196813187,
+      "rrs": 0.957162090291534
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.22768953396944913,
+      "map6": 0.06124801126855347,
+      "rrs": 0.4061973943623716
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.500550304653418,
+      "map6": 0.48648851738831517,
+      "rrs": 0.8929801293580363
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5563273906473454,
+      "map6": 0.5620700570462394,
+      "rrs": 0.9924862709047059
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5495830827200942,
+      "map6": 0.5496466848315564,
+      "rrs": 0.9804544473111168
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.539381414130553,
+      "map6": 0.5556036832481644,
+      "rrs": 0.9622547034450851
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5578935322144567,
+      "map6": 0.565497153398716,
+      "rrs": 0.995280262410036
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5605648500935377,
+      "map6": 0.5660998224041996,
+      "rrs": 1.000045884892016
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.4534513169257475,
+      "map6": 0.4240180239182583,
+      "rrs": 0.8089556871337745
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.520570373956206,
+      "map6": 0.49288182708824685,
+      "rrs": 0.9286958684347288
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5508892293530443,
+      "map6": 0.5559163555409764,
+      "rrs": 0.9827846086923189
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5535999458396583,
+      "map6": 0.5595279165266919,
+      "rrs": 0.9876205181630875
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.5068165962495867,
+      "map6": 0.5321458049061879,
+      "rrs": 0.9041591733584518
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5536661742696565,
+      "map6": 0.560287080247159,
+      "rrs": 0.9877386694686349
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5587402940018565,
+      "map6": 0.5672948369837553,
+      "rrs": 0.9967908827081723
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.5385873840639329,
+      "map6": 0.5639329248456871,
+      "rrs": 0.9608381563667739
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5613610198877812,
+      "map6": 0.5727030421621863,
+      "rrs": 1.001466249237507
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5588477226396978,
+      "map6": 0.5678280350949453,
+      "rrs": 0.9969825350516519
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5507593527342443,
+      "map6": 0.5559528890866478,
+      "rrs": 0.9825529092231977
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.5257475078625922,
+      "map6": 0.5327430889524646,
+      "rrs": 0.9379318586288207
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.47811588163064833,
+      "map6": 0.4360365249460214,
+      "rrs": 0.8529571910305549
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5349119656102014,
+      "map6": 0.5275872474112402,
+      "rrs": 0.954281221697579
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.23935591216668106,
+      "map6": 0.09230045794800606,
+      "rrs": 0.4270101754452186
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5066430697764739,
+      "map6": 0.4832766988907007,
+      "rrs": 0.9038496026899959
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5528260044347715,
+      "map6": 0.5576330453431119,
+      "rrs": 0.9862398091925277
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5113058054748704,
+      "map6": 0.48406189055873544,
+      "rrs": 0.9121679081398335
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.4277098294345147,
+      "map6": 0.3620529000874257,
+      "rrs": 0.7630329564589718
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.4965294665762524,
+      "map6": 0.45934483238166157,
+      "rrs": 0.8858069671945228
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5159624088515059,
+      "map6": 0.4908160326222219,
+      "rrs": 0.9204752735474248
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.14325279605707344,
+      "map6": 0.05260953274834212,
+      "rrs": 0.2555625262130631
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5231053946540068,
+      "map6": 0.4990343237945262,
+      "rrs": 0.9332183371848277
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5537309437690369,
+      "map6": 0.556123229862968,
+      "rrs": 0.9878542180466647
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5543984291418133,
+      "map6": 0.5585731700329609,
+      "rrs": 0.9890450097992323
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.5403659174354607,
+      "map6": 0.5463437824543792,
+      "rrs": 0.9640110541662751
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5391563538250269,
+      "map6": 0.5409247948341677,
+      "rrs": 0.9618531965857872
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5477158327093203,
+      "map6": 0.5526169115972382,
+      "rrs": 0.9771232793132886
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.26440471508684515,
+      "map6": 0.1931692098247986,
+      "rrs": 0.47169715907896104
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT",
+      "nds": 0.523046446865949,
+      "map6": 0.5128876086367434,
+      "rrs": 0.9331131745210237
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5529409243550512,
+      "map6": 0.5573586805332242,
+      "rrs": 0.9864448259597199
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.54414483171767,
+      "map6": 0.5427849558192367,
+      "rrs": 0.9707526250597275
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK",
+      "nds": 0.5355332323292696,
+      "map6": 0.5385911907231743,
+      "rrs": 0.9553895595209743
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5540610296401947,
+      "map6": 0.5635320823636308,
+      "rrs": 0.9884430901763698
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5600762688563606,
+      "map6": 0.5664749927639033,
+      "rrs": 0.9991742575404385
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "all",
+      "nds": 0.4998315948145532,
+      "map6": 0.48461573887938897,
+      "rrs": 0.8916979533231525
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT",
+      "nds": 0.530810450656909,
+      "map6": 0.5211198225508125,
+      "rrs": 0.9469641322472171
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5493344415665,
+      "map6": 0.5518198763355081,
+      "rrs": 0.9800108722949074
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5549333524966984,
+      "map6": 0.5599833081938503,
+      "rrs": 0.9899993113393596
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK",
+      "nds": 0.5376105029817424,
+      "map6": 0.5414361408848362,
+      "rrs": 0.9590954036663317
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5551896440244117,
+      "map6": 0.5616880567519338,
+      "rrs": 0.9904565345983272
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5564217556197945,
+      "map6": 0.5659880213851348,
+      "rrs": 0.9926546177112526
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "all",
+      "nds": 0.5288183733706173,
+      "map6": 0.529983371978134,
+      "rrs": 0.9434102727924004
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5581671513703311,
+      "map6": 0.5689731500116334,
+      "rrs": 0.9957683981017659
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5588946764974807,
+      "map6": 0.5657159982280923,
+      "rrs": 0.9970663005825227
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5552379654002826,
+      "map6": 0.5660725919670372,
+      "rrs": 0.990542739777057
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK",
+      "nds": 0.5357966110249436,
+      "map6": 0.5387161898188979,
+      "rrs": 0.9558594262647293
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5356337943445275,
+      "map6": 0.5394481241954724,
+      "rrs": 0.9555689618319082
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5434024108427886,
+      "map6": 0.54445172606476,
+      "rrs": 0.969428148613052
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "all",
+      "nds": 0.4289134934794994,
+      "map6": 0.44907120049599086,
+      "rrs": 0.7651802892337232
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5513928734773561,
+      "map6": 0.5663221452126833,
+      "rrs": 0.9836831081859707
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5609026359631122,
+      "map6": 0.5680701393287361,
+      "rrs": 1.0006484937940658
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5509828280543265,
+      "map6": 0.5559043180138162,
+      "rrs": 0.9829515884735751
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK",
+      "nds": 0.5187961719820985,
+      "map6": 0.535555933272278,
+      "rrs": 0.9255306978342579
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5251607124302409,
+      "map6": 0.5076317296318646,
+      "rrs": 0.9368850174697676
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5408226413098898,
+      "map6": 0.5298298294440137,
+      "rrs": 0.9648258480854417
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "all",
+      "nds": 0.30661088363830463,
+      "map6": 0.23979662904834442,
+      "rrs": 0.546992827670923
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5434983161212488,
+      "map6": 0.5459431813188187,
+      "rrs": 0.9695992433205555
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5580929548719785,
+      "map6": 0.5672241507830195,
+      "rrs": 0.9956360317879691
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5485334007744438,
+      "map6": 0.5527693628084905,
+      "rrs": 0.9785818181050259
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK",
+      "nds": 0.5417585746981717,
+      "map6": 0.5509652349116898,
+      "rrs": 0.9664955502319965
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.557152246954165,
+      "map6": 0.5579676466964337,
+      "rrs": 0.9939578118961264
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5542616482992344,
+      "map6": 0.5605940470690277,
+      "rrs": 0.9888009932171541
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "all",
+      "nds": 0.37193419007934353,
+      "map6": 0.32975539466129555,
+      "rrs": 0.6635293957111783
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.46467445716217937,
+      "map6": 0.3821723868474474,
+      "rrs": 0.8289777331238805
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5361821614955588,
+      "map6": 0.5265649568902168,
+      "rrs": 0.9565472470610075
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5162544552434671,
+      "map6": 0.48748242653410473,
+      "rrs": 0.9209962833689105
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.49967377465614876,
+      "map6": 0.47389976523041244,
+      "rrs": 0.8914164026694877
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5354821031220874,
+      "map6": 0.531858792130718,
+      "rrs": 0.9552983451802395
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5439043075232108,
+      "map6": 0.5383904981104032,
+      "rrs": 0.9703235306724399
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.25218060160983014,
+      "map6": 0.11044288476464369,
+      "rrs": 0.44988938005553125
+    },
+    {
+      "cond": "ER",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.45497044697098427,
+      "map6": 0.36832921213539,
+      "rrs": 0.8116658102356803
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5505902287440689,
+      "map6": 0.5516196119414606,
+      "rrs": 0.9822511925701055
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5388243593971677,
+      "map6": 0.5326873919630999,
+      "rrs": 0.9612609195970814
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.5240434789752638,
+      "map6": 0.5370933674391614,
+      "rrs": 0.9348918765888738
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5559535210250511,
+      "map6": 0.5611851864421821,
+      "rrs": 0.9918192887041646
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5591387102897138,
+      "map6": 0.5680176745597496,
+      "rrs": 0.9975016560809216
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.5229646576888236,
+      "map6": 0.5251270679778175,
+      "rrs": 0.9329672628927806
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5332450270197251,
+      "map6": 0.5172156767361542,
+      "rrs": 0.9513074086276098
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5519226386397857,
+      "map6": 0.5571065992560651,
+      "rrs": 0.9846282075273913
+    },
+    {
+      "cond": "ER",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5404684896101764,
+      "map6": 0.5263327950016234,
+      "rrs": 0.9641940425951995
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.49948818108763915,
+      "map6": 0.5177870048973028,
+      "rrs": 0.8910853043417571
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5500961125208571,
+      "map6": 0.5568737072879378,
+      "rrs": 0.981369690821291
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5585117326521317,
+      "map6": 0.5662647786143585,
+      "rrs": 0.9963831299973137
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.49337809308872327,
+      "map6": 0.5511566404678084,
+      "rrs": 0.8801849270551251
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5607695888866839,
+      "map6": 0.5701529147365602,
+      "rrs": 1.0004111382387597
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5592008697404319,
+      "map6": 0.568250698728244,
+      "rrs": 0.9976125483405546
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5554063060519574,
+      "map6": 0.5619925700289515,
+      "rrs": 0.9908430589567904
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.5368527985308563,
+      "map6": 0.5480857110237162,
+      "rrs": 0.9577436613693494
+    },
+    {
+      "cond": "ER",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5488110445294738,
+      "map6": 0.5525731264652465,
+      "rrs": 0.979077133668671
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5310610618020364,
+      "map6": 0.519830220794275,
+      "rrs": 0.947411221721969
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.21603873269440926,
+      "map6": 0.05867283900979433,
+      "rrs": 0.3854124024584838
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.4744401171022051,
+      "map6": 0.42289280161567494,
+      "rrs": 0.8463996389651902
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5535348662729872,
+      "map6": 0.5539448540781894,
+      "rrs": 0.9875044164260107
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5297986358934373,
+      "map6": 0.5197321532797666,
+      "rrs": 0.9451590579720214
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.4516082824438641,
+      "map6": 0.39885925105506087,
+      "rrs": 0.805667719561398
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5063795022555765,
+      "map6": 0.47688708456188783,
+      "rrs": 0.9033793990826512
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5304433057289138,
+      "map6": 0.5211882702062202,
+      "rrs": 0.94630914687962
+    },
+    {
+      "cond": "VR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.11346741140667789,
+      "map6": 0.03441025158541736,
+      "rrs": 0.20242549604682347
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5160988022585925,
+      "map6": 0.48258472186672097,
+      "rrs": 0.9207185989458343
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.548243613871872,
+      "map6": 0.5476863085817508,
+      "rrs": 0.9780648392053247
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5454961790369623,
+      "map6": 0.5409305938718051,
+      "rrs": 0.9731634243196038
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.5385575503769294,
+      "map6": 0.5377680185558561,
+      "rrs": 0.9607849331653656
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5509881927120722,
+      "map6": 0.5589101819438748,
+      "rrs": 0.9829611590056938
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5537959960652776,
+      "map6": 0.5609627020220787,
+      "rrs": 0.9879702711333817
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.37501664356188813,
+      "map6": 0.3250486592991317,
+      "rrs": 0.6690284827839326
+    },
+    {
+      "cond": "VR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5195331090675003,
+      "map6": 0.49132847694441645,
+      "rrs": 0.9268453912181855
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -20,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5495439013493956,
+      "map6": 0.5530865840025766,
+      "rrs": 0.9803845478721401
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5395462503150353,
+      "map6": 0.532972545538805,
+      "rrs": 0.9625487706666481
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_BACK",
+      "nds": 0.5185905905744571,
+      "map6": 0.5205787254506368,
+      "rrs": 0.9251639412659719
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5490266021225603,
+      "map6": 0.5565294273440897,
+      "rrs": 0.9794616877196205
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.559320728727045,
+      "map6": 0.5669398298164771,
+      "rrs": 0.9978263763861585
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "all",
+      "nds": 0.5281585764027967,
+      "map6": 0.5237955023661844,
+      "rrs": 0.9422331971294808
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "CAM_FRONT",
+      "nds": 0.5415633864331574,
+      "map6": 0.5386941223232998,
+      "rrs": 0.9661473349966421
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 16,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5520517485929894,
+      "map6": 0.5573270297134044,
+      "rrs": 0.984858539267561
+    },
+    {
+      "cond": "VR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5444366726424501,
+      "map6": 0.5363564657728829,
+      "rrs": 0.9712732683284246
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -20,
+      "proto": "CAM_BACK",
+      "nds": 0.5276870910591481,
+      "map6": 0.5290216161829641,
+      "rrs": 0.9413920687968286
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -16,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5553470503343995,
+      "map6": 0.5636274055374275,
+      "rrs": 0.9907373469477512
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -12,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5545854936400896,
+      "map6": 0.5624383997442907,
+      "rrs": 0.9893787322609232
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": -8,
+      "proto": "all",
+      "nds": 0.5265908823147963,
+      "map6": 0.5284827882085316,
+      "rrs": 0.9394364359318911
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 4,
+      "proto": "CAM_FRONT",
+      "nds": 0.5575367042660233,
+      "map6": 0.5681368458304944,
+      "rrs": 0.9946436825007076
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 8,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5603656754283028,
+      "map6": 0.5676594140773078,
+      "rrs": 0.999690557931523
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 12,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.554288699426986,
+      "map6": 0.5637853784239161,
+      "rrs": 0.9888492523418301
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 16,
+      "proto": "CAM_BACK",
+      "nds": 0.5388544785947944,
+      "map6": 0.5449589629779973,
+      "rrs": 0.961314652148521
+    },
+    {
+      "cond": "CR",
+      "axis": "yaw",
+      "mag": 20,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5398825535652066,
+      "map6": 0.5329931030146174,
+      "rrs": 0.9631487345804638
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -20,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5426493417678827,
+      "map6": 0.5394146324371288,
+      "rrs": 0.9680846758118704
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -16,
+      "proto": "all",
+      "nds": 0.3982014301754141,
+      "map6": 0.3998201703868059,
+      "rrs": 0.710390067337597
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -8,
+      "proto": "CAM_FRONT",
+      "nds": 0.5528413261772,
+      "map6": 0.5654493320431824,
+      "rrs": 0.9862671431316117
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": -4,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5587344345589808,
+      "map6": 0.5682288719047978,
+      "rrs": 0.996780429480977
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 4,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.553687076754445,
+      "map6": 0.5600857007924739,
+      "rrs": 0.9877759594340925
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 8,
+      "proto": "CAM_BACK",
+      "nds": 0.5220918689936884,
+      "map6": 0.5415803608965686,
+      "rrs": 0.9314102106751745
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 12,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5324658695566228,
+      "map6": 0.5245288792276784,
+      "rrs": 0.9499173942260141
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 16,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.546386595696946,
+      "map6": 0.5447055560195694,
+      "rrs": 0.9747519247696541
+    },
+    {
+      "cond": "CR",
+      "axis": "pitch",
+      "mag": 20,
+      "proto": "all",
+      "nds": 0.22866042511895524,
+      "map6": 0.13336321300075374,
+      "rrs": 0.4079294610422208
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -16,
+      "proto": "CAM_FRONT",
+      "nds": 0.5363868052468643,
+      "map6": 0.5287885432955649,
+      "rrs": 0.9569123308534141
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -12,
+      "proto": "CAM_FRONT_RIGHT",
+      "nds": 0.5554968313052326,
+      "map6": 0.5640845788116072,
+      "rrs": 0.9910045557167131
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -8,
+      "proto": "CAM_FRONT_LEFT",
+      "nds": 0.5478134935758605,
+      "map6": 0.5480931272454911,
+      "rrs": 0.9772975059842655
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": -4,
+      "proto": "CAM_BACK",
+      "nds": 0.5425595528719855,
+      "map6": 0.5512097554835439,
+      "rrs": 0.9679244927111356
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 4,
+      "proto": "CAM_BACK_LEFT",
+      "nds": 0.5584580280582421,
+      "map6": 0.5610735404333297,
+      "rrs": 0.9962873211749979
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 8,
+      "proto": "CAM_BACK_RIGHT",
+      "nds": 0.5574906817646121,
+      "map6": 0.5635182798173856,
+      "rrs": 0.9945615785066005
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 12,
+      "proto": "all",
+      "nds": 0.4476445863155883,
+      "map6": 0.43351636868600396,
+      "rrs": 0.7985964984504361
+    },
+    {
+      "cond": "CR",
+      "axis": "roll",
+      "mag": 20,
+      "proto": "CAM_FRONT",
+      "nds": 0.5203403645618897,
+      "map6": 0.5094698561910279,
+      "rrs": 0.9282855324169887
+    }
+  ]
+}

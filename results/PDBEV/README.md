@@ -52,18 +52,20 @@ Conditions ER (extrinsic) / **VR (image, primary)** / CR (both). Headline = **1/
 = (6·mRRS_percam + RRSALL_allcam)/7 (paper Table-2 metric). carla_VR frame-2N fix is in
 the shared `build_condition_pkls_bevdet` builder.
 
-**`eval_vp.subset768.*` (fps-16, NDS_Normal 0.5598)** — the 768-matched cross-model subset:
+Two runs are present: **`eval_vp.*` = full-3792** (fps-79, NDS_Normal **0.5605**, the
+Table-2 source) and **`eval_vp.subset768.*` = fps-16 768-matched** (NDS_Normal 0.5598, the
+cross-model subset). They agree to the decimal (full confirmed the interim):
 
 | | 1/7 mVRS Ext | Img | Cal |
 |---|---|---|---|
 | BEVDepth (base) | 90.2 | 82.8 | 87.4 |
-| **PD-BEV** | **91.4** | **88.9** | **95.1** |
+| **PD-BEV (full)** | **91.4** | **88.9** | **95.1** |
+| PD-BEV (subset768) | 91.4 | 88.9 | 95.1 |
 
 PD-BEV improves all three; notably **Cal flips above Ext** (95.1 > 91.4) where BEVDepth has
 Cal < Ext (87.4 < 90.2) — perspective-debiasing lets the model use the correct calibration
-instead of staying collapsed by the baked-in tilt. Full-3792 `eval_vp.*` is being computed
-(`tag=pdbev_sedan384_full`) and will be added; full≈subset for 1/7 mVRS (≤~0.3 pt, as for
-BEVDepth).
+instead of staying collapsed by the baked-in tilt. (Full per-condition: ER mRRS/RRSALL
+0.949/0.702, VR 0.938/0.593, CR 0.975/0.803.)
 
 ## Eval pipeline (two-env, since CarlaNuScenesDataset NDS lives in bevdet-b200)
 

@@ -1,2 +1,5 @@
-[vpfull] ==== INFER START Mon Jun 15 12:09:38 AM KST 2026 ====
-[vpfull] round 1: dets=13/631, launching both shards Mon Jun 15 12:09:38 AM KST 2026
+[vpfull] ==== INFER START Mon Jun 15 09:04:17 PM KST 2026 ====
+[vpfull] round 1: dets=437/631, launching both shards Mon Jun 15 09:04:17 PM KST 2026
+[vpfull] round 1 ended (shard0=0 ...) dets now 632/631 Tue Jun 16 01:50:44 AM KST 2026
+[vpfull] all 631 dets present -> infer done
+[vpfull] ==== INFER DONE dets=632/631 Tue Jun 16 01:50:44 AM KST 2026 ====

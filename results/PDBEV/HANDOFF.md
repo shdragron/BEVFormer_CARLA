@@ -26,14 +26,17 @@ RRSALL_allcam)/7** (NOT ½(mRRS+RRSALL)); **CTS-Cal = CTS_CAL × 100**; **P_Norm
 sedan NDS**. (1/7 reproduces BEVDepth 90.2/82.8/87.4 exactly.)
 
 ```latex
-% INTERIM (768-subset; full-val pending, expect ≤~0.3pt drift)
-\,+\,PD-BEV~\cite{pdbev}  & 0.5601 & 91.4 & 88.9 & 95.1 & 55.9 & 41.8 \\
+% FINAL (full-3792 VP; full == subset768 to the decimal)
+\,+\,PD-BEV~\cite{pdbev}  & 0.5605 & 91.4 & 88.9 & 95.1 & 55.9 & 41.8 \\
 ```
 
 | Method | P_Normal | Ext | Img | Cal | CTS-Cal SUV | Bus |
 |---|---|---|---|---|---|---|
 | BEVDepth (base) | 0.5354 | 90.2 | 82.8 | 87.4 | 5.7 | 16.6 |
-| **+PD-BEV** | **0.5601** | **91.4** | **88.9** | **95.1** | **55.9** | **41.8** |
+| **+PD-BEV** | **0.5605** | **91.4** | **88.9** | **95.1** | **55.9** | **41.8** |
+
+(P_Normal = full-3792 VP NDS_Normal 0.5605; the standard sedan384 oracle eval is 0.5601 —
+same to 3 decimals. mVRS now FINAL: full-3792 == subset768 (Ext 91.37/Img 88.90/Cal 95.06).)
 
 Story: PD-BEV improves every column; **Cal flips above Ext** (95.1>91.4, BEVDepth has Cal<Ext
 — DG lets the model use correct calibration) and **CTS-Cal jumps ~10× (SUV) / ~2.5× (Bus)**
@@ -77,12 +80,13 @@ Repo **shdragron/BEVFormer_CARLA** @ `3cdff80` (branch master). Repo
 - **Conda envs** `pdbev-b200`, `bevdet-b200` (under giyong miniconda) — rebuild on new machine.
 - **Memory** `~/.claude/.../memory/*.md` — local; key facts are embedded here + in pdbev READMEs.
 
-## 4. IN FLIGHT (will DIE on machine move) — full-3792 VP
+## 4. full-3792 VP — DONE (2026-06-16)
 
-`tag=pdbev_sedan384_full` (fps=79 = all 3792 frames, 631 cells) was running at ~278/631 when
-this was written, to replace the 3 interim mVRS values with exact full numbers. Orchestration
-(all under `/tmp`, machine-local): `run_vp_full_pdbev.sh` (auto-restart 2-shard infer) +
-`pdbev_vpfull_score_chain.sh` (waits → 8-shard score). On the new machine these are GONE.
+`tag=pdbev_sedan384_full` (fps=79 = all 3792 frames, 631 cells) **completed**: NDS_Normal
+0.5605, 1/7 mVRS Ext/Img/Cal = 91.4/88.9/95.1 (== subset768). Results are in
+`results/PDBEV/vp/eval_vp.{json,csv,summary.txt}` (subset768 kept as `*.subset768.*`). The
+run survived a mid-run disk-full on `/` by relocating its dets to `/tmp` (symlink) + auto-restart.
+The re-run recipe below is kept in case it must be regenerated on the new machine.
 
 **To finish full VP on the new machine** (needs the 3 ckpts + data present):
 ```bash

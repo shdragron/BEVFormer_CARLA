@@ -25,7 +25,7 @@ reproduces BEVDepth's committed 90.2/82.8/87.4). ER=Ext VR=Img CR=Cal:
 
 PD-BEV improves all three; **Cal flips ABOVE Ext** (95.1>91.4) where BEVDepth has Cal<Ext —
 perspective-debiasing lets it use the correct calibration instead of staying collapsed.
-Full-3792 VP (`tag=pdbev_sedan384_full`) was launched separately; full≈subset (≤~0.3pt).
+Full-3792 VP DONE (tag=pdbev_sedan384_full): NDS_Normal 0.5605, 1/7 mVRS Ext/Img/Cal 91.4/88.9/95.1 == subset768 (confirmed identical). results/PDBEV/vp/eval_vp.* (full) + *.subset768.*. P_Normal for Table-2 = 0.5605.
 
 **CTS (sedan384 → target, CTS=NDS_cond/P_TARGET, IMG primary):**
 suv NORMAL/EXT/IMG/CAL = .966/.733/**.597**/.559 ; bus = .789/.377/**.009**/.418.

@@ -1,9 +1,3 @@
-[vpfull-score] waiting for 631 dets / INFER DONE... Mon Jun 15 12:27:30 AM KST 2026
-[vpfull-score] dets=631 complete Tue Jun 16 01:49:34 AM KST 2026
-[vpfull-score] ==== SCORE START Tue Jun 16 01:49:34 AM KST 2026 ====
-[vp-score-par] tag=pdbev_sedan384_full shards=8 START Tue Jun 16 01:49:36 AM KST 2026
-[vp-score-par] all shards done, merging Tue Jun 16 02:50:54 AM KST 2026
-[vp-score-par] ==== DONE Tue Jun 16 02:51:03 AM KST 2026 ====
 VP viewpoint-robustness (PD-BEV NDS)   tag=pdbev_sedan384_full
   frames-per-scene=79  NDS_Normal=0.5605  mAP6_Normal=0.5682
   RRS = NDS_cell / NDS_Normal   [VR primary]
@@ -15,4 +9,3 @@ VP viewpoint-robustness (PD-BEV NDS)   tag=pdbev_sedan384_full
   CR               0.9752          0.8034      0.8893      0.9506
 
   Table-2 row (1/7 mVRS %, ER=Ext VR=Img CR=Cal): ER=91.4 VR=88.9 CR=95.1
-[vpfull-score] ==== ALL DONE Tue Jun 16 02:51:03 AM KST 2026 ====
