@@ -188,3 +188,11 @@ bev_det_benchmark/sparse/out_vp_detr3d/
 # raw result archives/extractions (curated copies live in results/<Model>/)
 results/**/*.tar
 results/CAPE/cape_result/
+results_dfa3d.tar
+
+# nested model repos (separate gits — pushed on their own remotes)
+/BEVFormer_segmentation_detection/
+/GaussianLSS/
+/VEDet/
+# old duplicate memory copy (canonical = top-level memory_snapshot/)
+/results/memory_snapshot/

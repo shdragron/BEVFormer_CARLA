@@ -1,0 +1,16 @@
+CTS detection eval  (PD-BEV NDS)   tag=pdbev_sedan384   [paper Eq.6]
+  numerator P_c = SEDAN384 model deployed on target
+  denominator P_TARGET = native-384 target oracle (suv 0.5464, bus 0.6064)
+  CTS_c = NDS(c) / P_TARGET   [IMG primary]
+
+  platform cond          NDS     mAP6      CTS
+  suv      ORACLE     0.5464       --   1.0000
+  suv      NORMAL     0.5281   0.5042   0.9665
+  suv      EXT        0.4004   0.4008   0.7328
+  suv      IMG        0.3263   0.2248   0.5972  <- primary
+  suv      CAL        0.3053   0.2654   0.5587
+  bus      ORACLE     0.6064       --   1.0000
+  bus      NORMAL     0.4787   0.4130   0.7894
+  bus      EXT        0.2288   0.1333   0.3773
+  bus      IMG        0.0054   0.0108   0.0089  <- primary
+  bus      CAL        0.2537   0.1579   0.4184

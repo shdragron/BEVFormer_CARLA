@@ -11,3 +11,4 @@ __all__ = [
     'CropResizeFlipImage', 'GlobalRotScaleTransImage',
     'DD3DMapper',
 ]
+from .carla_seg_loading import LoadCarlaSegImages, FormatCarlaSeg
