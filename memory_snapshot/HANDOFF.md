@@ -6,8 +6,8 @@ chat. Written 2026-06-15.
 
 > ⚠️ **The persistent memory (`~/.claude/.../memory/`) is machine-local and does
 > NOT move with the computer.** It has been copied into
-> **`results/memory_snapshot/`** (21 files) so it travels with the repo. Treat
-> `results/memory_snapshot/MEMORY.md` as the project index; the other files are
+> **`memory_snapshot/`** (21 files) so it travels with the repo. Treat
+> `memory_snapshot/MEMORY.md` as the project index; the other files are
 > one-fact-each detail notes. They reflect what was true when written — verify a
 > file/flag still exists before relying on it.
 
@@ -87,7 +87,7 @@ untracked). BEVDet VP driver dedups duplicate progress lines on load (harmless).
    GitHub `git@github.com:shdragron/LatentCalib.git`) — calibration as a latent
    variable via projection-agreement `A(Δ)`. Validation ladder passed; full-model
    training + nuScenes leg are GPU-blocked/deferred. See
-   `results/memory_snapshot/latentcalib-method-paper.md` and
+   `memory_snapshot/latentcalib-method-paper.md` and
    `results/METHOD_PAPER_SPEC_KR.md` §8.
 
 ## 2. ACTIVE TASK (what the last session was doing)
@@ -117,7 +117,7 @@ untracked). BEVDet VP driver dedups duplicate progress lines on load (harmless).
 | DFA3D | backward+depth | — | `dfa3d-carla-setup.md`, VP/CTS full |
 | PD-BEV | forward+DG | `pdbev-b200` | `pdbev-vp-cts-results.md`, VP infer running |
 
-Fair-comparison settings per model: `results/memory_snapshot/bev-fair-comparison-matrix.md`.
+Fair-comparison settings per model: `memory_snapshot/bev-fair-comparison-matrix.md`.
 
 ## 4. Key analysis findings (don't re-derive)
 
@@ -156,9 +156,9 @@ help if copied over).
 
 1. `bevformer_seg/HANDOFF.md` — full seg task (bugs, geometry, run commands).
 2. `bevformer_seg/NOTES.md` — locked low-level facts.
-3. `results/memory_snapshot/MEMORY.md` — whole-project index → individual notes.
+3. `memory_snapshot/MEMORY.md` — whole-project index → individual notes.
 4. `results/SEGMENTATION_RESULTS.md`, `results/BENCHMARK_SUMMARY.md` — paper tables.
 
 > After the move, re-establish persistent memory: copy
-> `results/memory_snapshot/*.md` back into the new machine's
+> `memory_snapshot/*.md` back into the new machine's
 > `~/.claude/projects/<project>/memory/` so recall works again.

@@ -194,5 +194,12 @@ results_dfa3d.tar
 /BEVFormer_segmentation_detection/
 /GaussianLSS/
 /VEDet/
+
+# seg viz outputs (local only) + stray root dup of results/PDBEV
+/bevformer_seg/out/
+/PDBEV_results/
+/HANDOFF.md
+/GaussianLSS/
+/VEDet/
 # old duplicate memory copy (canonical = top-level memory_snapshot/)
 /results/memory_snapshot/
