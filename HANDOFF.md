@@ -6,8 +6,8 @@ chat. Written 2026-06-15.
 
 > ⚠️ **The persistent memory (`~/.claude/.../memory/`) is machine-local and does
 > NOT move with the computer.** It has been copied into
-> **`results/memory_snapshot/`** (21 files) so it travels with the repo. Treat
-> `results/memory_snapshot/MEMORY.md` as the project index; the other files are
+> **`memory_snapshot/`** (21 files) so it travels with the repo. Treat
+> `memory_snapshot/MEMORY.md` as the project index; the other files are
 > one-fact-each detail notes. They reflect what was true when written — verify a
 > file/flag still exists before relying on it.
 
@@ -54,9 +54,37 @@ ratios: suv Ext/Img/Cal **0.615/0.170/0.161**, bus **0.539/0.0022/0.228**.
   `BEVDepth/outputs/carla_sedan_extrinaug/`.
 - **At handoff: epoch ~19/24, val/NDS ~0.508** (climbed 0.275→0.50+; LR steps ep19,23 → final
   bump). Slow (~2h/epoch, GPU-contended).
-- **WHEN DONE**: run full VP + CTS on that ckpt → compute 1/7 mVRS(Ext/Img/Cal) + CTS-Cal(suv,bus)
-  → fill the "+Extrinsic Aug" row. (VP via `run_vp_full_bevdepth.sh` with `--ckpt` pointed at the new
-  ckpt, auto-resume wrapper; CTS via the bevdepth cts driver with the new ckpt.)
+- **WHEN DONE** (user-specified): run full VP + CTS on the ckpt → fill the "+Extrinsic Aug" row.
+  - **CTS**: deploy extrinaug-sedan on suv/bus (NORMAL/EXT/IMG/CAL); **oracle denominator = the
+    BASELINE BEVDepth suv/bus** (P_TARGET suv 0.5474, bus 0.4182 — NOT retrained). Reuse existing
+    `bev_det_benchmark/out/cts_bevdepth/pkls/{suv,bus}_{NORMAL,EXT,IMG,CAL}_*` (model-independent —
+    just swap the ckpt). `CTS = NDS_cond / P_TARGET` → CTS-Cal SUV/Bus.
+  - **VP**: `run_vp_full_bevdepth.sh` with `--ckpt` = new ckpt (auto-resume wrapper) → 1/7 mVRS
+    (Ext/Img/Cal). Compare vs baseline BEVDepth row (does extrinsic aug close the gap?).
+
+**(D-UPDATE) Extrinsic-Aug RESULT + a CONVENTION FIX — re-train in progress, paused for node swap:**
+- **v1 (left-multiply, DEPRECATED).** First trained run used `E' = δ@E` (per the user's
+  `extrin_uniform20_p05.yaml` config). Result (vs baseline BEVDepth): P_Normal 0.5152 (clean −0.02),
+  mVRS 1/7 EXT 90.1 / IMG 83.9 / CAL 88.0 (≈ baseline 90.2/82.8/87.4 — ~flat), CTS-Cal suv 10.6 (↑ from
+  5.7) / bus 13.3 (↓ from 16.6). **EXT did NOT improve** → user flagged it.
+- **Root cause (verified).** The VP **EXT/ER test** perturbs the extrinsic as `E' = E @ δ_cam`
+  (RIGHT-multiply: camera pans/tilts about its OWN optical center, position fixed — translation-delta
+  0.000). The v1 aug used `δ@E` (LEFT: camera orbits the ego origin, translation-delta 0.2–0.6 m) — a
+  DIFFERENT perturbation the test doesn't measure, so no EXT gain. Confirmed VP-EXT's
+  `sweepsensor2keyego == E_keyego @ δ` exactly.
+- **Fix applied** in `BEVDepth/bevdepth/datasets/nusc_det_dataset.py`: changed the aug to
+  `sweepsensor2keyego = sweepsensor2keyego @ extrin_delta` (RIGHT-multiply). Offline-verified
+  (translation-delta now 0.0000 = camera rotates in place). Docstring in `carla_sedan_extrinaug.py`
+  updated. **These 2 edits are NOT yet committed/pushed** (commit to shdragron/BEVDepth_CARLA).
+- **v2 (right-multiply) re-train was RUNNING then KILLED for the node swap** (wandb run 3hg2deam,
+  killed ~epoch 1). Observation before kill: loss decreasing normally (3.8e4→~366) BUT **epoch-0
+  val/NDS = 0.000** (v1 was 0.275) — the *correct* (test-matching) aug is harder, slow early start.
+  **Watch on resume:** if val/NDS stays 0 through epoch 2–3, the aug is too aggressive (±20° **3-axis**
+  ≈ up to 35°, p=0.5) — make it **single-axis ±20°** (matches the test better) or lower rot_deg/p, and
+  restart. ckpt/outputs of v1 cleaned to free `/`; v1 results preserved at
+  `results/BEVDepth_ExtrinAug_leftmul_DEPRECATED/`. Re-launch: `BEVDepth/_run_sedan_extrinaug_train.sh`.
+- ⚠️ The **same left-vs-right convention check applies to the OTHER models' +Extrinsic-Aug rows** (seg
+  CVT etc.) — use RIGHT-multiply (`E@δ`, cam-frame) to match the VP EXT test.
 
 **Next-session TODO:** (1) finish+eval extrinaug → row; (2) DETR3D full → `results/DETR3D/vp`
 (mirror like BEVFormer's `_full3792_allcam.*`); (3) apply the BEVDet-CTS ratio fix in the table;
@@ -87,7 +115,7 @@ untracked). BEVDet VP driver dedups duplicate progress lines on load (harmless).
    GitHub `git@github.com:shdragron/LatentCalib.git`) — calibration as a latent
    variable via projection-agreement `A(Δ)`. Validation ladder passed; full-model
    training + nuScenes leg are GPU-blocked/deferred. See
-   `results/memory_snapshot/latentcalib-method-paper.md` and
+   `memory_snapshot/latentcalib-method-paper.md` and
    `results/METHOD_PAPER_SPEC_KR.md` §8.
 
 ## 2. ACTIVE TASK (what the last session was doing)
@@ -117,7 +145,7 @@ untracked). BEVDet VP driver dedups duplicate progress lines on load (harmless).
 | DFA3D | backward+depth | — | `dfa3d-carla-setup.md`, VP/CTS full |
 | PD-BEV | forward+DG | `pdbev-b200` | `pdbev-vp-cts-results.md`, VP infer running |
 
-Fair-comparison settings per model: `results/memory_snapshot/bev-fair-comparison-matrix.md`.
+Fair-comparison settings per model: `memory_snapshot/bev-fair-comparison-matrix.md`.
 
 ## 4. Key analysis findings (don't re-derive)
 
@@ -156,9 +184,9 @@ help if copied over).
 
 1. `bevformer_seg/HANDOFF.md` — full seg task (bugs, geometry, run commands).
 2. `bevformer_seg/NOTES.md` — locked low-level facts.
-3. `results/memory_snapshot/MEMORY.md` — whole-project index → individual notes.
+3. `memory_snapshot/MEMORY.md` — whole-project index → individual notes.
 4. `results/SEGMENTATION_RESULTS.md`, `results/BENCHMARK_SUMMARY.md` — paper tables.
 
 > After the move, re-establish persistent memory: copy
-> `results/memory_snapshot/*.md` back into the new machine's
+> `memory_snapshot/*.md` back into the new machine's
 > `~/.claude/projects/<project>/memory/` so recall works again.
