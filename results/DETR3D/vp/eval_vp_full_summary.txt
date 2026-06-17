@@ -1,0 +1,8 @@
+VP full-frame mVRS (1/7)  model=DETR3D  P_Normal=0.5333
+  source: bev_det_benchmark/sparse/out_vp_detr3d/vp_detr3d_sedan_full/eval_vp.json
+  mVRS(1/7) = (6*mRRS_percam + RRSALL_allcam)/7
+
+  cond        mRRS_percam   RRSALL_allcam   mVRS(1/7)
+  ER(EXT)     0.9106        0.4400        84.34%
+  VR(IMG)     0.9104        0.4243        84.09%
+  CR(CAL)     0.9778        0.8545        96.02%

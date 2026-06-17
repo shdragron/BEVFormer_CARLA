@@ -1,0 +1,8 @@
+VP full-frame mVRS (1/7)  model=BEVFormer  P_Normal=0.5037
+  source: out_vpfull/vp_tiny_sedan_fullval_percam (mRRS) + results/BEVFormer/vp/eval_vp_full3792_allcam (RRSALL)
+  mVRS(1/7) = (6*mRRS_percam + RRSALL_allcam)/7
+
+  cond        mRRS_percam   RRSALL_allcam   mVRS(1/7)
+  ER(EXT)     0.8995        0.4248        83.17%
+  VR(IMG)     0.9074        0.4250        83.85%
+  CR(CAL)     0.9620        0.7785        93.58%

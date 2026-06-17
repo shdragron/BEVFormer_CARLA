@@ -1,0 +1,24 @@
+{
+  "model": "BEVFormer",
+  "frames_per_scene": "4(percam)+79(allcam)",
+  "source": "out_vpfull/vp_tiny_sedan_fullval_percam (mRRS) + results/BEVFormer/vp/eval_vp_full3792_allcam (RRSALL)",
+  "normal_nds": 0.5036861408318074,
+  "metric": "mVRS_1of7 = (6*mRRS_percam + RRSALL_allcam)/7",
+  "aggregate": {
+    "ER": {
+      "mRRS_percam": 0.8995300198355278,
+      "RRSALL_allcam": 0.42478749353982365,
+      "mVRS_1of7": 0.8317096589361415
+    },
+    "VR": {
+      "mRRS_percam": 0.9074293727033471,
+      "RRSALL_allcam": 0.4250363235987838,
+      "mVRS_1of7": 0.8385160799741238
+    },
+    "CR": {
+      "mRRS_percam": 0.9620061554207875,
+      "RRSALL_allcam": 0.7785334519448056,
+      "mVRS_1of7": 0.9357957692099329
+    }
+  }
+}

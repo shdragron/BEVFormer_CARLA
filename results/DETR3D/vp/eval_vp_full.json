@@ -1,0 +1,24 @@
+{
+  "model": "DETR3D",
+  "frames_per_scene": 4,
+  "source": "bev_det_benchmark/sparse/out_vp_detr3d/vp_detr3d_sedan_full/eval_vp.json",
+  "normal_nds": 0.533336992406339,
+  "metric": "mVRS_1of7 = (6*mRRS_percam + RRSALL_allcam)/7",
+  "aggregate": {
+    "ER": {
+      "mRRS_percam": 0.9106283869148131,
+      "RRSALL_allcam": 0.4399953347858558,
+      "mVRS_1of7": 0.8433950937535334
+    },
+    "VR": {
+      "mRRS_percam": 0.9103907257302347,
+      "RRSALL_allcam": 0.4242574529382329,
+      "mVRS_1of7": 0.8409431153313773
+    },
+    "CR": {
+      "mRRS_percam": 0.9778323045565224,
+      "RRSALL_allcam": 0.8544708922569072,
+      "mVRS_1of7": 0.9602092456565774
+    }
+  }
+}
