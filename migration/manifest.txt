@@ -1,0 +1,38 @@
+RoboGeo migration manifest  (generated 2026-06-29 19:38)
+================================================================
+
+[CODE]  /home/hanyan_arch/viewpoint/BEVFormer
+  BEVFormer       master @ 8d18148  (38 dirty + 924 untracked = uncommitted research)
+  DFA3D           vendored (no .git) under 3D-deformable-attention/BEVFormer_DFA3D
+  detr3d          main@fa08069
+  BEVDet          dev3.0@85ff132
+  BEVDepth        main@384f618
+  CAPE (nested)   used by eval (BEVFormer/CAPE)
+
+[CONDA ENVS]  /NHNHOME/WORKSPACE/0526040099_A/giyong/miniconda3/envs  (~9.4G each)
+  bevformer-b200(BEVFormer,DFA3D) legacy-mmdet140-b200(CAPE,DETR3D) bevdet-b200 bevdepth-b200 [pdbev-b200 coin3d optional]
+  -> conda-pack required (compiled CUDA ops). yml manifests in env_manifests/
+
+[DATA]  Lustre /NHNHOME/WORKSPACE/0526040099_A/jeongtae
+  carla_geobev            8.5G   (pkls + v1.0-carla_* DBs + sweeps symlinks + split)
+  simbev_compare/sweeps2  1.3TB  (real baseline images; val-only subset ~30G via 07)
+  carla_VR                1.1TB  (31 variant renders + viewpoint_metadata.json; VP eval only)
+  data/nuscenes symlink -> carla_geobev
+
+[EVAL CHECKPOINTS]  per platform P in {sedan,suv,bus}  (~10-15G total)
+  bevformer  work_dirs/bevformer_tiny_carla_P/epoch_24.pth (latest.pth->)
+  dfa3d      3D-deformable-attention/BEVFormer_DFA3D/work_dirs/bevformer_DFA3D_carla_P/epoch_24.pth (480M)
+  detr3d     detr3d/work_dirs/detr3d_carla_P/epoch_24.pth (latest.pth->)
+  cape       CAPE/ckpts/CAPE_ckpt/P/latest.pth (693M)
+  bevdet     BEVDet/work_dirs/bevdet-r50-carla_P/epoch_24.pth (596M, latest.pth->)
+  bevdepth   BEVDepth/outputs/cts_ckpt_P.ckpt -> .../carla_P/BEVDepth-CARLA/<id>/checkpoints/epoch=23-step=6528.ckpt (908M)
+  full work_dirs (all epochs) ~141G  (retraining scope only)
+
+[HARDCODED PATHS to mirror or fix]
+  /home/hanyan_arch/viewpoint/BEVFormer   (~323 bench files) -> mirror path = 0 edits
+  /NHNHOME/WORKSPACE/0526040099_A         (VR_ROOT, run_bevdepth ENV, data roots)
+    build_condition_pkls*.py: VR_ROOT=.../carla_VR
+    run_bevdepth.sh: ENV=.../giyong/miniconda3/envs/bevdepth-b200
+
+[RESULTS shipped in code tar]  results/ROBOGEO_CTS_NOVIS_FULL.json, results/qual_grid/*
+[MEMORY optional]  ~/.claude/projects/-home-hanyan-arch-viewpoint-BEVFormer/memory/

@@ -1,0 +1,26 @@
+% Per-axis mVRS (1/7) for 3D OBJECT DETECTION — parallel to the BEV-segmentation tab:supp_peraxis.
+% metric: mVRS(1/7) = (6*mRRS_percam + RRSALL_allcam)/7, per axis, %. Source: results/ROBOGEO_FULL_RESULTS.json
+% Per-axis values average (within rounding) to the headline mVRS per condition.
+\begin{table*}[t]\centering
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{ll ccc ccc ccc}
+\toprule
+& & \multicolumn{3}{c}{\textsc{Ext}} & \multicolumn{3}{c}{\textsc{Img}} & \multicolumn{3}{c}{\textsc{Cal}}\\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}
+View Transformation & Model & Roll & Pitch & Yaw & Roll & Pitch & Yaw & Roll & Pitch & Yaw\\
+\midrule
+\multirow{2}{*}{Forward-projection} & BEVDet   & 93.3 & 91.3 & 82.8 & 85.6 & 80.7 & 82.7 & 83.2 & 81.0 & 98.3\\
+ & BEVDepth & 95.7 & 92.0 & 83.1 & 85.5 & 80.1 & 82.8 & 84.4 & 79.4 & 98.3\\
+\midrule
+\multirow{2}{*}{Backward-projection} & BEVFormer & 86.5 & 78.2 & 84.8 & 87.0 & 79.3 & 85.3 & 92.5 & 90.5 & 97.7\\
+ & DFA3D     & 96.6 & 89.3 & 85.3 & 88.4 & 83.8 & 86.1 & 90.2 & 90.4 & 99.0\\
+\midrule
+\multirow{2}{*}{Sparse} & DETR3D & 86.9 & 81.5 & 84.6 & 86.5 & 81.5 & 84.3 & 94.7 & 95.6 & 97.8\\
+ & CAPE   & 99.2 & 98.5 & 84.4 & 86.5 & 80.4 & 84.8 & 86.3 & 80.4 & 99.0\\
+\midrule
+Forward-proj. + DG & PD-BEV & 96.9 & 93.6 & 83.6 & 93.7 & 90.1 & 82.9 & 93.7 & 93.5 & 98.0\\
+\bottomrule
+\end{tabular}
+\caption{Per-axis mean Viewpoint Robustness Score (mVRS, \%) for 3D \emph{object detection} (NDS-based), split by rotation axis under each diagnostic condition. Averaged over the seven perturbation buckets (six per-camera and all-camera) and the five magnitudes per axis. PD-BEV is a domain-generalization technique row built on the forward-projection BEVDepth backbone. DFA3D per-axis values are aggregated from its fps16 per-camera run (no full-frame per-config exists), so they sum to its full-frame headline mVRS only approximately ($\pm0.1$).}
+\label{tab:supp_peraxis_det}
+\end{table*}

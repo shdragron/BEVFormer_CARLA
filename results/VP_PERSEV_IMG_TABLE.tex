@@ -1,0 +1,40 @@
+% Per-severity mVRS (%) under primary Img (VR), vs signed per-axis angle theta. 3D Object Detection (ours) + BEV Seg (given).
+% Det value(theta) = mean of per-config RRS over {3 axes} x {7 buckets=6 per-cam + all-cam} at that magnitude, x100.
+% Verified: averaging a model's 10 theta values reproduces its headline Img mVRS. DETR3D=backward, CAPE=projection-free.
+% Sources: results/<MODEL>/vp/eval_vp_per_config.csv (BEVFormer = full_percam + full3792_allcam; DFA3D = full-frame rows[] in vp_dfa3d_sedan_fullframe.json). All full-frame (3792); fps16 not used.
+\begin{table*}[t]\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{ll cccccccccc}
+\toprule
+& & \multicolumn{10}{c}{Perturbation angle $\theta$ (deg)}\\
+\cmidrule(lr){3-12}
+View Transformation & Model & $-20$ & $-16$ & $-12$ & $-8$ & $-4$ & $+4$ & $+8$ & $+12$ & $+16$ & $+20$\\
+\midrule
+\multicolumn{12}{l}{\textbf{3D Object Detection}}\\
+\midrule
+\multirow{3}{*}{Forward-projection} & BEVDet & 78.2 & 79.4 & 81.0 & 83.5 & 89.8 & 90.5 & 85.9 & 82.8 & 80.8 & 78.0\\
+ & BEVDepth & 78.4 & 79.7 & 81.1 & 83.7 & 89.1 & 89.2 & 85.1 & 82.7 & 80.2 & 79.0\\
+ & PD-BEV & 82.5 & 85.6 & 88.0 & 91.3 & 95.3 & 95.6 & 92.2 & 89.1 & 86.3 & 83.1\\
+\midrule
+\multirow{3}{*}{Backward-projection} & BEVFormer & 81.0 & 81.8 & 82.7 & 84.5 & 89.7 & 89.3 & 84.7 & 82.5 & 81.4 & 81.0\\
+ & DFA3D & 82.5 & 83.8 & 85.4 & 87.5 & 91.7 & 91.7 & 87.3 & 84.9 & 83.6 & 82.4\\
+ & DETR3D & 81.1 & 82.0 & 83.4 & 84.6 & 88.4 & 89.1 & 85.7 & 83.7 & 82.2 & 80.8\\
+\midrule
+Projection-free & CAPE & 81.4 & 82.1 & 82.7 & 84.7 & 88.9 & 88.8 & 84.6 & 82.9 & 81.7 & 81.1\\
+\midrule
+\multicolumn{12}{l}{\textbf{BEV Segmentation}}\\
+\midrule
+\multirow{2}{*}{Forward-projection} & LSS & 77.2 & 78.8 & 81.8 & 84.4 & 89.9 & 88.9 & 83.3 & 80.4 & 77.9 & 76.8\\
+ & GaussianLSS & 78.9 & 83.4 & 85.0 & 87.2 & 91.2 & 90.0 & 86.0 & 84.2 & 81.2 & 78.1\\
+\midrule
+\multirow{2}{*}{Backward-projection} & BEVFormer & 74.6 & 75.6 & 77.1 & 80.6 & 88.2 & 87.6 & 80.9 & 78.1 & 76.9 & 76.2\\
+ & PointBeV & 75.0 & 76.1 & 78.1 & 80.9 & 87.3 & 86.5 & 80.7 & 77.9 & 76.3 & 75.1\\
+\midrule
+\multirow{3}{*}{Projection-free} & CVT & 77.3 & 80.6 & 84.6 & 88.0 & 93.1 & 91.9 & 86.0 & 81.7 & 78.1 & 76.2\\
+ & LaRa & 76.7 & 79.9 & 82.7 & 85.1 & 90.5 & 89.2 & 83.5 & 80.6 & 78.8 & 77.6\\
+ & DSPE & 76.1 & 77.4 & 79.2 & 82.1 & 89.3 & 88.0 & 82.2 & 79.3 & 77.4 & 76.1\\
+\bottomrule
+\end{tabular}
+\caption{Per-severity mVRS (\%) under the primary \textsc{Img} condition, as a function of the signed per-axis rotation angle $\theta$, for 3D object detection (top) and BEV segmentation (bottom). Each value averages over the three axes and the seven perturbation buckets at that magnitude. All rows use the full-frame (3792-sample) evaluation.}
+\label{tab:supp_severity}
+\end{table*}

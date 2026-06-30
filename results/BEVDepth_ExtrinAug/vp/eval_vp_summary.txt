@@ -1,0 +1,8 @@
+VP viewpoint-robustness (BEVDepth NDS)   tag=bevdepth_extrinaug_v2
+  frames-per-scene=16  NDS_Normal=0.5118  mAP6_Normal=0.4813
+  RRS = NDS_cell / NDS_Normal   [VR primary]
+
+  condition   mRRS(per-cam)   RRSALL(all-cam)        mVRS
+  ER               0.9565          0.6571      0.8068
+  VR               0.9235          0.3685      0.6460  <- primary
+  CR               0.9497          0.5150      0.7323

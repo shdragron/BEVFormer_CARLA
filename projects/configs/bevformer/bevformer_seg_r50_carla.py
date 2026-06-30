@@ -100,7 +100,7 @@ train_pipeline = [
     dict(type='PadMultiViewImage', size_divisor=32),
     dict(type='DefaultFormatBundle3D', class_names=class_names, with_label=False),
     dict(type='FormatCarlaSeg'),
-    dict(type='CustomCollect3D', keys=['img', 'gt_seg'],
+    dict(type='CustomCollect3D', keys=['img', 'gt_seg', 'gt_valid'],
          meta_keys=('filename', 'ori_shape', 'img_shape', 'lidar2img', 'pad_shape',
                     'scene_token', 'can_bus', 'prev_idx', 'next_idx', 'sample_idx')),
 ]

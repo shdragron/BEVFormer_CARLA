@@ -34,9 +34,12 @@ class LoadCarlaSegImages(object):
 
 @PIPELINES.register_module()
 class FormatCarlaSeg(object):
-    """gt_seg (H,W) uint8 -> DC float tensor (1,H,W)."""
+    """gt_seg / gt_valid (H,W) uint8 -> DC float tensor (1,H,W)."""
 
     def __call__(self, results):
         g = results['gt_seg'].astype(np.float32)[None]        # (1,H,W)
         results['gt_seg'] = DC(torch.from_numpy(g), stack=True)
+        if 'gt_valid' in results:
+            v = results['gt_valid'].astype(np.float32)[None]
+            results['gt_valid'] = DC(torch.from_numpy(v), stack=True)
         return results

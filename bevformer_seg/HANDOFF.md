@@ -5,7 +5,38 @@
 > bug already fixed, all verified geometry facts, and how to resume.
 > Companion: `bevformer_seg/NOTES.md` (locked low-level facts).
 
-Last updated: 2026-06-15, mid-training (epoch ~8/24).
+Last updated: 2026-06-15, mid-training (epoch ~9/24).
+
+---
+
+## ⏱ LATEST UPDATE (supersedes §5 bug-2 below)
+
+**Visibility convention = IGNORE (NOT removal).** The seg benchmark
+(CVT/LSS/GaussianLSS/PointBEV/…) uses the IGNORE convention — verified in the
+GaussianLSS reference repo (`metrics.py` `IoUMetric` + `losses.py`): cells with
+`visibility < min` are *masked out* of BOTH the loss and the IoU (not supervised
+or scored as background). Reported IoU = **max over thresholds {0.40,0.45,0.50}**,
+`min_visibility = 2`. The earlier "3DOD-style removal" was the *detection*-table
+convention and is WRONG for the seg table — now reverted. Current code (all four
+seg files) implements IGNORE: `gt_seg` = full vehicle mask, `gt_valid` = (vis≥2),
+loss masked by `gt_valid`, `evaluate()` accumulates TP/FP/FN over vis≥2 cells at
+3 thresholds and reports the max. **This makes us equivalent to the seg models.**
+
+- Re-eval of epoch_8 confirms the number barely moves: IGNORE+max-th **0.3880**
+  vs old removal@0.5 0.3860 — removal-trained checkpoints score ~identically
+  under IGNORE, so a full restart is optional (running run still uses removal
+  loss in memory; restart only for methodological purity).
+- **Val is high early & NOT leakage**: train reads `gaussianlss/sedan/` (220
+  scenes), val reads `gaussianlss/sedan_eval/` (48 scenes); the two dirs share
+  **0 scene names** (train.txt lists 39 eval names but their JSONs aren't in
+  `sedan/`, so they're skipped). High early IoU = resumed-from-epoch_2 + coarse,
+  fast-converging vehicle target on in-domain CARLA synthetic data.
+
+**Public repo pushed:** clean BEVFormer-Seg → `git@github.com:shdragron/BEVFormer_Seg-CARLA.git`
+(branch `main`). Carve-out = upstream BEVFormer (Apache-2.0) + the 4 seg files
+only; genericized data paths; **excluded** all other models, the unpublished
+CARLA detection/VP-CTS benchmark code, checkpoints, data, paper, internal notes.
+Staged from `/tmp/BEVFormer_Seg-CARLA`. Commit author `shdragron`, no Claude refs.
 
 ---
 

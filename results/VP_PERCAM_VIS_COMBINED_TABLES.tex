@@ -1,0 +1,79 @@
+% Side-by-side supplementary tables: per-camera (Img) + visibility-stratified mVRS (%).
+% Each: 3D Object Detection (ours) on top, BEV Segmentation (given) below; grouped by paradigm
+% (forward / backward / projection-free). DETR3D = backward (projection-sampling), CAPE = projection-free.
+% Det per-camera from results/ROBOGEO_PERCAM_VP.json (IMG mean x100); det visibility = vis>=2 headline
+% mVRS from results/ROBOGEO_FULL_RESULTS.json. Detection has no all-objects stratum (eval is vis>=2), hence '--'.
+\begin{table*}[h]\centering
+%---- left: per-camera ----
+\begin{minipage}[t]{0.48\textwidth}\centering
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l cccccc c}
+\toprule
+Model & FL & F & FR & BL & B & BR & All\\
+\midrule
+\multicolumn{8}{l}{\textit{3D Object Detection}}\\
+\midrule
+BEVDet    & 92.2 & 87.2 & 96.3 & 93.4 & 80.8 & 95.1 & 36.0\\
+BEVDepth  & 93.3 & 88.9 & 96.8 & 91.4 & 80.2 & 96.6 & 32.5\\
+PD-BEV    & 95.2 & 92.1 & 97.6 & 93.9 & 86.7 & 97.5 & 59.3\\
+\midrule
+BEVFormer & 91.5 & 87.2 & 96.3 & 91.3 & 82.6 & 95.7 & 42.5\\
+DFA3D     & 93.7 & 89.6 & 96.8 & 92.3 & 84.1 & 96.6 & 49.5\\
+DETR3D    & 92.3 & 85.7 & 96.4 & 92.6 & 83.9 & 95.4 & 42.4\\
+\midrule
+CAPE      & 93.1 & 85.6 & 96.9 & 92.7 & 81.7 & 97.3 & 40.0\\
+\midrule
+\multicolumn{8}{l}{\textit{BEV Segmentation}}\\
+\midrule
+LSS         & 93.1 & 80.9 & 97.5 & 94.3 & 75.1 & 97.1 & 35.4\\
+GaussianLSS & 93.6 & 84.4 & 97.2 & 95.7 & 78.1 & 97.3 & 45.3\\
+\midrule
+BEVFormer & 91.7 & 81.5 & 95.5 & 93.8 & 69.9 & 95.0 & 29.6\\
+PointBeV  & 91.0 & 77.8 & 96.0 & 93.7 & 72.4 & 96.2 & 28.5\\
+\midrule
+CVT  & 94.0 & 80.8 & 97.4 & 96.1 & 77.3 & 98.2 & 42.5\\
+LaRa & 93.6 & 80.5 & 97.6 & 95.0 & 75.1 & 97.6 & 37.8\\
+DSPE & 93.9 & 78.8 & 96.8 & 94.7 & 72.5 & 97.2 & 31.1\\
+\bottomrule
+\end{tabular}
+\caption{Per-camera mVRS (\%) under the primary \textsc{Img} condition, for 3D object detection (top) and BEV segmentation (bottom).}
+\label{tab:supp_percam}
+\end{minipage}\hfill
+%---- right: visibility ----
+\begin{minipage}[t]{0.48\textwidth}\centering
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l cc cc cc}
+\toprule
+& \multicolumn{2}{c}{\textsc{Ext}} & \multicolumn{2}{c}{\textsc{Img}} & \multicolumn{2}{c}{\textsc{Cal}}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+Model & vis$\geq$2 & all & vis$\geq$2 & all & vis$\geq$2 & all\\
+\midrule
+\multicolumn{7}{l}{\textit{3D Object Detection}}\\
+\midrule
+BEVDet    & 89.2 & -- & 83.0 & -- & 87.5 & --\\
+BEVDepth  & 90.2 & -- & 82.8 & -- & 87.4 & --\\
+PD-BEV    & 91.4 & -- & 88.9 & -- & 95.1 & --\\
+\midrule
+BEVFormer & 83.2 & -- & 83.9 & -- & 93.6 & --\\
+DFA3D     & 90.5 & -- & 86.1 & -- & 93.1 & --\\
+DETR3D    & 84.3 & -- & 84.1 & -- & 96.0 & --\\
+\midrule
+CAPE      & 94.0 & -- & 83.9 & -- & 88.6 & --\\
+\midrule
+\multicolumn{7}{l}{\textit{BEV Segmentation}}\\
+\midrule
+LSS         & 88.4 & 88.8 & 81.9 & 82.1 & 86.3 & 86.6\\
+GaussianLSS & 90.7 & 91.4 & 84.5 & 85.1 & 92.1 & 92.1\\
+\midrule
+BEVFormer & 80.2 & 80.2 & 79.6 & 79.6 & 88.2 & 88.2\\
+PointBeV  & 79.7 & 80.2 & 79.4 & 79.5 & 92.6 & 93.0\\
+\midrule
+CVT  & 91.2 & 91.4 & 83.8 & 83.8 & 90.9 & 90.9\\
+LaRa & 91.1 & 91.6 & 82.5 & 83.3 & 90.0 & 90.3\\
+DSPE & 97.7 & 97.6 & 80.7 & 80.9 & 82.0 & 82.0\\
+\bottomrule
+\end{tabular}
+\caption{Visibility-stratified mVRS (\%), at vis$\geq$2 and over all objects. Detection is evaluated at vis$\geq$2 by construction, so the all-objects stratum is not available (\,--\,).}
+\label{tab:supp_visibility}
+\end{minipage}
+\end{table*}

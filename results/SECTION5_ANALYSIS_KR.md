@@ -152,3 +152,10 @@ CTS 해석에는 한 가지 주의가 필요하다. CTS는 각 모델의 target-
    +0.90/+0.90/+0.60, bus +0.60). seg per-camera ρ=+0.90이므로 "약하거나 음수" 일반화
    금지 — "det 음수, seg는 변별 폭 0.03/0.16" 표현 유지. v5 개고 3건 검증 일치.
    v6 전수 검증은 부기 2 참조.
+   2026-06-15 재검증(실측 확정): detection ρ를 raw all-cam eval에서 5-det
+   (BEVDet/BEVDepth/BEVFormer/DETR3D/CAPE) 직접 재계산 — all-cam IMG(VR.allcam)
+   vs SUV CTS-IMG +1.00, all-cam EXT(ER.allcam) vs SUV −0.70, all-cam IMG vs
+   bus +0.60 — 전부 문서값과 정확히 일치. 소스: _vp_xmodel_ground_truth.json
+   (BEVDet/BEVDepth/BEVFormer) + results/{DETR3D,CAPE}/vp/*_summary.txt. → §corr
+   detection ρ는 잠정값 없이 실측 확정. (DFA3D는 5-det 제외 exception; per-cam
+   IMG ρ는 DETR3D per-cam 미완으로 별도, 메모 3항목은 전부 all-cam 기준이라 무관.)

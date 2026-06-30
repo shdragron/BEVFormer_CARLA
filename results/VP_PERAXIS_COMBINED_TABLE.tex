@@ -1,0 +1,36 @@
+% Combined per-axis mVRS (1/7): BEV SEGMENTATION (given) + 3D OBJECT DETECTION (ours), one table.
+% metric: mVRS(1/7) = (6*mRRS_percam + RRSALL_allcam)/7 per axis, %. Both tasks are normalized
+% robustness ratios (seg=IoU-based, det=NDS-based) so rows are comparable.
+% Det source: results/ROBOGEO_FULL_RESULTS.json ; Seg rows verbatim from tab:supp_peraxis.
+\begin{table*}[t]\centering
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{lll ccc ccc ccc}
+\toprule
+& & & \multicolumn{3}{c}{\textsc{Ext}} & \multicolumn{3}{c}{\textsc{Img}} & \multicolumn{3}{c}{\textsc{Cal}}\\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}\cmidrule(lr){10-12}
+View Transformation & Task & Model & Roll & Pitch & Yaw & Roll & Pitch & Yaw & Roll & Pitch & Yaw\\
+\midrule
+\multirow{5}{*}{Forward-projection}
+ & Seg & LSS         & 94.9 & 94.5 & 75.8 & 86.7 & 80.6 & 78.5 & 86.4 & 80.3 & 92.3\\
+ & Seg & GaussianLSS & 97.3 & 97.8 & 77.0 & 88.7 & 87.8 & 77.0 & 89.4 & 88.8 & 98.0\\
+ & Det & BEVDet      & 93.3 & 91.3 & 82.8 & 85.6 & 80.7 & 82.7 & 83.2 & 81.0 & 98.3\\
+ & Det & BEVDepth    & 95.7 & 92.0 & 83.1 & 85.5 & 80.1 & 82.8 & 84.4 & 79.4 & 98.3\\
+ & Det & PD-BEV$^\dagger$ & 96.9 & 93.6 & 83.6 & 93.7 & 90.1 & 82.9 & 93.7 & 93.5 & 98.0\\
+\midrule
+\multirow{4}{*}{Backward-projection}
+ & Seg & BEVFormer & 85.8 & 76.6 & 78.3 & 85.3 & 75.1 & 78.4 & 85.5 & 81.0 & 98.3\\
+ & Seg & PointBeV  & 88.8 & 73.4 & 76.7 & 84.6 & 76.4 & 77.1 & 93.5 & 86.4 & 97.9\\
+ & Det & BEVFormer & 86.5 & 78.2 & 84.8 & 87.0 & 79.3 & 85.3 & 92.5 & 90.5 & 97.7\\
+ & Det & DFA3D$^\ddagger$ & 96.6 & 89.3 & 85.3 & 88.4 & 83.8 & 86.1 & 90.2 & 90.4 & 99.0\\
+\midrule
+\multirow{5}{*}{Projection-free / Sparse}
+ & Seg & CVT  & 99.1 & 93.6 & 81.0 & 88.0 & 83.9 & 79.4 & 88.8 & 89.2 & 94.8\\
+ & Seg & LaRa & 98.6 & 96.4 & 78.2 & 88.3 & 81.1 & 78.0 & 89.2 & 82.9 & 97.8\\
+ & Seg & DSPE & 99.9 & 99.5 & 93.6 & 85.7 & 77.7 & 78.8 & 86.1 & 78.2 & 81.7\\
+ & Det & DETR3D & 86.9 & 81.5 & 84.6 & 86.5 & 81.5 & 84.3 & 94.7 & 95.6 & 97.8\\
+ & Det & CAPE   & 99.2 & 98.5 & 84.4 & 86.5 & 80.4 & 84.8 & 86.3 & 80.4 & 99.0\\
+\bottomrule
+\end{tabular}
+\caption{Per-axis mean Viewpoint Robustness Score (mVRS, \%), split by rotation axis under each diagnostic condition, for BEV \emph{segmentation} (Seg, IoU-based) and 3D \emph{object detection} (Det, NDS-based). mVRS is a normalized clean-to-perturbed retention ratio, so the two tasks are directly comparable. Averaged over the seven perturbation buckets (six per-camera and all-camera) and the five magnitudes per axis. $^\dagger$PD-BEV is a domain-generalization technique row on the forward-projection BEVDepth backbone. $^\ddagger$DFA3D per-axis values are aggregated from its fps16 per-camera run (no full-frame per-config exists) and reconstruct its full-frame headline mVRS only to within $\pm0.1$.}
+\label{tab:supp_peraxis}
+\end{table*}

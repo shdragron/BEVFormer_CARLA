@@ -207,3 +207,13 @@ results_dfa3d.tar
 /VEDet/
 # old duplicate memory copy (canonical = top-level memory_snapshot/)
 /results/memory_snapshot/
+
+# ---- migration: large result dumps move via tar/rsync, not git ----
+results/RELEASE/
+results/BEVDepth/
+results/BEVDet/
+results/DFA3D/
+results/BEVFormer/
+results/_qual_conditions/
+results/qual_grid/
+results/*.tar

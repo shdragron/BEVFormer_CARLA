@@ -1,0 +1,847 @@
+{
+  "benchmark": "RoboGeo (WACV 2027) \u2014 CARLA camera-geometry robustness",
+  "note": "FULL-frame results only. VP mVRS = (6*mRRS_percam + RRSALL_allcam)/7. CTS = P_c/P_oracle (full 3792). EXT=ER, IMG=VR, CAL=CR.",
+  "detection": {
+    "BEVDet": {
+      "P_Normal_NDS": 0.5166,
+      "VP_full": {
+        "EXT": {
+          "mVRS_pct": 89.15,
+          "percam_mRRS": 0.9385,
+          "allcam_RRSALL": 0.6095,
+          "abs_NDS": 0.4605,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 93.34,
+              "percam_mRRS": 0.9651,
+              "allcam_RRSALL": 0.7427
+            },
+            "pitch": {
+              "mVRS_pct": 91.3,
+              "percam_mRRS": 0.9563,
+              "allcam_RRSALL": 0.6528
+            },
+            "yaw": {
+              "mVRS_pct": 82.81,
+              "percam_mRRS": 0.8939,
+              "allcam_RRSALL": 0.433
+            }
+          }
+        },
+        "IMG": {
+          "mVRS_pct": 83.0,
+          "percam_mRRS": 0.9084,
+          "allcam_RRSALL": 0.3596,
+          "abs_NDS": 0.4288,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 85.61,
+              "percam_mRRS": 0.9238,
+              "allcam_RRSALL": 0.4499
+            },
+            "pitch": {
+              "mVRS_pct": 80.69,
+              "percam_mRRS": 0.9059,
+              "allcam_RRSALL": 0.2124
+            },
+            "yaw": {
+              "mVRS_pct": 82.69,
+              "percam_mRRS": 0.8953,
+              "allcam_RRSALL": 0.4165
+            }
+          }
+        },
+        "CAL": {
+          "mVRS_pct": 87.49,
+          "percam_mRRS": 0.9354,
+          "allcam_RRSALL": 0.5122,
+          "abs_NDS": 0.452,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 83.18,
+              "percam_mRRS": 0.9123,
+              "allcam_RRSALL": 0.349
+            },
+            "pitch": {
+              "mVRS_pct": 80.95,
+              "percam_mRRS": 0.9039,
+              "allcam_RRSALL": 0.2434
+            },
+            "yaw": {
+              "mVRS_pct": 98.34,
+              "percam_mRRS": 0.9899,
+              "allcam_RRSALL": 0.9443
+            }
+          }
+        }
+      },
+      "VP_source": "results/BEVDet/vp/eval_vp_per_config.csv",
+      "CTS_full": {
+        "suv": {
+          "oracle_NDS": 0.5348,
+          "NORMAL": {
+            "cts_pct": 91.32,
+            "nds": 0.4884
+          },
+          "EXT": {
+            "cts_pct": 61.53,
+            "nds": 0.329
+          },
+          "IMG": {
+            "cts_pct": 16.96,
+            "nds": 0.0907
+          },
+          "CAL": {
+            "cts_pct": 16.08,
+            "nds": 0.086
+          }
+        },
+        "bus": {
+          "oracle_NDS": 0.3729,
+          "NORMAL": {
+            "cts_pct": 122.42,
+            "nds": 0.4565
+          },
+          "EXT": {
+            "cts_pct": 53.93,
+            "nds": 0.2011
+          },
+          "IMG": {
+            "cts_pct": 0.22,
+            "nds": 0.0008
+          },
+          "CAL": {
+            "cts_pct": 22.77,
+            "nds": 0.0849
+          }
+        }
+      },
+      "CTS_source": "results/BEVDet/cts/eval_cts.csv"
+    },
+    "BEVDepth": {
+      "P_Normal_NDS": 0.5354,
+      "VP_full": {
+        "EXT": {
+          "mVRS_pct": 90.25,
+          "percam_mRRS": 0.9449,
+          "allcam_RRSALL": 0.6477,
+          "abs_NDS": 0.4831,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 95.72,
+              "percam_mRRS": 0.9775,
+              "allcam_RRSALL": 0.8356
+            },
+            "pitch": {
+              "mVRS_pct": 91.95,
+              "percam_mRRS": 0.9591,
+              "allcam_RRSALL": 0.6815
+            },
+            "yaw": {
+              "mVRS_pct": 83.07,
+              "percam_mRRS": 0.8981,
+              "allcam_RRSALL": 0.4262
+            }
+          }
+        },
+        "IMG": {
+          "mVRS_pct": 82.81,
+          "percam_mRRS": 0.912,
+          "allcam_RRSALL": 0.3252,
+          "abs_NDS": 0.4434,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 85.52,
+              "percam_mRRS": 0.9265,
+              "allcam_RRSALL": 0.4273
+            },
+            "pitch": {
+              "mVRS_pct": 80.13,
+              "percam_mRRS": 0.9102,
+              "allcam_RRSALL": 0.1476
+            },
+            "yaw": {
+              "mVRS_pct": 82.79,
+              "percam_mRRS": 0.8991,
+              "allcam_RRSALL": 0.4007
+            }
+          }
+        },
+        "CAL": {
+          "mVRS_pct": 87.36,
+          "percam_mRRS": 0.9383,
+          "allcam_RRSALL": 0.4852,
+          "abs_NDS": 0.4677,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 84.4,
+              "percam_mRRS": 0.922,
+              "allcam_RRSALL": 0.3761
+            },
+            "pitch": {
+              "mVRS_pct": 79.41,
+              "percam_mRRS": 0.9051,
+              "allcam_RRSALL": 0.128
+            },
+            "yaw": {
+              "mVRS_pct": 98.25,
+              "percam_mRRS": 0.9877,
+              "allcam_RRSALL": 0.9515
+            }
+          }
+        }
+      },
+      "VP_source": "results/BEVDepth/vp/eval_vp_per_config.csv",
+      "CTS_full": {
+        "suv": {
+          "oracle_NDS": 0.5474,
+          "NORMAL": {
+            "cts_pct": 92.2,
+            "nds": 0.5047
+          },
+          "EXT": {
+            "cts_pct": 69.48,
+            "nds": 0.3803
+          },
+          "IMG": {
+            "cts_pct": 10.31,
+            "nds": 0.0564
+          },
+          "CAL": {
+            "cts_pct": 5.69,
+            "nds": 0.0312
+          }
+        },
+        "bus": {
+          "oracle_NDS": 0.4182,
+          "NORMAL": {
+            "cts_pct": 111.58,
+            "nds": 0.4666
+          },
+          "EXT": {
+            "cts_pct": 29.94,
+            "nds": 0.1252
+          },
+          "IMG": {
+            "cts_pct": 0.14,
+            "nds": 0.0006
+          },
+          "CAL": {
+            "cts_pct": 16.6,
+            "nds": 0.0694
+          }
+        }
+      },
+      "CTS_source": "results/BEVDepth/cts/eval_cts.csv"
+    },
+    "BEVFormer": {
+      "P_Normal_NDS": 0.5037,
+      "VP_full": {
+        "EXT": {
+          "mVRS_pct": 83.17,
+          "percam_mRRS": 0.8995,
+          "allcam_RRSALL": 0.4248,
+          "abs_NDS": 0.4189,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 86.49,
+              "percam_mRRS": 0.9146,
+              "allcam_RRSALL": 0.5668
+            },
+            "pitch": {
+              "mVRS_pct": 78.18,
+              "percam_mRRS": 0.8835,
+              "allcam_RRSALL": 0.1714
+            },
+            "yaw": {
+              "mVRS_pct": 84.84,
+              "percam_mRRS": 0.9005,
+              "allcam_RRSALL": 0.5362
+            }
+          }
+        },
+        "IMG": {
+          "mVRS_pct": 83.85,
+          "percam_mRRS": 0.9074,
+          "allcam_RRSALL": 0.425,
+          "abs_NDS": 0.4224,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 87.01,
+              "percam_mRRS": 0.9223,
+              "allcam_RRSALL": 0.5568
+            },
+            "pitch": {
+              "mVRS_pct": 79.27,
+              "percam_mRRS": 0.893,
+              "allcam_RRSALL": 0.1908
+            },
+            "yaw": {
+              "mVRS_pct": 85.27,
+              "percam_mRRS": 0.9069,
+              "allcam_RRSALL": 0.5275
+            }
+          }
+        },
+        "CAL": {
+          "mVRS_pct": 93.58,
+          "percam_mRRS": 0.962,
+          "allcam_RRSALL": 0.7785,
+          "abs_NDS": 0.4714,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 92.52,
+              "percam_mRRS": 0.9573,
+              "allcam_RRSALL": 0.7326
+            },
+            "pitch": {
+              "mVRS_pct": 90.54,
+              "percam_mRRS": 0.9454,
+              "allcam_RRSALL": 0.6653
+            },
+            "yaw": {
+              "mVRS_pct": 97.68,
+              "percam_mRRS": 0.9833,
+              "allcam_RRSALL": 0.9377
+            }
+          }
+        }
+      },
+      "VP_source": "eval_vp_full_percam + eval_vp_full3792_allcam",
+      "CTS_full": {
+        "suv": {
+          "oracle_NDS": 0.5029,
+          "NORMAL": {
+            "cts_pct": 94.76,
+            "nds": 0.4766
+          },
+          "EXT": {
+            "cts_pct": 45.05,
+            "nds": 0.2266
+          },
+          "IMG": {
+            "cts_pct": 37.21,
+            "nds": 0.1872
+          },
+          "CAL": {
+            "cts_pct": 71.88,
+            "nds": 0.3615
+          }
+        },
+        "bus": {
+          "oracle_NDS": 0.5471,
+          "NORMAL": {
+            "cts_pct": 79.83,
+            "nds": 0.4368
+          },
+          "EXT": {
+            "cts_pct": 25.07,
+            "nds": 0.1371
+          },
+          "IMG": {
+            "cts_pct": 17.95,
+            "nds": 0.0982
+          },
+          "CAL": {
+            "cts_pct": 40.06,
+            "nds": 0.2192
+          }
+        }
+      },
+      "CTS_source": "results/BEVFormer/cts/eval_cts.csv"
+    },
+    "DFA3D": {
+      "P_Normal_NDS": 0.4892,
+      "VP_full": {
+        "EXT": {
+          "mVRS_pct": 90.52,
+          "percam_mRRS": 0.9461,
+          "allcam_RRSALL": 0.6601,
+          "abs_NDS": 0.4428,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 96.67,
+              "percam_mRRS": 0.9828,
+              "allcam_RRSALL": 0.8701
+            },
+            "pitch": {
+              "mVRS_pct": 89.46,
+              "percam_mRRS": 0.949,
+              "allcam_RRSALL": 0.5687
+            },
+            "yaw": {
+              "mVRS_pct": 85.45,
+              "percam_mRRS": 0.9067,
+              "allcam_RRSALL": 0.5415
+            }
+          }
+        },
+        "IMG": {
+          "mVRS_pct": 86.09,
+          "percam_mRRS": 0.9219,
+          "allcam_RRSALL": 0.4947,
+          "abs_NDS": 0.4211,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 88.31,
+              "percam_mRRS": 0.9351,
+              "allcam_RRSALL": 0.5709
+            },
+            "pitch": {
+              "mVRS_pct": 83.91,
+              "percam_mRRS": 0.9187,
+              "allcam_RRSALL": 0.3616
+            },
+            "yaw": {
+              "mVRS_pct": 86.03,
+              "percam_mRRS": 0.9118,
+              "allcam_RRSALL": 0.5515
+            }
+          }
+        },
+        "CAL": {
+          "mVRS_pct": 93.07,
+          "percam_mRRS": 0.9614,
+          "allcam_RRSALL": 0.7462,
+          "abs_NDS": 0.4553,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 90.09,
+              "percam_mRRS": 0.9463,
+              "allcam_RRSALL": 0.628
+            },
+            "pitch": {
+              "mVRS_pct": 90.28,
+              "percam_mRRS": 0.9474,
+              "allcam_RRSALL": 0.635
+            },
+            "yaw": {
+              "mVRS_pct": 98.83,
+              "percam_mRRS": 0.9904,
+              "allcam_RRSALL": 0.9757
+            }
+          }
+        }
+      },
+      "VP_source": "vp_dfa3d_sedan_fullframe.json (full 3792 rows[]) \u2014 fps16 retired",
+      "CTS_full": {
+        "suv": {
+          "oracle_NDS": 0.5138,
+          "NORMAL": {
+            "cts_pct": 90.03,
+            "nds": 0.4625
+          },
+          "EXT": {
+            "cts_pct": 68.7,
+            "nds": 0.353
+          },
+          "IMG": {
+            "cts_pct": 38.75,
+            "nds": 0.1991
+          },
+          "CAL": {
+            "cts_pct": 47.47,
+            "nds": 0.2439
+          }
+        },
+        "bus": {
+          "oracle_NDS": 0.556,
+          "NORMAL": {
+            "cts_pct": 76.25,
+            "nds": 0.4239
+          },
+          "EXT": {
+            "cts_pct": 37.14,
+            "nds": 0.2065
+          },
+          "IMG": {
+            "cts_pct": 28.76,
+            "nds": 0.1599
+          },
+          "CAL": {
+            "cts_pct": 48.11,
+            "nds": 0.2675
+          }
+        }
+      },
+      "CTS_source": "results/DFA3D/cts/cts_dfa3d_sedan.csv",
+      "note": ""
+    },
+    "DETR3D": {
+      "P_Normal_NDS": 0.5333,
+      "VP_full": {
+        "EXT": {
+          "mVRS_pct": 84.34,
+          "percam_mRRS": 0.9106,
+          "allcam_RRSALL": 0.44,
+          "abs_NDS": 0.4498,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 86.94,
+              "percam_mRRS": 0.9232,
+              "allcam_RRSALL": 0.5464
+            },
+            "pitch": {
+              "mVRS_pct": 81.47,
+              "percam_mRRS": 0.9078,
+              "allcam_RRSALL": 0.2562
+            },
+            "yaw": {
+              "mVRS_pct": 84.61,
+              "percam_mRRS": 0.9009,
+              "allcam_RRSALL": 0.5175
+            }
+          }
+        },
+        "IMG": {
+          "mVRS_pct": 84.09,
+          "percam_mRRS": 0.9104,
+          "allcam_RRSALL": 0.4243,
+          "abs_NDS": 0.4485,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 86.46,
+              "percam_mRRS": 0.923,
+              "allcam_RRSALL": 0.5141
+            },
+            "pitch": {
+              "mVRS_pct": 81.5,
+              "percam_mRRS": 0.9072,
+              "allcam_RRSALL": 0.2622
+            },
+            "yaw": {
+              "mVRS_pct": 84.32,
+              "percam_mRRS": 0.901,
+              "allcam_RRSALL": 0.4965
+            }
+          }
+        },
+        "CAL": {
+          "mVRS_pct": 96.02,
+          "percam_mRRS": 0.9778,
+          "allcam_RRSALL": 0.8545,
+          "abs_NDS": 0.5121,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 94.7,
+              "percam_mRRS": 0.9721,
+              "allcam_RRSALL": 0.7965
+            },
+            "pitch": {
+              "mVRS_pct": 95.61,
+              "percam_mRRS": 0.9761,
+              "allcam_RRSALL": 0.836
+            },
+            "yaw": {
+              "mVRS_pct": 97.76,
+              "percam_mRRS": 0.9853,
+              "allcam_RRSALL": 0.9309
+            }
+          }
+        }
+      },
+      "VP_source": "bev_det_benchmark/sparse/out_vp_detr3d/vp_detr3d_sedan_full/eval_vp_per_config.csv",
+      "CTS_full": {
+        "suv": {
+          "oracle_NDS": 0.5602,
+          "NORMAL": {
+            "cts_pct": 89.99,
+            "nds": 0.5041
+          },
+          "EXT": {
+            "cts_pct": 42.86,
+            "nds": 0.2401
+          },
+          "IMG": {
+            "cts_pct": 34.9,
+            "nds": 0.1955
+          },
+          "CAL": {
+            "cts_pct": 76.91,
+            "nds": 0.4308
+          }
+        },
+        "bus": {
+          "oracle_NDS": 0.6019,
+          "NORMAL": {
+            "cts_pct": 77.42,
+            "nds": 0.466
+          },
+          "EXT": {
+            "cts_pct": 30.71,
+            "nds": 0.1848
+          },
+          "IMG": {
+            "cts_pct": 26.46,
+            "nds": 0.1593
+          },
+          "CAL": {
+            "cts_pct": 37.56,
+            "nds": 0.2261
+          }
+        }
+      },
+      "CTS_source": "results/DETR3D/cts/eval_cts.csv"
+    },
+    "CAPE": {
+      "P_Normal_NDS": 0.5546,
+      "VP_full": {
+        "EXT": {
+          "mVRS_pct": 94.0,
+          "percam_mRRS": 0.9629,
+          "allcam_RRSALL": 0.8032,
+          "abs_NDS": 0.5214,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 99.15,
+              "percam_mRRS": 0.9951,
+              "allcam_RRSALL": 0.9697
+            },
+            "pitch": {
+              "mVRS_pct": 98.49,
+              "percam_mRRS": 0.9911,
+              "allcam_RRSALL": 0.9479
+            },
+            "yaw": {
+              "mVRS_pct": 84.38,
+              "percam_mRRS": 0.9024,
+              "allcam_RRSALL": 0.4918
+            }
+          }
+        },
+        "IMG": {
+          "mVRS_pct": 83.9,
+          "percam_mRRS": 0.9122,
+          "allcam_RRSALL": 0.3998,
+          "abs_NDS": 0.4653,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 86.49,
+              "percam_mRRS": 0.9234,
+              "allcam_RRSALL": 0.5141
+            },
+            "pitch": {
+              "mVRS_pct": 80.41,
+              "percam_mRRS": 0.908,
+              "allcam_RRSALL": 0.1803
+            },
+            "yaw": {
+              "mVRS_pct": 84.79,
+              "percam_mRRS": 0.9051,
+              "allcam_RRSALL": 0.505
+            }
+          }
+        },
+        "CAL": {
+          "mVRS_pct": 88.58,
+          "percam_mRRS": 0.9412,
+          "allcam_RRSALL": 0.5533,
+          "abs_NDS": 0.4913,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 86.27,
+              "percam_mRRS": 0.922,
+              "allcam_RRSALL": 0.5071
+            },
+            "pitch": {
+              "mVRS_pct": 80.44,
+              "percam_mRRS": 0.9084,
+              "allcam_RRSALL": 0.1802
+            },
+            "yaw": {
+              "mVRS_pct": 99.04,
+              "percam_mRRS": 0.9933,
+              "allcam_RRSALL": 0.9726
+            }
+          }
+        }
+      },
+      "VP_source": "results/CAPE/vp/vp_cape_sedan_fullframe_per_config.csv",
+      "CTS_full": {
+        "suv": {
+          "oracle_NDS": 0.5964,
+          "NORMAL": {
+            "cts_pct": 87.75,
+            "nds": 0.5233
+          },
+          "EXT": {
+            "cts_pct": 82.3,
+            "nds": 0.4908
+          },
+          "IMG": {
+            "cts_pct": 33.79,
+            "nds": 0.2015
+          },
+          "CAL": {
+            "cts_pct": 34.33,
+            "nds": 0.2047
+          }
+        },
+        "bus": {
+          "oracle_NDS": 0.449,
+          "NORMAL": {
+            "cts_pct": 107.84,
+            "nds": 0.4842
+          },
+          "EXT": {
+            "cts_pct": 57.5,
+            "nds": 0.2582
+          },
+          "IMG": {
+            "cts_pct": 35.98,
+            "nds": 0.1615
+          },
+          "CAL": {
+            "cts_pct": 32.94,
+            "nds": 0.1479
+          }
+        }
+      },
+      "CTS_source": "results/CAPE/cts/cts_cape_sedan.csv"
+    },
+    "PD-BEV": {
+      "P_Normal_NDS": 0.5606,
+      "VP_full": {
+        "EXT": {
+          "mVRS_pct": 91.37,
+          "percam_mRRS": 0.949,
+          "allcam_RRSALL": 0.7019,
+          "abs_NDS": 0.5122,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 96.92,
+              "percam_mRRS": 0.9826,
+              "allcam_RRSALL": 0.8884
+            },
+            "pitch": {
+              "mVRS_pct": 93.61,
+              "percam_mRRS": 0.9665,
+              "allcam_RRSALL": 0.7539
+            },
+            "yaw": {
+              "mVRS_pct": 83.58,
+              "percam_mRRS": 0.8979,
+              "allcam_RRSALL": 0.4635
+            }
+          }
+        },
+        "IMG": {
+          "mVRS_pct": 88.9,
+          "percam_mRRS": 0.9384,
+          "allcam_RRSALL": 0.593,
+          "abs_NDS": 0.4984,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 93.74,
+              "percam_mRRS": 0.9677,
+              "allcam_RRSALL": 0.7554
+            },
+            "pitch": {
+              "mVRS_pct": 90.05,
+              "percam_mRRS": 0.9522,
+              "allcam_RRSALL": 0.5898
+            },
+            "yaw": {
+              "mVRS_pct": 82.93,
+              "percam_mRRS": 0.8952,
+              "allcam_RRSALL": 0.4339
+            }
+          }
+        },
+        "CAL": {
+          "mVRS_pct": 95.06,
+          "percam_mRRS": 0.9752,
+          "allcam_RRSALL": 0.8034,
+          "abs_NDS": 0.5329,
+          "per_axis": {
+            "roll": {
+              "mVRS_pct": 93.74,
+              "percam_mRRS": 0.969,
+              "allcam_RRSALL": 0.7478
+            },
+            "pitch": {
+              "mVRS_pct": 93.48,
+              "percam_mRRS": 0.969,
+              "allcam_RRSALL": 0.7297
+            },
+            "yaw": {
+              "mVRS_pct": 97.97,
+              "percam_mRRS": 0.9876,
+              "allcam_RRSALL": 0.9327
+            }
+          }
+        }
+      },
+      "VP_source": "results/PDBEV/vp/eval_vp_per_config.csv (79f full)",
+      "CTS_full": {
+        "suv": {
+          "oracle_NDS": 0.5464,
+          "NORMAL": {
+            "cts_pct": 96.65,
+            "nds": 0.5281
+          },
+          "EXT": {
+            "cts_pct": 73.28,
+            "nds": 0.4004
+          },
+          "IMG": {
+            "cts_pct": 59.72,
+            "nds": 0.3263
+          },
+          "CAL": {
+            "cts_pct": 55.87,
+            "nds": 0.3053
+          }
+        },
+        "bus": {
+          "oracle_NDS": 0.6064,
+          "NORMAL": {
+            "cts_pct": 78.94,
+            "nds": 0.4787
+          },
+          "EXT": {
+            "cts_pct": 37.73,
+            "nds": 0.2288
+          },
+          "IMG": {
+            "cts_pct": 0.89,
+            "nds": 0.0054
+          },
+          "CAL": {
+            "cts_pct": 41.84,
+            "nds": 0.2537
+          }
+        }
+      },
+      "CTS_source": "results/PDBEV/cts/eval_cts.csv",
+      "note": "forward-projection + domain generalization (PD-BEV/Generalizable-BEV on BEVDepth); paper +PD-BEV technique row, sedan384"
+    }
+  },
+  "section5_detection_rho": {
+    "allcam_IMG_vs_suvCTS_IMG": 1.0,
+    "allcam_EXT_vs_suvCTS_IMG": -0.7,
+    "allcam_IMG_vs_busCTS_IMG": 0.6,
+    "models_used": [
+      "BEVDet",
+      "BEVDepth",
+      "BEVFormer",
+      "DETR3D",
+      "CAPE"
+    ],
+    "note": "DFA3D excluded (depth-gate exception). seg counterparts (doc): +0.90/-/+"
+  },
+  "segmentation": {
+    "BEVFormer_seg_sedan": {
+      "task": "vehicle BEV occupancy IoU",
+      "convention": "visibility>=2 IGNORE, IoU=max{0.40,0.45,0.50}",
+      "status": "removal-trained (epoch_24 done); definitive IGNORE-trained run pending on new machine",
+      "best_ckpt": "epoch_16",
+      "IoU_removal_at0.5_fullval": 0.4283,
+      "IoU_ignore_estimate": "~0.43-0.44"
+    }
+  },
+  "notes": {
+    "PD-BEV": "Added 2026-06-23: forward+DG technique row, full-frame VP + full CTS. Not in section5_detection_rho (which is the 5 base detectors).",
+    "per_axis": "VP_full.<cond>.per_axis adds roll/pitch/yaw 1/7 mVRS = (6*percam_axis + allcam_axis)/7. The 3 axes average to the headline mVRS_pct. All models (incl. DFA3D) now full-frame 3792."
+  }
+}

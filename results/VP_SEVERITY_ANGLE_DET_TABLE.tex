@@ -1,0 +1,39 @@
+\begin{table*}[t]\centering
+\resizebox{\textwidth}{!}{%
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l ccccccccccc c}
+\toprule
+Model & $-20$ & $-16$ & $-12$ & $-8$ & $-4$ & $0$ & $4$ & $8$ & $12$ & $16$ & $20$ & mVRS\\
+\cmidrule(lr){2-12}\cmidrule(lr){13-13}
+\midrule
+\multicolumn{13}{l}{\textsc{Ext}}\\
+\midrule
+BEVDet    & 86.0 & 88.0 & 89.7 & 91.5 & 94.5 & 100.0 & 94.3 & 90.0 & 87.4 & 86.1 & 83.9 & 89.1\\
+BEVDepth  & 86.1 & 88.8 & 90.9 & 92.7 & 96.0 & 100.0 & 95.6 & 92.0 & 89.0 & 86.6 & 84.8 & 90.2\\
+BEVFormer & 79.1 & 80.2 & 81.5 & 84.5 & 89.6 & 100.0 & 89.6 & 84.1 & 82.0 & 80.9 & 80.2 & 83.2\\
+DFA3D     & 86.5 & 88.1 & 90.1 & 92.9 & 96.6 & 100.0 & 96.2 & 91.8 & 89.3 & 87.5 & 86.3 & 90.5\\
+DETR3D    & 81.9 & 82.6 & 83.8 & 85.8 & 89.1 & 100.0 & 88.3 & 84.7 & 83.5 & 82.0 & 81.6 & 84.3\\
+CAPE      & 91.0 & 92.4 & 93.7 & 95.0 & 97.1 & 100.0 & 97.3 & 95.1 & 93.9 & 92.8 & 91.7 & 94.0\\
+\midrule
+\multicolumn{13}{l}{\textsc{Img}}\\
+\midrule
+BEVDet    & 78.2 & 79.4 & 81.0 & 83.5 & 89.8 & 100.0 & 90.5 & 85.9 & 82.8 & 80.8 & 78.0 & 83.0\\
+BEVDepth  & 78.4 & 79.7 & 81.1 & 83.7 & 89.1 & 100.0 & 89.2 & 85.1 & 82.7 & 80.2 & 79.0 & 82.8\\
+BEVFormer & 81.0 & 81.8 & 82.7 & 84.5 & 89.7 & 100.0 & 89.3 & 84.7 & 82.5 & 81.4 & 81.0 & 83.9\\
+DFA3D     & 82.5 & 83.8 & 85.4 & 87.5 & 91.7 & 100.0 & 91.7 & 87.3 & 84.9 & 83.6 & 82.4 & 86.1\\
+DETR3D    & 81.1 & 82.0 & 83.4 & 84.6 & 88.4 & 100.0 & 89.1 & 85.7 & 83.7 & 82.2 & 80.8 & 84.1\\
+CAPE      & 81.4 & 82.1 & 82.7 & 84.7 & 88.9 & 100.0 & 88.8 & 84.6 & 82.9 & 81.7 & 81.1 & 83.9\\
+\midrule
+\multicolumn{13}{l}{\textsc{Cal}}\\
+\midrule
+BEVDet    & 84.8 & 84.7 & 85.6 & 87.9 & 91.5 & 100.0 & 91.9 & 88.9 & 87.9 & 86.5 & 85.3 & 87.5\\
+BEVDepth  & 84.9 & 85.6 & 86.0 & 88.0 & 91.2 & 100.0 & 91.0 & 88.1 & 86.9 & 86.5 & 85.3 & 87.4\\
+BEVFormer & 90.9 & 92.0 & 93.7 & 95.6 & 97.5 & 100.0 & 97.5 & 95.5 & 93.3 & 90.9 & 89.0 & 93.6\\
+DFA3D     & 92.0 & 92.7 & 93.4 & 94.3 & 95.7 & 100.0 & 95.7 & 93.5 & 92.1 & 91.2 & 89.9 & 93.1\\
+DETR3D    & 93.2 & 94.7 & 96.2 & 97.7 & 98.6 & 100.0 & 98.8 & 98.0 & 96.6 & 94.5 & 91.8 & 96.0\\
+CAPE      & 87.1 & 87.6 & 87.9 & 88.8 & 91.3 & 100.0 & 91.5 & 89.1 & 88.1 & 87.4 & 87.1 & 88.6\\
+\bottomrule
+\end{tabular}}
+\caption{Per-angle mVRS (\%) by perturbation severity (signed angle $\theta$, deg) under the \textsc{Ext}, \textsc{Img}, and \textsc{Cal} conditions, for 3D object detection. Each cell averages RRS over all 7 camera protocols (6 single-camera + all-camera) and the 3 rotation axes (roll/pitch/yaw) at that angle; $\theta{=}0$ is the clean reference ($100$ by definition). The mVRS column is the mean over the ten non-zero angles (the headline robustness score).}
+\label{tab:supp_severity_det}
+\end{table*}
